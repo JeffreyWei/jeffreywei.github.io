@@ -232,7 +232,7 @@ Full-Width Styles
 }
 
 #forkme_banner {
-  display: none;
+  display: block;
   position: absolute;
   top:0;
   right: 10px;
