@@ -1,0 +1,14 @@
+username: JeffreyWei
+baseurl: ""
+markdown: redcarpet
+safe: false
+highlighter: pygments
+title: 耐冬
+description: 槁竹有火，不钻不燃。韬光养晦，厚积薄发。
+theme: slate
+disqusname: mavenwei
+paginate: 5
+sitemapurl: "http://jeffreywei.github.io"
+
+# theme can be: hack, leap-day, merlot, midnight, minimal, modernist, slate, time-machine
+# those themes are all come from GitHub Pages Themes
