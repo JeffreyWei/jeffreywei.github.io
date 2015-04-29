@@ -5,7 +5,7 @@ safe: false
 highlighter: pygments
 title: 耐冬
 description: 槁竹有火，不钻不燃。韬光养晦，厚积薄发。
-theme: hack
+theme: time-machine
 disqusname: mavenwei
 paginate: 5
 sitemapurl: "http://jeffreywei.github.io"
