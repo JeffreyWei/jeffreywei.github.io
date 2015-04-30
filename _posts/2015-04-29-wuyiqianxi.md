@@ -1,7 +1,13 @@
+
 ---
-layout: default
+layout: post
 title: 五一前夕
+share: true
 comments: true
+imagefeature:
+tags: [生活,感受]
+category: os
+description: "五一前夕"
 ---
 
 
@@ -15,4 +21,3 @@ comments: true
 
 首先想到的是这篇古文是要求背诵的，当时背诵一篇古文真是痛苦至极，一晚上都不一定能背得下来，第二天上课还要提心吊胆的上语文老师的课，生怕被点名当堂背诵，然后就是作者想表达的深层意义，对于当时那个年代的我连古文句子都读不通，更不同说理解了，但现在有了些生活的经历后再看它，多少有些和作者相同的感受。
 
-![游褒禅山记](../images/20150429_0.png)
