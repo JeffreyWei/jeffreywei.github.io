@@ -1,0 +1,24 @@
+---
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% for post in site.posts %}
+    <url>
+        <loc>{{ site.url }}{{ post.url }}</loc>
+        <lastmod>{{ post.modified | to_xmlschema }}T00:00:00-00:00</lastmod>
+    <data>
+        <display>
+            <title>{{ post.title | cdata_escape }}</title>
+            <pubTime>{{ post.date | date_to_xmlschema }}</pubTime>
+            <tag>{{ post.tags | cdata_escape }}</tag>
+            <content>
+                <![CDATA[
+                {{ post.content | xml_escape }}
+                ]]>
+            </content>
+            <breadCrumb title="{{ post.category | cdata_escape }}" url="{{ site.url }}/categories/#{{ post.category | cdata_escape}}" />
+        </display>
+    </data>
+    </url>
+    {% endfor %}
+</urlset>

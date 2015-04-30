@@ -1,0 +1,154 @@
+/* ---------------- */
+/* THEME UTILITITES */
+/* ---------------- */
+/* - Decor -*/
+.decor-wrapper {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+#footer .decor-wrapper {
+  bottom: auto;
+  top: 0;
+}
+@media (max-width: 767px) {
+  .decor-wrapper {
+    max-height: 150px;
+  }
+}
+@media (max-width: 480px) {
+  .decor-wrapper {
+    max-height: 100px;
+  }
+}
+.decor {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+.decor.bottom {
+  bottom: -1px;
+}
+.decor.top {
+  top: -1px;
+}
+/* - Theme Backgrounds - */
+.blog-background {
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+}
+@media (max-width: 1024px) {
+  .blog-background {
+    background-attachment: scroll;
+  }
+}
+/* - Inner allignment - */
+.inner {
+  display: table-cell;
+  vertical-align: top;
+  position: relative;
+  z-index: 10;
+}
+.align-middle .inner {
+  vertical-align: middle;
+}
+.align-bottom .inner {
+  vertical-align: bottom;
+}
+@media (max-width: 767px) {
+  #masthead .inner {
+    top: 0%;
+  }
+}
+/* - Overlay - */
+.overlay:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+/* - Border Classes - */
+.bordered-top,
+.bordered-bottom {
+  position: relative;
+}
+.bordered-top:after,
+.bordered-bottom:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 1px;
+  width: 80px;
+  left: 50%;
+  margin-left: -40px;
+}
+.bordered-top:after {
+  top: 0;
+}
+.bordered-bottom:after {
+  bottom: 0;
+}
+/* Social list */
+.social-icons {
+  margin: 0;
+  padding: 0 0 48px;
+  list-style-type: none;
+}
+.social-icons li {
+  display: inline-block;
+  padding: 0 12px;
+}
+.social-icons a {
+  display: block;
+  font-size: 24px;
+  height: 72px;
+  width: 72px;
+  line-height: 72px;
+  border-radius: 50%;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -o-transition: all .2s;
+  -ms-transition: all .2s;
+  transition: all .2s;
+}
+.social-icons i {
+  vertical-align: middle;
+}
+.social-mini {
+  margin: 0;
+  padding: 0 0 24px;
+  list-style-type: none;
+}
+.social-mini li {
+  display: inline-block;
+  font-size: 16px;
+  padding: 0 12px;
+}
+/* - Responsive videos -*/
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+  margin-bottom: 24px;
+}
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

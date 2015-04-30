@@ -1,0 +1,382 @@
+@import url(http://fonts.useso.com/css?family=Source+Sans+Pro:200,300,400,700);
+@import url(http://fonts.useso.com/css?family=Merriweather:400,300,400italic,700);
+@import url(http://fonts.useso.com/css?family=Raleway:400,300,100,700);
+@import url(http://fonts.useso.com/css?family=Sacramento);
+
+/*!
+ * HMFAYSAL OMEGA v1.0.1
+ * Responsive Jekyll Theme
+ *
+ * Copyright 2014 Hossain Mohd Faysal
+ *
+ * Designed and built with all the love in the world by @hmfaysal
+ */
+/* ------------------------ */
+/* GENERAL TYPOGRAPHY RULES */
+/* ------------------------ */
+/* - Body typography - */
+body {
+  -webkit-font-smoothing: antialiased;
+}
+/* - Headers - */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+h1 {
+  font-size: 38px;
+  line-height: 48px;
+  margin-bottom: 24px;
+}
+h1 small {
+  font-size: 26px;
+}
+h2 {
+  font-size: 26px;
+  line-height: 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+h2 small {
+  font-size: 18px;
+}
+h3 {
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 24px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+h3 small {
+  font-size: 13px;
+}
+h4,
+h5,
+h6 {
+  line-height: 24px;
+}
+h4 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+h4 small {
+  font-size: 16px;
+}
+h5 {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+h6 {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin: 0;
+}
+/* - Links - */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.more-link {
+  line-height: 18px;
+  font-size: 18px;
+  font-style: italic;
+}
+/* - Lead text - */
+.lead {
+  font-size: 21px;
+  line-height: 2em;
+}
+/* - Blockquote - */
+blockquote {
+  background: #f6f6f6;
+  /*padding-left: 0;*/
+  border: 0;
+  border-left: 5px solid #A1A1A1;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+}
+blockquote:before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: -24px;
+  width: 4px;
+}
+.cursive {
+  font-family: 'Sacramento', cursive;
+  color: #17e4d8;
+  font-size: 34px;
+  text-align: center;
+}
+/* - Form elements - */
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  -webkit-appearance: none;
+  box-shadow: none;
+  text-shadow: none !important;
+}
+select:focus,
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  outline: none;
+}
+select {
+  line-height: 24px;
+}
+input[type="submit"] {
+  text-shadow: none !important;
+  font-weight: normal;
+  outline: none;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.fancy-select {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 24px;
+}
+.fancy-select select {
+  margin-bottom: 0;
+  width: 100%;
+  min-width: 180px;
+}
+.fancy-select:after {
+  display: block;
+  position: absolute;
+  content: "\f107";
+  font-family: 'FontAwesome';
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  z-index: 1;
+  top: 50%;
+  right: 0.5em;
+  margin-top: -0.5em;
+}
+/* - Figures - */
+figure {
+  margin: 0 0 24px;
+}
+/* - Pre and code - */
+pre,
+code,
+var,
+kbd,
+samp,
+tt,
+dir,
+listing,
+plaintext,
+xmp,
+abbr,
+acronym,
+q {
+  font-size: 14px;
+  word-break: normal;
+  border: 0;
+}
+/* - Font weight classes - */
+.black {
+  font-weight: bolder !important;
+}
+.bold {
+  font-weight: bold !important;
+}
+.regular {
+  font-weight: normal !important;
+}
+.light {
+  font-weight: lighter !important;
+}
+.lighter {
+  font-weight: lighter !important;
+}
+/* - Font size classes - */
+.small {
+  font-size: 14px;
+  line-height: 24px;
+}
+.super {
+  font-size: 60px;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.super.text-center small {
+  display: block;
+  line-height: 1.5em;
+}
+.hyper {
+  font-size: 72px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+}
+/* - Text aligns classes - */
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-center {
+  text-align: center !important;
+}
+/* - Text transform classes - */
+.text-caps {
+  text-transform: uppercase !important;
+}
+.text-italic {
+  font-style: italic;
+}
+/* Table */
+table {
+  border-collapse: collapse;
+  empty-cells: hide;
+}
+table, td, th {
+  border: 1px solid #A1A1A1;
+}
+td, th {
+  padding:3px 7px 2px 7px;
+}
+th {
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color: #eef;
+}
+/* Responsive typography */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 26px;
+    line-height: 36px;
+  }
+  h1 small {
+    font-size: 18px;
+  }
+  h2 {
+    font-size: 23px;
+    line-height: 36px;
+  }
+  h2 small {
+    font-size: 16px;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 36px;
+  }
+  h3 small {
+    font-size: 16px;
+  }
+  blockquote {
+    padding-left: 24px;
+  }
+  blockquote:before {
+    left: 0;
+  }
+  .super {
+    font-size: 48px;
+    text-align: center;
+  }
+  .super small {
+    margin-top: 12px;
+    display: block;
+  }
+  .hyper {
+    font-size: 60px;
+  }
+  .small-screen-center {
+    text-align: center !important;
+  }
+  .small-screen-margin-bottom {
+    margin-bottom: 24px !important;
+  }
+}
+@media (max-width: 480px) {
+  .super {
+    font-size: 36px;
+    line-superheight: 1em;
+  }
+  .hyper {
+    font-size: 48px;
+    line-height: 1em;
+  }
+  .lead {
+    font-size: 16px;
+  }
+}
+@media (max-width: 320px) {
+  body {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 23px;
+    line-height: 24px;
+  }
+  h1 small {
+    font-size: 16px;
+  }
+  h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  h2 small {
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  h3 small {
+    font-size: 13px;
+  }
+  .super {
+    font-size: 24px;
+    line-height: 1;
+  }
+  .hyper {
+    font-size: 36px;
+  }
+}

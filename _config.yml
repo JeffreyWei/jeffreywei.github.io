@@ -1,17 +1,151 @@
-username: JeffreyWei
-baseurl: ""
-markdown: redcarpet
-safe: false
+title:            耐冬
+description:      "槁竹有火，不钻不燃。韬光养晦，厚积薄发。"
+logo:             omikron.png
+disqus_shortname: mavenwei
+youyan_uid:
+changyan_shortname: 
+# duoshuo_shortname:  hangyan
+# Assign a default image for your site's header and footer
+default_bg:       http://jeffreywei.github.io/images/Steampunk.jpg
+search:           true
+share:            true
+# Read Time is a calculator tp provide post read-time based on word count. Usage is recommended.
+readtime:         true
+# Specify the average Words per minute. If not defined, 180 will be used
+wpm:  200
+# Turn on or off the fin animations in the header and footer
+triangleheader:  true
+animated_fins:  true
+# Specify the fin color in RGB value
+fin_color:        "255,255,255"
+
+# Owner/author information
+owner:
+  name:           耐冬
+  avatar:         girl.jpg
+  email:          mavenwei@qq.com
+  # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
+  description:    若得其情，哀矜勿喜。
+  # Social networking links used in footer. Update and remove as you like.
+  #twitter:        
+  #facebook:       
+  github:         JeffreyWei
+  weibo:          524406123
+
+
+
+# Links to include in footer navigation
+# For external links add external: true
+links:
+  - title: Home
+    url: /
+    external: false
+    icon: home
+  - title: Categories
+    url: /categories
+    icon: bars
+  - title: Tags
+    url: /tags
+    icon: tags
+  - title: Guestbook
+    url: /guestbook
+    icon: comments
+  - title: Project
+    url: /project
+    icon: code
+  - title: Links
+    url:   /links
+    icon: link
+  - title: About
+    url: /about
+    icon: user
+
+# Where things are
+source:      .
+destination: ./_site
+plugins:     ./_plugins
+layouts:     ./_layouts
+data_source: ./_data
+collections: null
+
+# Handling Reading
+safe:         false
+include:      [".htaccess"]
+exclude:      []
+keep_files:   [".git", ".svn"]
+encoding:     "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+textile_ext:  "textile"
+
+# Filtering Content
+show_drafts: null
+limit_posts: 0
+future:      true
+unpublished: false
+
+# Plugins
+whitelist: []
+gems:      []
+
+# Conversion
+markdown:    kramdown
 highlighter: pygments
-title: 耐冬
-description: 槁竹有火，不钻不燃。韬光养晦，厚积薄发。
-theme: slate
-disqusname: mavenwei
-paginate: 5
-sitemapurl: "http://jeffreywei.github.io"
+lsi:         false
+excerpt_separator: "<!--more-->"
 
+# Serving
+detach:  false
+port:    4000
+host:    127.0.0.1
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://jeffreywei.github.io" # the base hostname & protocol for your site
 
+# Backwards-compatibility
+relative_permalinks: false
 
+# Outputting
+permalink:     /:categories/:title
+paginate: 6
+paginate_path: /page:num
+timezone:      Asia/Shanghai
 
-# theme can be: hack, leap-day, merlot, midnight, minimal, modernist, slate, time-machine
-# those themes are all come from GitHub Pages Themes
+quiet:    false
+defaults: []
+
+# Markdown Processors
+maruku:
+  use_tex:    false
+  use_divs:   false
+  png_engine: blahtex
+  png_dir:    images/latex
+  png_url:    /images/latex
+  fenced_code_blocks: true
+
+rdiscount:
+  extensions: []
+
+redcarpet:
+  extensions: []
+
+kramdown:
+  auto_ids:       true
+  footnote_nr:    1
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+  coderay:
+    coderay_wrap:              div
+    coderay_line_numbers:      inline
+    coderay_line_number_start: 1
+    coderay_tab_width:         4
+    coderay_bold_every:        10
+    coderay_css:               style
+
+redcloth:
+  hard_breaks: true
+
+sass:
+    sass_dir: _sass
+    style: :compressed

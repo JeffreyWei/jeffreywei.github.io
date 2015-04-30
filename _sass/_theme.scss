@@ -1,0 +1,85 @@
+/* ------------ */
+/* THEME COLORS */
+/* ------------ */
+body {
+  color: #424143;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.lead {
+  color: #1e1e1f;
+}
+a {
+  color: #807f83;
+  border-color: #807f83;
+}
+a:hover {
+  color: #67666a;
+  border-color: #67666a;
+}
+blockquote:before {
+  /*background: #57ad68;*/
+}
+blockquote:hover {
+  border-left: 5px solid #f25962;
+}
+.post-title {
+  color: #807f83;
+}
+.post-info {
+  color: #67666a;
+}
+.pagination {
+  color: #67666a;
+}
+.bordered-top:after,
+.bordered-bottom:after {
+  background-color: #cbc9cf;
+}
+.social-icons a {
+  color: #cbc9cf;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+.social-icons a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.overlay:after {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+#masthead {
+  background-color: #1e1e1f;
+}
+#footer,
+#masthead {
+  color: #fff;
+}
+#footer h1,
+#masthead h1,
+#footer h2,
+#masthead h2,
+#footer p,
+#masthead p {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.75);
+}
+#footer h1,
+#masthead h1,
+#footer h2,
+#masthead h2,
+#footer a,
+#masthead a,
+#footer p,
+#masthead p {
+  color: #fff;
+}
+::selection {
+  background: rgba(240,17,68,0.8);
+  color: #fff;
+}
+::-moz-selection {
+  background: rgba(240,17,68,0.8);
+  color: #fff;
+}
