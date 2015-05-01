@@ -5,8 +5,8 @@ share: true
 comments: true
 imagefeature:
 tags: [生活,感受]
-category: os
-description: "五一前夕"
+category: life
+description: "International Labour Day eve"
 ---
 
 
