@@ -6,7 +6,7 @@ youyan_uid:
 changyan_shortname: 
 # duoshuo_shortname:  hangyan
 # Assign a default image for your site's header and footer
-default_bg:       http://jeffreywei.github.io/images/Steampunk.jpg
+default_bg:       http://jeffreywei.github.io/images/Clouds.jpg
 search:           true
 share:            true
 # Read Time is a calculator tp provide post read-time based on word count. Usage is recommended.
@@ -22,10 +22,10 @@ fin_color:        "255,255,255"
 # Owner/author information
 owner:
   name:           耐冬
-  avatar:         girl.jpg
+  avatar:         bear.jpg
   email:          mavenwei@qq.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
-  description:    若得其情，哀矜勿喜。
+  description:    槁竹有火，不钻不燃。韬光养晦，厚积薄发。
   # Social networking links used in footer. Update and remove as you like.
   #twitter:        
   #facebook:       
@@ -98,7 +98,8 @@ detach:  false
 port:    4000
 host:    127.0.0.1
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://jeffreywei.github.io" # the base hostname & protocol for your site
+#url: "http://jeffreywei.github.io" # the base hostname & protocol for your site
+url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
 
 # Backwards-compatibility
 relative_permalinks: false
