@@ -24,4 +24,4 @@ description: "International Labour Day eve"
 
 
 
-[1]: {{ site.url }}/assets/posts/2015-04/1.jpg "游褒禅山记"
+[1]: {{ site.url }}/assets/posts/2015-04/1.png "游褒禅山记"
