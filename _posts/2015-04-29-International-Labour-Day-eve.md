@@ -13,6 +13,8 @@ description: "International Labour Day eve"
 
 没有付出行动，还期望能有改变，真是白日做梦。
 
+<!--more-->
+
 在网上漫无目的的瞎逛时看到了一篇中学时期要求背诵的古文
 
 ![ ][1]

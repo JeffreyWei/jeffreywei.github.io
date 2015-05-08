@@ -9,6 +9,10 @@ category: code java
 description: "Hadoop Standalone on Mac"
 ---
 
+Mac上单机模式部署hadopp2.7.0
+
+<!--more-->
+
 ### 1.Hadoop下载
 
 ![ ][2]
