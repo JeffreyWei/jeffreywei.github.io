@@ -1,6 +1,6 @@
 ---
 layout: post
-title: hadoop-1-单用户部署
+title: hadoop-单用户部署
 share: true
 comments: true
 imagefeature:
