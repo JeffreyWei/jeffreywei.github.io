@@ -9,7 +9,7 @@ category: life
 description: "Stay Hungry,Stay Foolish."
 ---
 
-待知识的态度依然有些浮躁。
+对待知识的态度依然有些浮躁。
 
 <!--more-->
 
