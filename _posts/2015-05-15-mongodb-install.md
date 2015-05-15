@@ -52,7 +52,8 @@ mongo安装、用户授权
 	use admin
 	db.auth("buru","12345678")
 	{%  endhighlight %}
-	返回1表示成功，此时“admin”账号只有管理功能。
+	
+返回1表示成功，此时“admin”账号只有管理功能。
 
 
 3.	使用用户库，创建用户
@@ -68,11 +69,15 @@ mongo安装、用户授权
 	]})
 	db.auth("crs","12345678")
 	{%  endhighlight %}
-	仍然是返回1，成功，此时就可以使用insert方法向“crs”库中添加数据了。
 	
-	**注：目前Robomongo还不能使用授权方式访问3.0的mongodb，**
+仍然是返回1，成功，此时就可以使用insert方法向“crs”库中添加数据了。
 	
-	![][1]
+	
+**注：目前Robomongo还不能使用授权方式访问3.0的mongodb，**
+	
+	
+
+![][1]
 	
 	
 [1]: http://jeffreywei.github.io/assets/posts/2015-05/robomogo_connect_error.png "robomogo_connect_error"
