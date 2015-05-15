@@ -18,8 +18,8 @@ mongo安装、用户授权
 ## 准备工作
 1.	 mongodb下载
 	
-	* [官方下载地址](https://www.mongodb.org/dl/osx/x86_64)
-	* brew install mongodb --with-openssl
+		[官方下载地址](https://www.mongodb.org/dl/osx/x86_64)
+		brew install mongodb --with-openssl
 
 	
 2.	设置环境变量
@@ -34,7 +34,6 @@ mongo安装、用户授权
 	
 		mongod --dbpath "db/data" --logpath "db/log/db.log"
 
-	
 	{% highlight bash lineno %}
 	use admin
 	db.createUser({
@@ -75,12 +74,13 @@ mongo安装、用户授权
 	
 	![][1]
 	
-
-[1]: {{ site.url }}/assets/posts/2015-05/robomogo_connect_error.png "robomogo_connect_error"
-
-
-
+	
+[1]: http://jeffreywei.github.io/assets/posts/2015-05/robomogo_connect_error.png "robomogo_connect_error"
+	
 
 
 
-[
+
+
+
+
