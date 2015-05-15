@@ -35,7 +35,7 @@ mongo安装、用户授权
 		mongod --dbpath "db/data" --logpath "db/log/db.log"
 
 	
-	{% highlight shell %}
+	{% highlight bash lineno %}
 	use admin
 	db.createUser({
     	user: "admin",
@@ -49,7 +49,7 @@ mongo安装、用户授权
 
 		mongod --dbpath "db/data" --logpath "db/log/db.log" --auth
 
-	{% highlight shell %}
+	{% highlight bash lineno %}
 	use admin
 	db.auth("buru","12345678")
 	{%  endhighlight %}
@@ -58,7 +58,7 @@ mongo安装、用户授权
 
 3.	使用用户库，创建用户
 
-	{% highlight shell %}
+	{% highlight bash lineno %}
 	use crs
 	db.createUser({
 	   	user: "crs",
