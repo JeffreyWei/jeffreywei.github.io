@@ -42,7 +42,7 @@ description: "Import data to mongodb"
 	use workdb
 	db.customer.stats()
 	
-![][2]
+![][3]
 
 [1]: http://jeffreywei.github.io/assets/posts/2015-05/mongodb_import_0.png "mongodb_import_0"
 
