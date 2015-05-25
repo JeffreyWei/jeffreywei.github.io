@@ -14,55 +14,61 @@ Swift教程第二章--Swift基础
 <!--more-->
 ##Swift基础
 
-* 基本类型
+* **基本类型**
 
-Int,Double,Float,Bool,String,Array,Dictonary
+	Int,Double,Float,Bool,String,Array,Dictonary
 
-* 常量和变量的命名
-**unicode字符**
+* **常量和变量的命名**
+	
+	允许使用`unicode`字符命名变量名可。
+	
+* **注释**
 
-* 注释
+	`// 这是一个注释`
 
-// 这是一个注释
+	or
 
-or
+	`/*这是`
 
-/*这是
+	`多行注释*/`
 
-多行注释*/
+* **分号**
 
-* 分号
+	每条语句并非强制要求使用`;`如一行多条语句可以用作分隔，但不推荐。
+	
+	例如：
+	
+		let name="jack";pringln(name)
 
-每条语句并非强制要求使用`;`如一行多条语句可以用作分隔，但不推荐，例如：
-	let name="jack"；pringln(name)
-
-* 数值型字面量
+* **数值型字面量**
 
 		十进制，没有前缀
 		二进制,Ob
 		八进制，O0
 		十六进制，Ox
 
-* 元组
+* **元组**
 
-let http200Status = ( statusCode : 200 , description: "OK")
-println("this status code is \(http200Status.statusCode)")
+	let http200Status = ( statusCode : 200 , description: "OK")
+	println("this status code is \(http200Status.statusCode)")
 
-* 断言
-条件成立继续执行，不成立则停止
-let age=-3
-assert(age>=0,"error")
+* **断言**
+
+	条件成立继续执行，不成立则停止
+	let age=-3
+	assert(age>=0,"error")
 
 ##基本运算符
 
-* 区间运算符
+* **区间运算符**
 
-		[1,3]	1...3
-		[1,3)	1..3
+	[1,3]	1...3
+	
+	[1,3)	1..3
 		
 ##流程控制
 
-* switch
+* **switch**
 
 	范围匹配
 		
@@ -99,7 +105,7 @@ assert(age>=0,"error")
 			case let(x,y) where x==-y:
 		}
 
-* 控制转移语句
+* **控制转移语句**
 
 	- continue
 	- break
