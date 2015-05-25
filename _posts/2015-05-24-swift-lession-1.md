@@ -9,15 +9,15 @@ category: swift,work
 description: "swift language part-1"
 ---
 
-Swift教程第一章--认识Swift
+Swift教程第一章--Swift初见
 
 <!--more-->
 
 
 ##Swift初见
-**语句后不需要分号**
+* **语句后不需要分号**
 
-* 变量声明
+* **变量声明**
 
 	let 声明常量 
 	var 生命变量
@@ -32,7 +32,7 @@ Swift教程第一章--认识Swift
 	or
 	var say="I am \(age)"
 
-* 数组&字典
+* **数组&字典**
 
 	var people = ["Jack","Mike"]
 	var rank =["Jack":1,"Mike":2]
@@ -40,7 +40,7 @@ Swift教程第一章--认识Swift
 	var people=[] or var people =String[]()
 	var rank=[:] or var Dictionary<String,Float>()
 
-* 控制流
+* **控制流**
 
 	for in 
 	if boolExpression {}
@@ -61,7 +61,7 @@ Swift教程第一章--认识Swift
 	for i in 0..3{}
 	*方式和python很像*
 
-* 函数和闭包
+* **函数和闭包**
 
 	func greet(name:String,day:String)->String{
 		return "Hello \(name), today is \(day).";
@@ -90,7 +90,8 @@ Swift教程第一章--认识Swift
 	})
 
 
-* 对象&类
+* **对象&类**
+
 	init 声明构造方法
 	deinit	声明析构方法
 	子类，父类使用`:`
@@ -105,19 +106,21 @@ Swift教程第一章--认识Swift
  	?前的变量如果为空后面的语句不会被执行
  
 
-* 枚举
+* **枚举**
 
-* 结构
+* **结构**
+
 	结构体是传值,类是传引用
 
 
-* 接口&扩展
+* **接口&扩展**
+
 	接口 protocol
 	mutating??
 	
 	扩展 extension
 
-* 泛型
+* **泛型**
 	<classType> <class : parentClassType>
 	
 
