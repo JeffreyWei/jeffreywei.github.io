@@ -6,7 +6,7 @@ comments: true
 imagefeature:
 tags: [swift,work]
 category: swift,work
-description: "swift language part-1"
+description: "swift language part-1" 
 ---
 
 Swift教程第一章--Swift初见
@@ -15,32 +15,36 @@ Swift教程第一章--Swift初见
 
 
 #Swift初见
- **语句后不需要分号**
 
-* **变量声明**
+##变量声明
 
 	let 声明常量 
-	var 生命变量
-	//直接复制
-	var a = 70
-	//指定类型
-	var b : Double =70
 
-	var age=20;
-	var msg="I am "
-	var say=msg+String(age)
-	or
-	var say="I am \(age)"
+	var 声明变量
+
+	{% highlight swift %}
+//直接赋值
+var a = 70
+//指定类型
+var b : Double =70
+var age=20;
+var msg="I am "
+var say=msg+String(age)
+//or
+var say="I am \(age)"
+	{%  endhighlight %}
 
 * **数组&字典**
 
-	var people = ["Jack","Mike"]
-	var rank =["Jack":1,"Mike":2]
-	初始化
-	var people=[] or var people =String[]()
-	var rank=[:] or var Dictionary<String,Float>()
+{% highlight swift %}
+var people = ["Jack","Mike"]
+var rank =["Jack":1,"Mike":2]
+初始化
+var people=[] or var people =String[]()
+var rank=[:] or var Dictionary<String,Float>()
+{%  endhighlight %}
 
-* **控制流**
+##控制流
 
 	for in 
 	if boolExpression {}
@@ -59,68 +63,75 @@ Swift教程第一章--Swift初见
 	for var i=0;i<3;i++{}
 	or
 	for i in 0..3{}
+
+
 	*方式和python很像*
 
-* **函数和闭包**
+##函数和闭包
 
-	func greet(name:String,day:String)->String{
-		return "Hello \(name), today is \(day).";
-	}
-	greet(" Bob", "Tue sday ")
-	`->`指定返回值
-	返回一个元组
-	func getGasPrices() -> (Double, Double, Double) {
-		freturn (3.59, 3.69, 3.79)
-	}
-	可变参数
-	func su mOf(n umber s: I nt... ) -> Int {
-		return 0
-	}
+{% highlight swift %}
+func greet(name:String,day:String)->String{
+	return "Hello \(name), today is \(day).";
+}
+greet(" Bob", "Tue sday ")
+//`->`指定返回值
+//返回一个元组
+func getGasPrices() -> (Double, Double, Double) {
+	freturn (3.59, 3.69, 3.79)
+}
 
-	函数传递
+//可变参数
+func su mOf(n umber s: I nt... ) -> Int {
+	return 0
+}
 
-	func ha sAnyM atche s(li st: I nt[], cond ition : Int -> B ool) -> Bool{}
-	func lessThanTen(number: Int) -> Bool {}
-	var numbers = [20, 19, 7, 12]
-	hasAnyMatches(numbers, lessThanTen)
+//函数传递
+func ha sAnyM atche s(li st: I nt[], cond ition : Int -> B ool) -> Bool{}
+func lessThanTen(number: Int) -> Bool {}
+var numbers = [20, 19, 7, 12]
+hasAnyMatches(numbers, lessThanTen)
 
-	numbers .map({
-		(number: Int) -> Int in
-		return result = 3 * number
-	})
+numbers .map({
+	(number: Int) -> Int in
+	return result = 3 * number
+})
+{%  endhighlight %}
 
-
-* **对象&类**
+##对象&类
 
 	init 声明构造方法
 	deinit	声明析构方法
 	子类，父类使用`:`
 	方法重写需要 function前添加`override`
 	属性的get/set
-		var perimeter: Double {
-			get{1.0}
-			set{perimeter = newValue}
-		}
+
+{% highlight swift %}
+
+var perimeter: Double {
+	get{1.0}
+	set{perimeter = newValue}
+}
+{%  endhighlight %}
+ 
  	?的用法
  	let sideLength = optionalSquare ?.sid eLength
  	?前的变量如果为空后面的语句不会被执行
  
 
-* **枚举**
 
-* **结构**
+##结构
 
 	结构体是传值,类是传引用
 
 
-* **接口&扩展**
+##接口&扩展
 
 	接口 protocol
 	mutating??
 	
 	扩展 extension
 
-* **泛型**
+##泛型
 	<classType> <class : parentClassType>
 	
 

@@ -54,8 +54,11 @@ Swift教程第二章(1)--Swift基础
 
 * **元组**
 
-	let http200Status = ( statusCode : 200 , description: "OK")
-	println("this status code is \(http200Status.statusCode)")
+{% highlight swift %}
+let http200Status = ( statusCode : 200 , description: "OK")
+println("this status code is \(http200Status.statusCode)")
+	{%  endhighlight %}
+
 
 * **断言**
 
@@ -74,41 +77,45 @@ Swift教程第二章(1)--Swift基础
 ##流程控制
 
 * **switch**
+{% highlight swift %}
 
-	范围匹配
-		
-		switch count{
-			case:0
-			case:1...3
-			case:4...999_999
-		}
-		
-	元组
-		
-		swicth somePoint{
-			case(0,0):
-				println("0,0")
-			case(_,0):
-				println("_,0")
-			case(-2...2,-2...3)
-				println("")
-			deafault:
-				println("eles")
-		}
-
-	值绑定
 	
-		swich	anotherPoint{
-			case (let x,0):
-			case (0,let y):
-		}
-		
-	where
-		
-		swich	yetAnotherPoint{
-			case let(x,y) where x==y:
-			case let(x,y) where x==-y:
-		}
+
+//范围匹配
+	
+switch count{
+	case:0
+	case:1...3
+	case:4...999_999
+}
+	
+//元组
+	
+swicth somePoint{
+	case(0,0):
+		println("0,0")
+	case(_,0):
+		println("_,0")
+	case(-2...2,-2...3)
+		println("")
+	deafault:
+		println("eles")
+}
+
+//值绑定
+
+swich	anotherPoint{
+	case (let x,0):
+	case (0,let y):
+}
+	
+//where
+
+swich	yetAnotherPoint{
+	case let(x,y) where x==y:
+	case let(x,y) where x==-y:
+}
+{%  endhighlight %}
 
 * **控制转移语句**
 
@@ -121,95 +128,116 @@ Swift教程第二章(1)--Swift基础
 ##函数
 
 * 函数定义
+{% highlight swift %}
 
-	有返回值
 	
-		fun say(name:String)->String{
-			return "Hello "+name
-		}
 
-	无返回值
-		
-		fun say(name:String){
-			print("Hello "+name)
-		}
+//有返回值
+
+fun say(name:String)->String{
+	return "Hello "+name
+}
+
+//无返回值
+	
+fun say(name:String){
+	print("Hello "+name)
+}
+{%  endhighlight %}
 
 
 * 函数形参名
+{% highlight swift %}
 
-	指定外部形参名
-			
-		fun someFunction(exernalParameterName localParameterName:Int){
-			//foo
-		}			
-		someFunction(exernalParameterName : 1)
+		
 
-	快速定义形参
+指定外部形参名
+		
+fun someFunction(exernalParameterName localParameterName:Int){
+	//foo
+}			
+someFunction(exernalParameterName : 1)
+
+//	快速定义形参
 	
 				
-		fun someFunction(#localParameterName:Int){
-			//foo
-		}			
-		someFunction(localParameterName:Int : 1)			
+fun someFunction(#localParameterName:Int){
+	//foo
+}			
+someFunction(localParameterName:Int : 1)			
+{%  endhighlight %}
 	
 * 可变形参
+{% highlight swift %}
 
-		fun add(numbers:Double...){
-			var total:Double
-			for number in number{
-				total+=number
-			}
-			return total
-		}
 		
-		add(1,2,3,4,5)
+
+fun add(numbers:Double...){
+	var total:Double
+	for number in number{
+		total+=number
+	}
+	return total
+}
+
+add(1,2,3,4,5)
+{%  endhighlight %}
 		
 * 常量形参&变量形参
 
 	**函数形参默认是常量，试图在函数体被改变函数形参的值会引发一个编译异常**
-	
-	指定形参为变量形参使用var关键字
-		
-		fun foo(var str:String)->String{
-			str+="123";
-			return str
-		]
+{% highlight swift %}
 
-	inout形参（类似引用传递）
+		
 	
-		fun swap(inout a:Int,inout b:Int){
-			let temp=a
-			a=b
-			b=temp
-		}
+//指定形参为变量形参使用var关键字
+	
+fun foo(var str:String)->String{
+	str+="123";
+	return str
+}
+
+//inout形参（类似引用传递）
+
+fun swap(inout a:Int,inout b:Int){
+	let temp=a
+	a=b
+	b=temp
+}
+{%  endhighlight %}
 		
 * 函数类型
+{% highlight swift %}
 
-	使用函数类型
-	
-		fun add（a:Int,b:Int）->Int{
-			return a+b
-		}	
-	
-		var addFunction:(Int,Int)->Int=add
 		
-	使用函数类型作为形参
-	
-		fun foo(addFunction:(Int,Int)->Int,a:Int,b:Int){
-			print (addFunction(a,b))
-		}
-		
-	作为返回值
-		
-		fun foo()->(Int,Int)->Int{
-			return addFunction
-		}
-		
-	嵌套函数
 
-		fun foo()->(Int,Int)->Int{
-			fun anotherFunction(a:Int,b:Int)->Int{
-				return a+b
-			}
-			return anotherFunction
-		}
+//使用函数类型
+
+fun add（a:Int,b:Int）->Int{
+	return a+b
+}	
+
+var addFunction:(Int,Int)->Int=add
+	
+//使用函数类型作为形参
+
+fun foo(addFunction:(Int,Int)->Int,a:Int,b:Int){
+	print (addFunction(a,b))
+}
+	
+//作为返回值
+	
+fun foo()->(Int,Int)->Int{
+	return addFunction
+}
+	
+//嵌套函数
+
+fun foo()->(Int,Int)->Int{
+	fun anotherFunction(a:Int,b:Int)->Int{
+		return a+b
+	}
+	return anotherFunction
+}
+
+{%  endhighlight %}
