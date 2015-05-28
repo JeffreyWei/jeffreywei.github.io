@@ -1,4 +1,4 @@
----
+ƒ---
 layout: post
 title: Swift教程第二章(2)
 share: true
@@ -11,15 +11,13 @@ description: "swift language part-2.2"
 
 Swift教程第二章(2)--Swift基础
 
-* 闭包
-* 枚举
-* 类和结构体
+闭包、枚举
 
 <!--more-->
 	
 ##闭包
 
-* 闭包表达式
+###闭包表达式
 {% highlight swift %}
 	
 func backwards (s1:String,s2:String)->Bool{
@@ -60,11 +58,11 @@ var reversed = sort(names,{$0 > $1})
 var reversed = sort(names , >)
 {%  endhighlight %}
 		
-* Trailing闭包
+###Trailing闭包
 
 		var reversed = sort(names){$0 > $1}
 		
-* 捕获（Caputure）
+###捕获（Caputure）
 {% highlight swift %}
 
 func makeIncrementor(forIncrement amount:Int) -> ()->Int{
@@ -79,7 +77,7 @@ func makeIncrementor(forIncrement amount:Int) -> ()->Int{
 
 ##枚举
 
-* 枚举定义
+###枚举定义
 {% highlight swift %}
 	
 enum CompassPoint {
@@ -96,7 +94,7 @@ enum Planet{
 }
 {%  endhighlight %}
 
-* 使用
+###使用
 
 {% highlight swift %}
 
@@ -105,7 +103,7 @@ var directionToHead = CompassPoint.West
 directionToHead = .East
 {%  endhighlight %}
 		
-* 关联值
+###关联值
 {% highlight swift %}
 
 enum Barcode{
@@ -116,7 +114,7 @@ enum Barcode{
 var productBarcode = Barcode.UPCA(8,634423,3)
 {%  endhighlight %}
 		
-* 原始值
+###原始值
 {% highlight swift %}
 
 enum ASCIIControlCharacter : Character{
@@ -137,5 +135,5 @@ let possiblePlanet = Planet.fromRaw(7)
 //possiblePlanet is of type Planet and equals Planet.Uranus
 {%  endhighlight %}
 		
-##类和结构体
+
 

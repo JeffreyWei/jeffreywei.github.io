@@ -14,8 +14,6 @@ Swift教程第一章--Swift初见
 <!--more-->
 
 
-#Swift初见
-
 ##变量声明
 
 	let 声明常量 
@@ -34,7 +32,7 @@ var say=msg+String(age)
 var say="I am \(age)"
 	{%  endhighlight %}
 
-* **数组&字典**
+###数组&字典
 
 {% highlight swift %}
 var people = ["Jack","Mike"]
@@ -44,7 +42,7 @@ var people=[] or var people =String[]()
 var rank=[:] or var Dictionary<String,Float>()
 {%  endhighlight %}
 
-##控制流
+###控制流
 
 	for in 
 	if boolExpression {}
@@ -67,7 +65,7 @@ var rank=[:] or var Dictionary<String,Float>()
 
 	*方式和python很像*
 
-##函数和闭包
+###函数和闭包
 
 {% highlight swift %}
 func greet(name:String,day:String)->String{
@@ -97,7 +95,7 @@ numbers .map({
 })
 {%  endhighlight %}
 
-##对象&类
+###对象&类
 
 	init 声明构造方法
 	deinit	声明析构方法
@@ -119,19 +117,19 @@ var perimeter: Double {
  
 
 
-##结构
+###结构
 
 	结构体是传值,类是传引用
 
 
-##接口&扩展
+###接口&扩展
 
 	接口 protocol
 	mutating??
 	
 	扩展 extension
 
-##泛型
+###泛型
 	<classType> <class : parentClassType>
 	
 
