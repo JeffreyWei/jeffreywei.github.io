@@ -4,7 +4,7 @@ title: mongodb数据导入
 share: true
 comments: true
 imagefeature:
-tags: [工作,mongodb]
+tags: [work,mongodb]
 category: work,mongodb
 description: "Import data to mongodb"
 ---

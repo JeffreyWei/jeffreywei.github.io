@@ -4,7 +4,7 @@ title: mongodb用户授权
 share: true
 comments: true
 imagefeature:
-tags: [工作,nosql]
+tags: [work,nosql]
 category: work,nosql
 description: "mongodb 3.X install and user authorization"
 ---
