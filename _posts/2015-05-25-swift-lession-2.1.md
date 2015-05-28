@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Swift教程第二章
+title: Swift教程第二章(1)
 share: true
 comments: true
 imagefeature:
@@ -9,7 +9,7 @@ category: swift,work
 description: "swift language part-2.1"
 ---
 
-Swift教程第二章--Swift基础(1)
+Swift教程第二章(1)--Swift基础
 * Swift基础
 * 基本运算符
 * 流程控制
