@@ -1,4 +1,4 @@
-ƒ---
+---
 layout: post
 title: Swift教程第二章(2)
 share: true
