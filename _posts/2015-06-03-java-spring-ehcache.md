@@ -12,39 +12,41 @@ description: "Using Spring & Ehcache"
 在Spring项目中集成Ehcache,缓存数据、缓存页面
 
 <!--more-->
-##配置
+
+##配置修改
 
 ###工程配置
 
 For Maven project :
 
 {% highlight xml %}
-	<dependency>
-		<groupId>net.sf.ehcache</groupId>
-		<artifactId>ehcache</artifactId>
-		<version>2.9.0</version>
-	</dependency>
+
+<dependency>
+	<groupId>net.sf.ehcache</groupId>
+	<artifactId>ehcache</artifactId>
+	<version>2.9.0</version>
+</dependency>
+
+<!-- Optional, to log stuff -->
+<dependency>
+	<groupId>ch.qos.logback</groupId>
+	<artifactId>logback-classic</artifactId>
+	<version>1.0.13</version>
+</dependency>
  
-        <!-- Optional, to log stuff -->
-	<dependency>
-		<groupId>ch.qos.logback</groupId>
-		<artifactId>logback-classic</artifactId>
-		<version>1.0.13</version>
-	</dependency>
- 
-	<!-- Spring caching framework inside this -->
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-		<version>4.1.4.RELEASE</version>
-	</dependency>
- 
-	<!-- Support for Ehcache and others -->
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context-support</artifactId>
-		<version>4.1.4.RELEASE</version>
-	</dependency>
+<!-- Spring caching framework inside this -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context</artifactId>
+	<version>4.1.4.RELEASE</version>
+</dependency>
+
+<!-- Support for Ehcache and others -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context-support</artifactId>
+	<version>4.1.4.RELEASE</version>
+</dependency>
 
 {%  endhighlight %}
 
@@ -157,21 +159,23 @@ xml文件的schema中添加
         -->
   {%  endhighlight %}      
 ##使用缓存
+
 ###缓存数据
+
 {% highlight java %}
-    @Cacheable(value = "myCache", key = "'setAge'+#age")
-    public int getAge(int age) {
-        System.out.println("未使用缓存");
-        return age;
-    }
-    @CacheEvict(value = "myCache", key = "'setAge'+#age")
-    public void setAge(int age) {
-        System.out.println("重新缓存");
-        this.age = age;
-    }
-    //allEntries为true表示清除value中的全部缓存,默认为false
-    @CacheEvict(value = "myCache", allEntries = true)
-    	public void removeAll() {
+@Cacheable(value = "myCache", key = "'setAge'+#age")
+public int getAge(int age) {
+    System.out.println("未使用缓存");
+    return age;
+}
+@CacheEvict(value = "myCache", key = "'setAge'+#age")
+public void setAge(int age) {
+    System.out.println("重新缓存");
+    this.age = age;
+}
+//allEntries为true表示清除value中的全部缓存,默认为false
+@CacheEvict(value = "myCache", allEntries = true)
+public void removeAll() {
     }
 {%  endhighlight %}
 
