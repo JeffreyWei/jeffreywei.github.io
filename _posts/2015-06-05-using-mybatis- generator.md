@@ -91,10 +91,11 @@ description: "Using MyBatis Generator"
 </generatorConfiguration>
 {%  endhighlight %}
 
+如果数据库主键已设置了自增长属性，可以不使用`<generatedKey column="id" sqlStatement="Mysql"/>`
+
 ##生成文件
 
-使用命令`mvn mybatis-generator:generate`生成文件
+在项目的根目录下，使用命令`mvn mybatis-generator:generate`生成文件
 
-注：如果需要自定义生成的类注释，需要继承MyBatis Generator的`org.mybatis.generator.api.CommentGenerator`，默认使用的是`org.mybatis.generator.internal.DefaultCommentGenerator`，并使用maven发布后才能使用。
+**注：**如果需要自定义生成的类注释，需要继承MyBatis Generator的`org.mybatis.generator.api.CommentGenerator`，默认使用的是`org.mybatis.generator.internal.DefaultCommentGenerator`，并使用maven发布后才能使用。
 
-mvn mybatis-generator:generate
