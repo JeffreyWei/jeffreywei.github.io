@@ -3,3 +3,6 @@ Disallow: /
 
 User-agent: baiduspider
 Disallow: /
+
+User-agent: google
+Disallow: /

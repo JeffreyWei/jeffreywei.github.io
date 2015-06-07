@@ -4,8 +4,7 @@ logo:             omikron.png
 disqus_shortname: jeffreywei
 youyan_uid:
 changyan_shortname: 
-
-# duoshuo_shortname:  hangyan
+duoshuo_shortname: 
 # Assign a default image for your site's header and footer
 default_bg:       http://jeffreywei.github.io/images/Steampunk.jpg
 search:           true
@@ -32,8 +31,13 @@ owner:
   #facebook:       
   github:         JeffreyWei
   weibo:          524406123
-
-
+  stackexchange:  
+  linkedin:       
+  instagram:      
+  flickr:         
+  tumblr:   
+  # For Google Authorship https://plus.google.com/authorship
+  google_plus:
 
 # Links to include in footer navigation
 # For external links add external: true
@@ -51,7 +55,7 @@ links:
   - title: Guestbook
     url: /guestbook
     icon: comments
-  - title: Project
+  - title: Work
     url: /project
     icon: code
   - title: Links
