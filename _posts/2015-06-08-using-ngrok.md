@@ -36,15 +36,16 @@ description: "using ngrok"
 
 1. 编辑配置文件，保存以下内容为`ngrok.cfg`:
 	
-	
-		server_addr: "tunnel.mobi:44433"
-		trust_host_root_certs: true
+	{% highlight bash lineno  %}
+	server_addr: "tunnel.mobi:44433"
+	trust_host_root_certs: true
+	{%  endhighlight %}
 	此配置使用国内服务器，速度上比默认的国外服务器会快一些。
 
 2. 执行:
 	
 	{% highlight bash lineno  %}
-	./ngrok -config ngrok.cfg -subdomain domainname 8080
+	$ ./ngrok -config ngrok.cfg -subdomain domainname 8080
 	{%  endhighlight %}
 
 ##使用ngrok 2.0+
