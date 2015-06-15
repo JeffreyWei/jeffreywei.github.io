@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: links/index.html
-title: "链接"
+title: "Links"
 description: 
 headline: 
 modified: 2015-05-01
@@ -16,5 +16,5 @@ mathjax:
 
 
 <div class="alert alert-info" role="alert">
-	一花一界
+	
 </div>
