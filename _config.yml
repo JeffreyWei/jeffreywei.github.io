@@ -6,7 +6,7 @@ youyan_uid:
 changyan_shortname: 
 duoshuo_shortname: 
 # Assign a default image for your site's header and footer
-default_bg:       http://jeffreywei.github.io/images/Clouds.jpg
+default_bg:       http://jeffreywei.github.io/images/Steampunk.jpg
 search:           true
 share:            true
 # Read Time is a calculator tp provide post read-time based on word count. Usage is recommended.
@@ -31,10 +31,10 @@ owner:
   #facebook:       
   github:         JeffreyWei
   weibo:          524406123
-  stackexchange:  
-  linkedin:       
-  instagram:      
-  flickr:         
+  # stackexchange:  
+  # linkedin:       
+  # instagram:      
+  # flickr:         
   tumblr:         mavenwei
   # For Google Authorship https://plus.google.com/authorship
   google_plus:
