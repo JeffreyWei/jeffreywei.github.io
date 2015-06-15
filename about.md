@@ -12,8 +12,8 @@ image:
 </figure>
 <div class="alert alert-success" role="alert">
 	那个当年作业被标记“重写”的小学生，<br/>
-	那个当年英语作文中出现“In the end”歌词写中学生，<br/>
-	那个当年“不知天高地厚”的大学毕业生，<br/>
+	那个当年英语作文中出现“In the end”歌词写的学生，<br/>
+	那个当年“无知”的大学毕业生，<br/>
 	那个当年脑子只有“对、错”的职场新人，<br/>
 	<strong>他</strong>还努力地活着！
 </div>
@@ -25,7 +25,7 @@ image:
 - Python
 - Go
 - NodeJS
-- Object C
+- Objective-C
 - Swift
 - BASIC
 
