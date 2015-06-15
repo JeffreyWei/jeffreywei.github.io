@@ -1,25 +1,22 @@
 ---
 layout: page
 permalink: /about/index.html
-title: 关于
+title: About me
 tags: [about]
 image:
   feature: 
 ---
 <figure>
   <img src="{{ site.url }}/images/free.jpg" alt="耐冬">
-  <figcaption>耐冬</figcaption>
+  <figcaption>Wei</figcaption>
 </figure>
-
 <div class="alert alert-success" role="alert">
-	槁竹有火，不钻不燃。韬光养晦，厚积薄发。
+	那个当年作业被标记“重写”的小学生，<br/>
+	那个当年英语作文中出现“In the end”歌词写中学生，<br/>
+	那个当年“不知天高地厚”的大学毕业生，<br/>
+	那个当年脑子只有“对、错”的职场新人，<br/>
+	<strong>他</strong>还努力地活着！
 </div>
-
-
-## OS
-- Linux
-- OS X
-- Windows
 
 ## Language
 - Java
@@ -29,28 +26,26 @@ image:
 - Go
 - NodeJS
 - Object C
+- Swift
+- BASIC
 
 ## Projects
 - Docker
 - Hadoop
 - Web
 
-## 阅读
+## Read
 - 心理学
 - 管理学
 - 软件架构
 - 人工智能
 - 惊悚
-- 哲学
 - 科幻
-- 灵异
 
-
-## 艺术
-- 电影
+## Hobbies
+- 电影、游戏
+- 视觉设计
 - 流行音乐
-- 建筑设计
-- 游戏 
-
+- Shuer
 
 
