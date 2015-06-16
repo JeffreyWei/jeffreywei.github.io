@@ -1,13 +1,12 @@
 ---
 layout: page
 permalink: /project/index.html
-title: 项目
+title: Project
 tags: [project]
 image:
 feature:
 ---
 
-## PatternViaJava
 [PatternViaJava](https://github.com/JeffreyWei/PatternViaJava)
 
 24种设计模式`java`版
