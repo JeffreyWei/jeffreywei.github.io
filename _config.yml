@@ -22,7 +22,7 @@ fin_color:        "255,255,255"
 # Owner/author information
 owner:
   name:           Wei
-  avatar:         icon.png
+  avatar:         100.jpeg
   email:          mavenwei@qq.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:    自助者天助
