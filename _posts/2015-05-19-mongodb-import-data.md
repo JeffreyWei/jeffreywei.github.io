@@ -4,8 +4,8 @@ title: mongodb数据导入
 share: true
 comments: true
 imagefeature:
-tags: [work,mongodb]
-category: work,mongodb
+tags: [work,nosql]
+category: work,nosql
 description: "Import data to mongodb"
 ---
 

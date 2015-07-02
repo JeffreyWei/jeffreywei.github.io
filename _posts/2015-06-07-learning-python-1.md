@@ -4,8 +4,8 @@ title: python重点回顾（1）
 share: false
 comments: true
 imagefeature:
-tags: [code,python]
-category: code,python
+tags: [python]
+category: python
 description: "Learning python 1"
 ---
 

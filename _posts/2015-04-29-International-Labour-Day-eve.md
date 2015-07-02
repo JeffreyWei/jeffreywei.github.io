@@ -4,7 +4,7 @@ title: 五一前夕
 share: true
 comments: true
 imagefeature:
-tags: [生活,感受]
+tags: [life]
 category: life
 description: "International Labour Day eve"
 ---

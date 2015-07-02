@@ -4,8 +4,8 @@ title: 卖家的聪明才智超乎想象
 share: true
 comments: true
 imagefeature:
-tags: [life,shopping]
-category: life,shopping
+tags: [life]
+category: life
 description: "Sellers are always unbelievably savvy"
 ---
 

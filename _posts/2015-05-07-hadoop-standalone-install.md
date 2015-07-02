@@ -5,7 +5,7 @@ share: true
 comments: true
 imagefeature:
 tags: [hadoop]
-category: code java
+category: hadoop
 description: "Hadoop Standalone on Mac"
 ---
 

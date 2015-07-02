@@ -4,8 +4,8 @@ title: 古文名言警句
 share: true
 comments: true
 imagefeature:
-tags: [swift,work]
-category: swift,work
+tags: [life]
+category: life
 description: "teel my son By Mr.Zhuge"
 ---
 
