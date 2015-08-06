@@ -11,6 +11,7 @@ description: "using Apache Maven Resources Plugin"
 
 解决resources目录中配置文件改变的问题，spring中使用静态注入
 
+
 <!--more-->
 
 ##保持资源文件在编译后不变
