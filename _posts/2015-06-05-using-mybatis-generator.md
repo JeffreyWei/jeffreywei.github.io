@@ -93,6 +93,22 @@ description: "Using MyBatis Generator"
 
 如果数据库主键已设置了自增长属性，可以不使用`<generatedKey column="id" sqlStatement="Mysql"/>`
 
+##Plugin
+二级缓存设置、序列化、Like支持、Modal层ToString重写
+{% highlight xml %}
+<plugin type="org.mybatis.generator.plugins.CachePlugin">
+    <property name="cache_flushInterval" value="6000000"/>
+    <property name="cache_eviction" value="LRU"/>
+    <property name="cache_size" value="1024"/>
+    <property name="cache_readOnly" value="false"/>
+    <!--<property name="cache_type" value="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+</plugin>
+<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+{%  endhighlight %}
+
+
 ##生成文件
 
 在项目的根目录下，使用命令`mvn mybatis-generator:generate`生成文件
