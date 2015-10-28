@@ -88,7 +88,7 @@ class C extends B{
 		System.out.println("C1");
 	}
 }
-{% endghighlight %}
+{% endhighlight %}
 输出结果为
 
 	
