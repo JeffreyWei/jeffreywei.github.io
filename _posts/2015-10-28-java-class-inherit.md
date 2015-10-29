@@ -12,6 +12,7 @@ description: "java class inherit"
 子类初始化的顺序
 
 <!--more-->
+
 ## 子类初始化时构造函数优于类中的字段
 
 {% highlight java %}
