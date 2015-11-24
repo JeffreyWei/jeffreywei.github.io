@@ -18,7 +18,7 @@ description: "java class inherit"
 {% highlight java %}
 public class A {
 	private int mSuperX;
-	public A() {
+	public A() {·
 		setX(99);
 	}
 	public static void main(String[] args) {
@@ -51,7 +51,7 @@ class B extends A {
 	SubX is assigned 99
 	1
 
-构造子类B需要先是与偶那个A的构造函数，由于`setX`被重写，然后执行了B中的`setX`方法输出99，然后初始化B中的字段`mSubX = 1`，完成B对象的初始化。
+构造子类B需要先是调用A的构造函数，由于`setX`被重写，然后执行了B中的`setX`方法输出99，然后初始化B中的字段`mSubX = 1`，完成B对象的初始化。
 
 
 **构造子类时会先调用父类的无参构造方法，即使调用的是子类的有参构造方法**
