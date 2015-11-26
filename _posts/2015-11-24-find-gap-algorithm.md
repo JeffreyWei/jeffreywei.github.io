@@ -42,3 +42,5 @@ if __name__ == '__main__':
 
 
 {%  endhighlight %}
+
+*时间复杂度为n(n-1)/2*

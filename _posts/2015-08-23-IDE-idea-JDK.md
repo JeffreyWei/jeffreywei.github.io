@@ -27,7 +27,7 @@ description: "java IDE"
 
 ##代码中使用Tab指标符
 
-![](1)
+![][1]
 
 
 
