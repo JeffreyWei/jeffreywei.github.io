@@ -22,7 +22,7 @@ idea 定制快捷键Mac版
 	join lines						⌃ ⇧	J
 	split lines						⌘ enter
 	move caret to line end			⌃ E
-	move catet to next word 		⌥ right
+	move caret to next word 		⌥ right
 	toggle case						⇧ ⌘	X
 	column selection mode			⇧ ⌘ 8
 	copy path						⌥ ⇧	C
@@ -35,10 +35,10 @@ idea 定制快捷键Mac版
 
 	
 ##View
-	quick definiton					⌘ Y
+	quick definition					⌘ Y
 	quick documentation				F2
 	parameter info					⌃ ⌥	P
-	recentlu changed files			⇧ ⌘ E
+	recently changed files			⇧ ⌘ E
 	class...						⇧ ⌘ T
 	file...							⇧ ⌘ R
 	symbol...						⇧ ⌘ O
@@ -54,10 +54,10 @@ idea 定制快捷键Mac版
 	test							⌃ ⇧ T
 	file structure					⌘ O
 	type hierarchy					F4
-	mehtod hierarchy				⇧ ⌘ H
+	method hierarchy				⇧ ⌘ H
 	call hierarchy					⌃ ⌥ H
-	next hightlighted error			⌘ .
-	previous hightlighted error		⇧ ⌘ .
+	next highlighted error			⌘ .
+	previous highlighted error		⇧ ⌘ .
 
 ##Code
 	generate...						⌘ N
@@ -98,3 +98,5 @@ idea 定制快捷键Mac版
 	
 ##Help
 	find action 					⌘ 3
+	
+[文档配置](https://github.com/JeffreyWei/jeffreywei.github.io/tree/master/assets/posts/2015-12/1201)
