@@ -4,8 +4,8 @@ title: Intellij IDEA使用记录
 share: true
 comments: true
 imagefeature:
-tags: [java]
-category: java
+tags: [idea,ide]
+category: idea,ide
 description: "java IDE"
 ---
 
