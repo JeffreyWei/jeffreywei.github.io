@@ -116,7 +116,7 @@ Docker镜像的相关操作
 
 		docker login www.dockerhub.com
 
-
+本系列参考《[Docker技术入门与实战](http://book.douban.com/subject/26284823/)》
 		
 		
 		
