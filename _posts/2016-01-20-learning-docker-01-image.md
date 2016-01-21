@@ -110,8 +110,13 @@ Docker镜像的相关操作
 	docker push NAME[:TAG]
 		
 		
-		
-		
+##其他
+
+* 设置源地址		
+
+		docker login www.dockerhub.com
+
+
 		
 		
 		
