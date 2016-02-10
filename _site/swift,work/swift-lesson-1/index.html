@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<!--
+                       ::
+                      :;J7, :,                        ::;7:
+                      ,ivYi, ,                       ;LLLFS:
+                      :iv7Yi                       :7ri;j5PL
+                     ,:ivYLvr                    ,ivrrirrY2X,
+                     :;r@Wwz.7r:                :ivu@kexianli.
+                    :iL7::,:::iiirii:ii;::::,,irvF7rvvLujL7ur
+                   ri::,:,::i:iiiiiii:i:irrv177JX7rYXqZEkvv17
+                ;i:, , ::::iirrririi:i:::iiir2XXvii;L8OGJr71i
+              :,, ,,:   ,::ir@mingyi.irii:i:::j1jri7ZBOS7ivv,
+                 ,::,    ::rv77iiiriii:iii:i::,rvLq@huhao.Li
+             ,,      ,, ,:ir7ir::,:::i;ir:::i:i::rSGGYri712:
+           :::  ,v7r:: ::rrv77:, ,, ,:i7rrii:::::, ir7ri7Lri
+          ,     2OBBOi,iiir;r::        ,irriiii::,, ,iv7Luur:
+        ,,     i78MBBi,:,:::,:,  :7FSL: ,iriii:::i::,,:rLqXv::
+        :      iuMMP: :,:::,:ii;2GY7OBB0viiii:i:iii:i:::iJqL;::
+       ,     ::::i   ,,,,, ::LuBBu BBBBBErii:i:i:i:i:i:i:r77ii
+      ,       :       , ,,:::rruBZ1MBBqi, :,,,:::,::::::iiriri:
+     ,               ,,,,::::i:  @arqiao.       ,:,, ,:::ii;i7:
+    :,       rjujLYLi   ,,:::::,:::::::::,,   ,:i,:,,,,,::i:iii
+    ::      BBBBBBBBB0,    ,,::: , ,:::::: ,      ,,,, ,,:::::::
+    i,  ,  ,8BMMBBBBBBi     ,,:,,     ,,, , ,   , , , :,::ii::i::
+    :      iZMOMOMBBM2::::::::::,,,,     ,,,,,,:,,,::::i:irr:i:::,
+    i   ,,:;u0MBMOG1L:::i::::::  ,,,::,   ,,, ::::::i:i:iirii:i:i:
+    :    ,iuUuuXUkFu7i:iii:i:::, :,:,: ::::::::i:i:::::iirr7iiri::
+    :     :rk@Yizero.i:::::, ,:ii:::::::i:::::i::,::::iirrriiiri::,
+     :      5BMBBBBBBSr:,::rv2kuii:::iii::,:i:,, , ,,:,:i@petermu.,
+          , :r50EZ8MBBBBGOBBBZP7::::i::,:::::,: :,:,::i;rrririiii::
+              :jujYY7LS0ujJL7r::,::i::,::::::::::::::iirirrrrrrr:ii:
+           ,:  :@kevensun.:,:,,,::::i:i:::::,,::::::iir;ii;7v77;ii;i,
+           ,,,     ,,:,::::::i:iiiii:i::::,, ::::iiiir@xingjief.r;7:i,
+        , , ,,,:,,::::::::iiiiiiiiii:,:,:::::::::iiir;ri7vL77rrirri::
+         :,, , ::::::::i:::i:::i:i::,,,,,:,::i:i:::iir;@Secbone.ii:::
+         
+-->
+<head>
+<meta charset="utf-8">
+<title>Swift教程第一章 &#8211; Sagittarius</title>
+<meta name="description" content="swift language part-1">
+<meta name="keywords" content="swift, work">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift教程第一章">
+<meta property="og:description" content="swift language part-1">
+<meta property="og:url" content="http://jeffreywei.github.io/swift,work/swift-lesson-1">
+<meta property="og:site_name" content="Sagittarius">
+<meta property="og:image" content="http://jeffreywei.github.io/images/Clouds.jpg">
+
+
+
+
+
+<link rel="canonical" href="http://jeffreywei.github.io/swift,work/swift-lesson-1">
+<link href="http://jeffreywei.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Sagittarius Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Chrome Color -->
+<meta name="theme-color" content="#db5945">
+
+<!-- Windows8 Tile -->
+<meta name="msapplication-TileColor" content="#db5945">
+<meta name="msapplication-TileImage" content="http://jeffreywei.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://jeffreywei.github.io/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/nprogress/0.1.6/nprogress.min.css" />
+
+<div class="search-wrapper">
+    <div class="search-form">
+        <input type="text" class="search-field" placeholder="Search...">
+        <i class="fa fa-times"></i>
+        <ul class="search-results post-list"></ul><!-- /.search-results -->
+    </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<script type="text/javascript" src="http://cdn.bootcss.com/nprogress/0.1.6/nprogress.min.js"></script>
+<script>NProgress.start();</script>
+
+
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://jeffreywei.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://jeffreywei.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://jeffreywei.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://jeffreywei.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://jeffreywei.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://jeffreywei.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+<body class="post-template" itemscope itemtype="http://schema.org/WebPage">
+<div id="fade"></div>
+<a id="slide" class="animated fade"></a>
+<aside id="sidebar">
+    <nav id="navigation">
+    <h2>MENU</h2>
+    <hr>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/">Home</a>
+                 </li>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/categories">Categories</a>
+                 </li>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/tags">Tags</a>
+                 </li>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/guestbook">Guestbook</a>
+                 </li>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/project">Work</a>
+                 </li>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/links">Links</a>
+                 </li>
+
+            <li>
+                    <a href="http://jeffreywei.github.io/about">About</a>
+                 </li>
+
+           <li><a href="http://jeffreywei.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss"></i> Feed</a></li>
+    </nav>
+
+
+</aside>
+
+<header id="masthead" class="blog-background  align-center align-middle animated from-bottom"  style="background-image: url(http://jeffreywei.github.io/images/Clouds.jpg)" itemscope itemtype="http://schema.org/Organization">
+
+
+    <button class="menu-button animated fade dosearch">
+        <i class="fa fa-search"></i>
+    </button>
+
+
+    <div class="inner">
+        <div class="container">
+            <a class="brand" href="http://jeffreywei.github.io" role="banner" itemprop="url">
+
+                <img itemprop="logo" src="http://jeffreywei.github.io/images/fa-paper-plane-o.png" alt="Sagittarius Logo" />
+
+            <h1 class="blog-title light" itemprop="name">
+                Sagittarius
+            </h1>
+
+            </a>
+        </div>
+    </div>
+    
+    
+    <div class="decor-wrapper">
+        <svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+            <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+
+            <path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+            <path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+
+            <path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+            <path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+
+            <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+
+            <path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+
+        </svg>
+    </div>
+    
+</header>
+
+<div id="main" class="content" role="main" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/Blog">
+    <div class="container">
+        <div class="row">
+            <article class="post col-md-8 col-md-offset-2 hentry" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+            
+            
+            
+            
+            
+                    <header class="post-header entry-header">
+                    
+                        
+                        <h1 class="post-title text-center hyper lighter bordered-bottom entry-title" itemprop="headline">Swift教程第一章</h1>
+                        
+                        <div class="cursive" style="color: #000; font-style:italic;">swift language part-1</div>
+                        <div class="post-info text-center small">
+                            <span class="entry-date date published updated"><time datetime="2015-05-24T00:00:00+08:00" class="post-time" itemprop="datePublished">24 May 2015</time><span>
+                            in <span class="post-tags"><a href="http://jeffreywei.github.io/categories/index.html#swift,work" data-toggle="tooltip" title="Other posts from the Swift,work category" rel="tag">Swift,work</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;1 minute read</span>
+                        </div>
+                    </header>
+                    <div class="post-body bordered-bottom" itemprop="description">
+                        
+                        <div id="drawer"></div><div id="drawer"></div>
+                        <p>Swift教程第一章–Swift初见</p>
+
+<!--more-->
+
+<h2 id="section">变量声明</h2>
+
+<pre><code>let 声明常量 
+
+var 声明变量
+</code></pre>
+
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">//直接赋值</span>
+<span class="k">var</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="c1">//指定类型</span>
+<span class="k">var</span> <span class="nl">b</span> <span class="p">:</span> <span class="n">Double</span> <span class="o">=</span><span class="mi">70</span>
+<span class="k">var</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+<span class="k">var</span> <span class="n">msg</span><span class="o">=</span><span class="s">&quot;I am &quot;</span>
+<span class="k">var</span> <span class="n">say</span><span class="o">=</span><span class="n">msg</span><span class="o">+</span><span class="n">String</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="c1">//or</span>
+<span class="k">var</span> <span class="n">say</span><span class="o">=</span><span class="s">&quot;I am \(age)&quot;</span></code></pre></div>
+
+<h3 id="section-1">数组&amp;字典</h3>
+
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Jack&quot;</span><span class="p">,</span><span class="s">&quot;Mike&quot;</span><span class="p">]</span>
+<span class="k">var</span> <span class="n">rank</span> <span class="o">=</span><span class="p">[</span><span class="s">&quot;Jack&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;Mike&quot;</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="err">初始化</span>
+<span class="k">var</span> <span class="n">people</span><span class="o">=</span><span class="p">[]</span> <span class="n">or</span> <span class="k">var</span> <span class="n">people</span> <span class="o">=</span><span class="n">String</span><span class="p">[]()</span>
+<span class="k">var</span> <span class="n">rank</span><span class="o">=</span><span class="p">[</span><span class="o">:</span><span class="p">]</span> <span class="n">or</span> <span class="k">var</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">Float</span><span class="o">&gt;</span><span class="p">()</span></code></pre></div>
+
+<h3 id="section-2">控制流</h3>
+
+<pre><code>for in 
+if boolExpression {}
+switch
+不需要break
+试一下没有default
+
+遍历一个字典
+for (key,value) in dic
+
+while boolExpression {}
+
+do{} while boolExpression
+
+普通循环
+for var i=0;i&lt;3;i++{}
+or
+for i in 0..3{}
+
+
+*方式和python很像*
+</code></pre>
+
+<h3 id="section-3">函数和闭包</h3>
+
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">func</span> <span class="n">greet</span><span class="p">(</span><span class="nl">name</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="nl">day</span><span class="p">:</span><span class="n">String</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">String</span><span class="p">{</span>
+	<span class="k">return</span> <span class="s">&quot;Hello \(name), today is \(day).&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">greet</span><span class="p">(</span><span class="s">&quot; Bob&quot;</span><span class="p">,</span> <span class="s">&quot;Tue sday &quot;</span><span class="p">)</span>
+<span class="c1">//`-&gt;`指定返回值</span>
+<span class="c1">//返回一个元组</span>
+<span class="k">func</span> <span class="n">getGasPrices</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">Double</span><span class="p">,</span> <span class="n">Double</span><span class="p">,</span> <span class="n">Double</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">freturn</span> <span class="p">(</span><span class="mf">3.59</span><span class="p">,</span> <span class="mf">3.69</span><span class="p">,</span> <span class="mf">3.79</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//可变参数</span>
+<span class="k">func</span> <span class="n">su</span> <span class="n">mOf</span><span class="p">(</span><span class="n">n</span> <span class="n">umber</span> <span class="nl">s</span><span class="p">:</span> <span class="n">I</span> <span class="n">nt</span><span class="p">...</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Int</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="c1">//函数传递</span>
+<span class="k">func</span> <span class="n">ha</span> <span class="n">sAnyM</span> <span class="n">atche</span> <span class="n">s</span><span class="p">(</span><span class="n">li</span> <span class="nl">st</span><span class="p">:</span> <span class="n">I</span> <span class="n">nt</span><span class="p">[],</span> <span class="n">cond</span> <span class="nl">ition</span> <span class="p">:</span> <span class="n">Int</span> <span class="o">-&gt;</span> <span class="n">B</span> <span class="n">ool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">{}</span>
+<span class="k">func</span> <span class="n">lessThanTen</span><span class="p">(</span><span class="nl">number</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bool</span> <span class="p">{}</span>
+<span class="k">var</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="n">hasAnyMatches</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">lessThanTen</span><span class="p">)</span>
+
+<span class="n">numbers</span> <span class="p">.</span><span class="n">map</span><span class="p">({</span>
+	<span class="p">(</span><span class="nl">number</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Int</span> <span class="k">in</span>
+	<span class="k">return</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">number</span>
+<span class="p">})</span></code></pre></div>
+
+<h3 id="section-4">对象&amp;类</h3>
+
+<pre><code>init 声明构造方法
+deinit	声明析构方法
+子类，父类使用`:`
+方法重写需要 function前添加`override`
+属性的get/set
+</code></pre>
+
+<div class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">var</span> <span class="nl">perimeter</span><span class="p">:</span> <span class="n">Double</span> <span class="p">{</span>
+	<span class="kr">get</span><span class="p">{</span><span class="mf">1.0</span><span class="p">}</span>
+	<span class="kr">set</span><span class="p">{</span><span class="n">perimeter</span> <span class="o">=</span> <span class="n">newValue</span><span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+ 	?的用法
+ 	let sideLength = optionalSquare ?.sid eLength
+ 	?前的变量如果为空后面的语句不会被执行
+
+<h3 id="section-5">结构</h3>
+
+<pre><code>结构体是传值,类是传引用
+</code></pre>
+
+<h3 id="section-6">接口&amp;扩展</h3>
+
+<pre><code>接口 protocol
+mutating??
+
+扩展 extension
+</code></pre>
+
+<h3 id="section-7">泛型</h3>
+<pre><code>&lt;classType&gt; &lt;class : parentClassType&gt;
+</code></pre>
+
+
+                        <br>
+                        <hr>
+                    <div class="copyleft">
+                        <span class="cc">版权声明：作品原创-允许转载-保持署名 Wei</span>
+                        <span class="post-url">
+                            本文永久链接:
+                            <a href="http://jeffreywei.github.io/swift,work/swift-lesson-1">http://jeffreywei.github.io/swift,work/swift-lesson-1</a>
+                        </span>
+                    </div>
+                    
+                    
+                    <div class="entry-tags text-center">
+
+                        <i class="fa fa-tags"></i>&nbsp;Tagged with <a href="http://jeffreywei.github.io/tags/index.html#swift" data-toggle="tooltip" title="Posts tagged with swift" rel="tag">swift</a>&nbsp;&bull;&nbsp;<a href="http://jeffreywei.github.io/tags/index.html#work" data-toggle="tooltip" title="Posts tagged with work" rel="tag">work</a>
+
+                    </div>
+                    
+                    </div>
+                    <footer class="post-footer entry-meta">
+                        <div class="post-share text-center">
+    <p class="light small">
+        Share this post
+    </p>
+    <ul class="social-mini">
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=&quot;Swift教程第一章&quot;%20http://jeffreywei.github.io/swift,work/swift-lesson-1%20via%20&#64;"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" data-toggle="tooltip" title="Share on Twitter" itemprop="Twitter">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a  href="https://www.facebook.com/sharer/sharer.php?u=http://jeffreywei.github.io/swift,work/swift-lesson-1"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" data-toggle="tooltip" title="Share on Facebook" itemprop="Facebook">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a href="https://plus.google.com/share?url=http://jeffreywei.github.io/swift,work/swift-lesson-1"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" data-toggle="tooltip" title="Share on Google plus" itemprop="GooglePlus">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+                        <div class="post-author text-center">
+            <img src="http://jeffreywei.github.io/images/100.jpeg" alt="Wei's photo" itemprop="image" class="post-avatar img-circle img-responsive"/>
+        <h4 class="bordered-bottom vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">By <span itemprop="name" class="fn"><a href="http://jeffreywei.github.io/about" title="About Wei" itemprop="url">Wei</a></span></h4>
+        <p>自助者天助</p>
+</div>
+
+                        <nav class="pagination" role="navigation">
+                        
+                        <a class="newer-posts btn btn-danger btn-large" rel="prev" href="/work,nosql/mongodb-import-data" title="mongodb数据导入">&larr; Previous Post</a>
+                        
+                        
+                        <a class="older-posts btn btn-danger btn-large" rel="next" href="/swift,work/swift-lesson-2-1" title="Swift教程第二章(1)">Next Post &rarr;</a>
+                        
+                        </nav>
+                        <br>
+                        <div id="disqus_thread"></div><!-- /#disqus_thread -->
+                        
+						
+						
+                    </footer>
+            </article>
+        </div>
+    </div>
+</div>
+    
+<footer id="footer"  class="blog-background  text-center align-middle animated from-top" style="background-image: url(http://jeffreywei.github.io/images/Clouds.jpg)" >
+
+
+    <div class="inner">
+        <div class="container">
+
+            <ul class="social-icons">
+            
+            
+            
+            
+            
+            
+            
+            <li>
+                <a href="http://github.com/JeffreyWei" data-toggle="tooltip" title="Wei on Github" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+            
+			
+        </ul>
+            <div>
+                <a href="http://jeffreywei.github.io/about/">Wei</a> &copy; 2016 &bull; All rights reserved.
+            </div>
+            <ul class="menu-items">
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/"><i class="fa fa-home"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/categories"><i class="fa fa-bars"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/tags"><i class="fa fa-tags"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/guestbook"><i class="fa fa-comments"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/project"><i class="fa fa-code"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/links"><i class="fa fa-link"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li>
+                
+                    <a href="http://jeffreywei.github.io/about"><i class="fa fa-user"></i></a>&nbsp;&bull;
+                
+            </li>
+            
+            <li><a href="http://jeffreywei.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss"></i> Feed</a></li>
+        </ul>
+        </div>
+    </div>
+    
+        <div class="decor-wrapper">
+            <svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+
+                <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+                <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+
+                <path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+                <path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+
+                <path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+                <path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+
+                <path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+
+                <path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+
+            </svg>
+        </div>
+    
+</footer>
+
+
+    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"><\/script>')</script>
+<script src="http://jeffreywei.github.io/assets/js/scripts.min.js"></script>
+<script type="text/javascript" src="http://jeffreywei.github.io/assets/js/waypoints.min.js"></script>
+<script type="text/javascript" src="http://jeffreywei.github.io/assets/js/script.js"></script>
+<script type='text/javascript'>console.log("HMFaysal Omega Theme Version 2.0");</script>
+<script type='text/javascript'>console.log("https://alum.mit.edu/www/hmfaysal");</script>
+<script type='text/javascript'>$(document).ready(function(){$(".time").text(function(a,b){return Math.round(parseFloat(b))})});</script>
+
+<script type="text/javascript">
+
+/*      Slides       */
+
+$("a#slide").click(function(){
+    $("#sidebar,body,a#slide,#fade").addClass("slide")
+});
+
+$("#fade,#header,#posts-container").click(function(){
+    $("#sidebar,body,a#slide,#fade").removeClass("slide")
+});
+
+$("a#click-filter").click(function(){
+    $("#slide-filter").slideToggle("medium");
+    $("#slide-pages").slideOut("medium");
+});
+
+$("a#click-pages").click(function(){
+    $("#slide-pages").slideToggle("medium");
+    $("#slide-filter").slideOut("medium");
+});
+
+/*      End-Slides      */
+
+</script>
+
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').simpleJekyllSearch({
+          jsonFile : 'http://jeffreywei.github.io/search.json',
+          searchResults : '.search-results',
+          template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+
+     var bs = {
+          close: $(".fa-times"),
+          searchform: $(".search-form"),
+          canvas: $("body"),
+          dothis: $('.dosearch')
+      };
+
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('search-overlay');
+    });
+
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('search-overlay');
+    });
+  })( jQuery, window );
+</script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-42739557-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'jeffreywei'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<script>NProgress.done();</script>
+
+
+    <script type="text/javascript">
+// https://github.com/ghiculescu/jekyll-table-of-contents
+(function($){
+  $.fn.toc = function(options) {
+    var defaults = {
+      noBackToTopLinks: false,
+      title: '<i>Jump to...</i>',
+      minimumHeaders: 3,
+      headers: 'h1, h2, h3, h4, h5, h6',
+      listType: 'ul', // values: [ol|ul]
+      showEffect: 'show', // values: [show|slideDown|fadeIn|none]
+      showSpeed: 'slow' // set to 0 to deactivate effect
+    },
+    settings = $.extend(defaults, options);
+
+    var headers = $(settings.headers).filter(function() {
+      // get all headers with an ID
+      var previousSiblingName = $(this).prev().attr( "name" );
+      if (!this.id && previousSiblingName) {
+        this.id = $(this).attr( "id", previousSiblingName.replace(/\./g, "-") );
+      }
+      return this.id;
+    }), output = $(this);
+    if (!headers.length || headers.length < settings.minimumHeaders || !output.length) {
+      return;
+    }
+
+    if (0 === settings.showSpeed) {
+      settings.showEffect = 'none';
+    }
+
+    var render = {
+      show: function() { output.hide().html(html).show(settings.showSpeed); },
+      slideDown: function() { output.hide().html(html).slideDown(settings.showSpeed); },
+      fadeIn: function() { output.hide().html(html).fadeIn(settings.showSpeed); },
+      none: function() { output.html(html); }
+    };
+
+    var get_level = function(ele) { return parseInt(ele.nodeName.replace("H", ""), 10); }
+    var highest_level = headers.map(function(_, ele) { return get_level(ele); }).get().sort()[0];
+    var return_to_top = '<i class="icon-arrow-up back-to-top"> </i>';
+
+    var level = get_level(headers[0]),
+      this_level,
+      html = settings.title + " <"+settings.listType+">";
+    headers.on('click', function() {
+      if (!settings.noBackToTopLinks) {
+        window.location.hash = this.id;
+      }
+    })
+    .addClass('clickable-header')
+    .each(function(_, header) {
+      this_level = get_level(header);
+      if (!settings.noBackToTopLinks && this_level === highest_level) {
+        $(header).addClass('top-level-header').after(return_to_top);
+      }
+      if (this_level === level) // same level as before; same indenting
+        html += "<li><a href='#" + header.id + "'>" + header.innerHTML + "</a>";
+      else if (this_level <= level){ // higher level than before; end parent ol
+        for(i = this_level; i < level; i++) {
+          html += "</li></"+settings.listType+">"
+        }
+        html += "<li><a href='#" + header.id + "'>" + header.innerHTML + "</a>";
+      }
+      else if (this_level > level) { // lower level than before; expand the previous to contain a ol
+        for(i = this_level; i > level; i--) {
+          html += "<"+settings.listType+"><li>"
+        }
+        html += "<a href='#" + header.id + "'>" + header.innerHTML + "</a>";
+      }
+      level = this_level; // update for the next one
+    });
+    html += "</"+settings.listType+">";
+    if (!settings.noBackToTopLinks) {
+      $(document).on('click', '.back-to-top', function() {
+        $(window).scrollTop(0);
+        window.location.hash = '';
+      });
+    }
+
+    render[settings.showEffect]();
+  };
+})(jQuery);
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#drawer').toc();
+});
+</script>
+
+</body>
+</html>
