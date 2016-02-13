@@ -1,10 +1,23 @@
-title:            Sagittarius
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Sagittarius
 description:      "Good artists copy,Great artist steal."
-logo:             fa-paper-plane-o.png
-disqus_shortname: jeffreywei
-youyan_uid:
-changyan_shortname:
-duoshuo_shortname:
+email: mavenwei@qq.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://jeffreywei.github.io" # the base hostname & protocol for your site
+# twitter_username: jekyllrb
+github_username:  JeffreyWei
+
 # Assign a default image for your site's header and footer
 default_bg:       http://jeffreywei.github.io/images/Clouds.jpg
 search:           true
@@ -19,119 +32,12 @@ animated_fins:   true
 # Specify the fin color in RGB value
 fin_color:        "255,255,255"
 
-# Owner/author information
-owner:
-  name:           Wei
-  avatar:         100.jpeg
-  email:          mavenwei@qq.com
-  # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
-  description:    自助者天助
-  # Social networking links used in footer. Update and remove as you like.
-  #twitter:
-  #facebook:
-  github:         JeffreyWei
-  # weibo:          524406123
-  # stackexchange:
-  # linkedin:
-  # instagram:
-  # flickr:
-  tumblr:         mavenwei
-  # For Google Authorship https://plus.google.com/authorship
-  google_plus:
 
-# Links to include in footer navigation
-# For external links add external: true
-links:
-  - title: Home
-    url: /
-    external: false
-    icon: home
-  - title: Categories
-    url: /categories
-    icon: bars
-  - title: Tags
-    url: /tags
-    icon: tags
-  - title: Guestbook
-    url: /guestbook
-    icon: comments
-  - title: Work
-    url: /project
-    icon: code
-  - title: Links
-    url:   /links
-    icon: link
-  - title: About
-    url: /about
-    icon: user
-
-# Where things are
-source:      .
-destination: ./_site
-plugins:     ./_plugins
-layouts:     ./_layouts
-data_source: ./_data
-collections: null
-
-# Handling Reading
-safe:         false
-include:      [".htaccess"]
-exclude:      []
-keep_files:   [".git", ".svn"]
-encoding:     "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-textile_ext:  "textile"
-
-# Filtering Content
-show_drafts: null
-limit_posts: 0
-future:      true
-unpublished: false
-
-# Plugins
-whitelist: []
-gems:      []
-
-# Conversion
-markdown:    kramdown
+# Build settings
+markdown: kramdown
 highlighter: pygments
 lsi:         false
 excerpt_separator: "<!--more-->"
-
-# Serving
-detach:  false
-port:    4000
-host:    127.0.0.1
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
-#url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
-
-# Backwards-compatibility
-relative_permalinks: false
-
-# Outputting
-permalink:     /:categories/:title
-paginate: 6
-paginate_path: /page:num
-timezone:      Asia/Shanghai
-
-quiet:    false
-defaults: []
-
-# Markdown Processors
-maruku:
-  use_tex:    false
-  use_divs:   false
-  png_engine: blahtex
-  png_dir:    images/latex
-  png_url:    /images/latex
-  fenced_code_blocks: true
-
-rdiscount:
-  extensions: []
-
-redcarpet:
-  extensions: []
 
 kramdown:
   auto_ids:       true
@@ -149,9 +55,3 @@ kramdown:
     coderay_bold_every:        10
     coderay_css:               style
 
-redcloth:
-  hard_breaks: true
-
-sass:
-    sass_dir: _sass
-    style: :compressed

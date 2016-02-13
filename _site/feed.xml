@@ -1,34 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text">Sagittarius</title>
-<generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://127.0.0.1:4000/feed.xml" />
-<link rel="alternate" type="text/html" href="http://127.0.0.1:4000" />
-<updated>2016-02-13T14:27:26+08:00</updated>
-<id>http://127.0.0.1:4000/</id>
-<author>
-  <name>Wei</name>
-  <uri>http://127.0.0.1:4000/</uri>
-  <email>mavenwei@qq.com</email>
-</author>
-
-
-<entry>
-  <title type="html"><![CDATA[Docker(3)-项目部署]]></title>
-  <link>http://127.0.0.1:4000/docker/blog-test</link>
-  <id>http://127.0.0.1:4000/docker/blog-test</id>
-  <published>2016-02-13T00:00:00+08:00</published>
-  <updated>2016-02-13T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sagittarius</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://jeffreywei.github.io/</link>
+    <atom:link href="http://jeffreywei.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 13 Feb 2016 16:32:26 +0800</pubDate>
+    <lastBuildDate>Sat, 13 Feb 2016 16:32:26 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>Docker(3)-项目部署</title>
+        <description>&lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
 
 &lt;!--more--&gt;
-&lt;p&gt;##生成镜像
-使用&lt;code&gt;dockerfile&lt;/code&gt;生成包含war的镜像，此处使用的jetty作为容器&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;生成镜像&lt;/h2&gt;
+&lt;p&gt;使用&lt;code&gt;dockerfile&lt;/code&gt;生成包含war的镜像，此处使用的jetty作为容器&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;FROM jetty:9-jre7
 MAINTAINER wei@yizhen.com
@@ -50,7 +39,7 @@ EXPOSE 20885
 &lt;pre&gt;&lt;code&gt;sudo docker build -t imagename:tag dockerfilepath/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;启动镜像&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;启动镜像&lt;/h2&gt;
 
 &lt;p&gt;使用&lt;code&gt;docker run&lt;/code&gt;启动容器&lt;/p&gt;
 
@@ -59,7 +48,7 @@ EXPOSE 20885
 
 &lt;p&gt;&lt;em&gt;项目对外输出文件日志，使用了一个映射卷;net参数使dubbo向外暴露的接口使用和宿主机器同网段的地址&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;基础容器&lt;/h2&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;基础容器&lt;/h2&gt;
 &lt;p&gt;###mysql&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo docker run --name mysql -v /mysqldata:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=toor -d mysql:5.6
@@ -81,96 +70,21 @@ sudo docker push 127.0.0.1:5000/imagename
 &lt;pre&gt;&lt;code&gt;sudo docker run -d --restart=always -p 8080:8080 rancher/server
 &lt;/code&gt;&lt;/pre&gt;
 
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/blog-test&quot;&gt;Docker(3)-项目部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on February 13, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Docker(3)-项目部署]]></title>
-  <link>http://127.0.0.1:4000/docker/learning-docker-03-project-deploy</link>
-  <id>http://127.0.0.1:4000/docker/learning-docker-03-project-deploy</id>
-  <published>2016-02-10T00:00:00+08:00</published>
-  <updated>2016-02-10T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
-
-&lt;!--more--&gt;
-&lt;p&gt;##生成镜像
-使用&lt;code&gt;dockerfile&lt;/code&gt;生成包含war的镜像，此处使用的jetty作为容器&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;FROM jetty:9-jre7
-MAINTAINER wei@yizhen.com
-COPY target/uther.war /var/lib/jetty/webapps/ROOT.war
-VOLUME /home/jetty/.dubbo
-EXPOSE 8080
-EXPOSE 20885
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;由于项目中使用了dubbo，需要在用户根目录创建一个可写权限的文件夹;对外暴露需要使用的端口&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;使用maven打包项目&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mvn  clean compile war:war -Dmaven.test.skip=true -P dev
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用&lt;code&gt;docker build&lt;/code&gt;生成镜像&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo docker build -t imagename:tag dockerfilepath/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;启动镜像&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code&gt;docker run&lt;/code&gt;启动容器&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo docker run -d -p 80:8080 -p 20885:20885 -v /log:/log --net=host --name proejct_0210 imagename:tag
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;项目对外输出文件日志，使用了一个映射卷;net参数使dubbo向外暴露的接口使用和宿主机器同网段的地址&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;基础容器&lt;/h2&gt;
-&lt;p&gt;###mysql&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo docker run --name mysql -v /mysqldata:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=toor -d mysql:5.6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;jenkins&quot;&gt;jenkins&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo docker run -it  -p 8080:8080 -p 50000:50000 -v /jenkinsdata:/var/ jenkins_home jenkins
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;registry&quot;&gt;registry&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo docker run -p 5000:5000 -v /docker_registry:/tmp/registry-dev  registry
-sudo docker push 127.0.0.1:5000/imagename
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;rancher&quot;&gt;rancher&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo docker run -d --restart=always -p 8080:8080 rancher/server
-&lt;/code&gt;&lt;/pre&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/learning-docker-03-project-deploy&quot;&gt;Docker(3)-项目部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on February 10, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Docker(2)-容器&仓库]]></title>
-  <link>http://127.0.0.1:4000/docker/learning-docker-02-container-epository</link>
-  <id>http://127.0.0.1:4000/docker/learning-docker-02-container-epository</id>
-  <published>2016-01-21T00:00:00+08:00</published>
-  <updated>2016-01-21T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Docker容器、仓库的相关操作&lt;/p&gt;
+</description>
+        <pubDate>Wed, 10 Feb 2016 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/docker/2016/02/10/learning-docker-03-project-deploy.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/docker/2016/02/10/learning-docker-03-project-deploy.html</guid>
+        
+        <category>Docker</category>
+        
+        
+        <category>Docker</category>
+        
+      </item>
+    
+      <item>
+        <title>Docker(2)-容器&amp;仓库</title>
+        <description>&lt;p&gt;Docker容器、仓库的相关操作&lt;/p&gt;
 
 &lt;!--more--&gt;
 &lt;p&gt;#容器&lt;/p&gt;
@@ -217,23 +131,21 @@ docker import CONTAINER
 &lt;pre&gt;&lt;code&gt;docker push localhost:5000/IMAGE 
 &lt;/code&gt;&lt;/pre&gt;
 
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/learning-docker-02-container-epository&quot;&gt;Docker(2)-容器&仓库&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 21, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Docker(1)-镜像]]></title>
-  <link>http://127.0.0.1:4000/docker/learning-docker-01-image</link>
-  <id>http://127.0.0.1:4000/docker/learning-docker-01-image</id>
-  <published>2016-01-20T00:00:00+08:00</published>
-  <updated>2016-01-20T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Docker镜像的相关操作&lt;/p&gt;
+</description>
+        <pubDate>Thu, 21 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/docker/2016/01/21/learning-docker-02-container-epository.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/docker/2016/01/21/learning-docker-02-container-epository.html</guid>
+        
+        <category>Docker</category>
+        
+        
+        <category>Docker</category>
+        
+      </item>
+    
+      <item>
+        <title>Docker(1)-镜像</title>
+        <description>&lt;p&gt;Docker镜像的相关操作&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -373,23 +285,21 @@ docker import CONTAINER
 
 &lt;p&gt;本系列参考《&lt;a href=&quot;http://book.douban.com/subject/26284823/&quot;&gt;Docker技术入门与实战&lt;/a&gt;》&lt;/p&gt;
 
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/learning-docker-01-image&quot;&gt;Docker(1)-镜像&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 20, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[tomcat远程调试]]></title>
-  <link>http://127.0.0.1:4000/java/tomcat-remote-debug</link>
-  <id>http://127.0.0.1:4000/java/tomcat-remote-debug</id>
-  <published>2016-01-15T00:00:00+08:00</published>
-  <updated>2016-01-15T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;配置使用tomcat远程调试功能，使用idea远程调试项目&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/docker/2016/01/20/learning-docker-01-image.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/docker/2016/01/20/learning-docker-01-image.html</guid>
+        
+        <category>Docker</category>
+        
+        
+        <category>Docker</category>
+        
+      </item>
+    
+      <item>
+        <title>tomcat远程调试</title>
+        <description>&lt;p&gt;配置使用tomcat远程调试功能，使用idea远程调试项目&lt;/p&gt;
 
 &lt;!--more--&gt;
 &lt;p&gt;##tomcat配置
@@ -421,23 +331,21 @@ docker import CONTAINER
 
 &lt;p&gt;最近在工作中遇到的一个部署问题，是由于URL编码造成的，开发环境使用maven插件使项目运行在jetty上，线上环境为tomcat，部署后发现前台传入的中文无法正常到达后台，查看tomcat配置文档，需要在server.xml中配置连接的编码格式，添加&lt;code&gt;URIEncoding=&quot;UTF-8&quot;&lt;/code&gt;配置。&lt;/p&gt;
 
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/tomcat-remote-debug&quot;&gt;tomcat远程调试&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 15, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[使用jsonp实现js跨域请求]]></title>
-  <link>http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain</link>
-  <id>http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain</id>
-  <published>2016-01-13T00:00:00+08:00</published>
-  <updated>2016-01-13T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;页面内跨域请求&lt;/p&gt;
+</description>
+        <pubDate>Fri, 15 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/java/2016/01/15/tomcat-remote-debug.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/java/2016/01/15/tomcat-remote-debug.html</guid>
+        
+        <category>java</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>使用jsonp实现js跨域请求</title>
+        <description>&lt;p&gt;页面内跨域请求&lt;/p&gt;
 
 &lt;!--more--&gt;
 &lt;p&gt;##跨域限制
@@ -445,7 +353,7 @@ docker import CONTAINER
 
 &lt;h2 id=&quot;section&quot;&gt;前端&lt;/h2&gt;
 &lt;p&gt;前端使用jquery封装的ajax&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
 	&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -462,35 +370,33 @@ docker import CONTAINER
 	&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;调用时可以指定&lt;code&gt;callback&lt;/code&gt;或由jquery自动生成callback的参数。
 ##后端
 后端代码使用springmvc实现一个可以处理异步请求的方法&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/ajax&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@ResponseBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;getAjaxResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/ajax&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@ResponseBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;getAjaxResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;{&amp;#39;name&amp;#39;:&amp;#39;张三&amp;#39;}&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;(&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;后端服务需要可以处理&lt;code&gt;callback&lt;/code&gt;参数，并在返回前端需要的回调函数。&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain&quot;&gt;使用jsonp实现js跨域请求&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 13, 2016.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[2015年终总结]]></title>
-  <link>http://127.0.0.1:4000/work/2015-summary</link>
-  <id>http://127.0.0.1:4000/work/2015-summary</id>
-  <published>2015-12-25T00:00:00+08:00</published>
-  <updated>2015-12-25T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;回顾过去、展望未来&lt;/p&gt;
+</description>
+        <pubDate>Wed, 13 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/javascript/2016/01/13/ajax-jquery-crossdomain.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/javascript/2016/01/13/ajax-jquery-crossdomain.html</guid>
+        
+        <category>javascript</category>
+        
+        
+        <category>javascript</category>
+        
+      </item>
+    
+      <item>
+        <title>2015年终总结</title>
+        <description>&lt;p&gt;回顾过去、展望未来&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -577,23 +483,21 @@ docker import CONTAINER
 &lt;h2 id=&quot;section-4&quot;&gt;五、对组织意见或建议&lt;/h2&gt;
 
 &lt;p&gt;明确各项目组任务、职责，让每个人明确自己的定位，不仅有事做，而且愿意做。为其他人创造成长的机会，达到公司、个人双赢。&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/work/2015-summary&quot;&gt;2015年终总结&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 25, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[maven引用snapshot版本jar]]></title>
-  <link>http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT</link>
-  <id>http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT</id>
-  <published>2015-12-23T00:00:00+08:00</published>
-  <updated>2015-12-23T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;!--more--&gt;
+</description>
+        <pubDate>Fri, 25 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/work/2015/12/25/2015-summary.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/work/2015/12/25/2015-summary.html</guid>
+        
+        <category>work</category>
+        
+        
+        <category>work</category>
+        
+      </item>
+    
+      <item>
+        <title>maven引用snapshot版本jar</title>
+        <description>&lt;!--more--&gt;
 &lt;p&gt;##问题描述&lt;/p&gt;
 
 &lt;p&gt;在本地编译上传snapshot jar,在其他环境无法正常获取，发现每次执行&lt;code&gt;mvn deploy&lt;/code&gt;时都会在本地仓库生成相应的文件，本地编译其他依赖项目是没有问题的，但在其他环境编译发现始终从PublicRepositorie获取，推断部署阶段应该是没问题的，猜测问题出在snapshot获取的路径配置上，查看maven配置&lt;code&gt;setting.xml&lt;/code&gt;。&lt;/p&gt;
@@ -601,16 +505,16 @@ docker import CONTAINER
 &lt;h2 id=&quot;settingxml&quot;&gt;配置setting.xml&lt;/h2&gt;
 &lt;p&gt;###mirror段&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mirror&amp;gt;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;mirror&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;snapshot&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;mirrorOf&amp;gt;&lt;/span&gt;snapshots-repo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mirrorOf&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://xxx.com/content/repositories/snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/mirror&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/mirror&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;profile&quot;&gt;profile段&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;allow-snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;activation&amp;gt;&amp;lt;activeByDefault&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/activeByDefault&amp;gt;&amp;lt;/activation&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
@@ -621,34 +525,35 @@ docker import CONTAINER
          &lt;span class=&quot;nt&quot;&gt;&amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/enabled&amp;gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;
+ &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;再次编译依赖项目即可从SnapshotsRepositorie获取快照版本的类库。&lt;/p&gt;
 
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT&quot;&gt;maven引用snapshot版本jar&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[maven发布带有javadoc、source的库文件]]></title>
-  <link>http://127.0.0.1:4000/java,maven/maven-deploy</link>
-  <id>http://127.0.0.1:4000/java,maven/maven-deploy</id>
-  <published>2015-12-16T00:00:00+08:00</published>
-  <updated>2015-12-16T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;如果只发布打包的jar,在其他项目中引用看到的参数都是以var1…的形式存在，而且不包含注释文档，本文介绍如何向布带有源码、注释的jar.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/java,maven/2015/12/23/maven-using-SNAPSHOT.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/java,maven/2015/12/23/maven-using-SNAPSHOT.html</guid>
+        
+        <category>java</category>
+        
+        <category>maven</category>
+        
+        
+        <category>java,maven</category>
+        
+      </item>
+    
+      <item>
+        <title>maven发布带有javadoc、source的库文件</title>
+        <description>&lt;p&gt;如果只发布打包的jar,在其他项目中引用看到的参数都是以var1…的形式存在，而且不包含注释文档，本文介绍如何向布带有源码、注释的jar.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;maven&quot;&gt;maven配置&lt;/h2&gt;
 &lt;p&gt;向maven配置文件&lt;code&gt;settings.xml&lt;/code&gt;中添加&lt;code&gt;servers&lt;/code&gt;段，例如：&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;server&amp;gt;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;server&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;thirdparty&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;username&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/username&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;password&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/password&amp;gt;&lt;/span&gt;
@@ -657,7 +562,7 @@ docker import CONTAINER
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;username&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/username&amp;gt;&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;&amp;lt;password&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/password&amp;gt;&lt;/span&gt;
-  	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/server&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/server&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;分别用于release、snapshot版本发布.&lt;/p&gt;
 
@@ -665,7 +570,7 @@ docker import CONTAINER
 
 &lt;p&gt;修改项目下的&lt;code&gt;pom.xml&lt;/code&gt;文件&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-source-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
@@ -696,7 +601,7 @@ docker import CONTAINER
             &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;发布&lt;/h2&gt;
 &lt;p&gt;使用如下命令发布&lt;/p&gt;
@@ -705,23 +610,23 @@ docker import CONTAINER
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这样在其他项目引用时就可以获取到文档及源码。&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java,maven/maven-deploy&quot;&gt;maven发布带有javadoc、source的库文件&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[springmvc中配置FreeMarker]]></title>
-  <link>http://127.0.0.1:4000/java,freemarker,spring/freemarker-java</link>
-  <id>http://127.0.0.1:4000/java,freemarker,spring/freemarker-java</id>
-  <published>2015-12-10T00:00:00+08:00</published>
-  <updated>2015-12-10T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;前端模板freemarker配置&lt;/p&gt;
+</description>
+        <pubDate>Wed, 16 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/java,maven/2015/12/16/maven-deploy.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/java,maven/2015/12/16/maven-deploy.html</guid>
+        
+        <category>java</category>
+        
+        <category>maven</category>
+        
+        
+        <category>java,maven</category>
+        
+      </item>
+    
+      <item>
+        <title>springmvc中配置FreeMarker</title>
+        <description>&lt;p&gt;前端模板freemarker配置&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -746,7 +651,7 @@ docker import CONTAINER
 
 &lt;p&gt;springmvc相关配置&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;freemarkerConfigurer&amp;quot;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;freemarkerConfigurer&amp;quot;&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;templateLoaderPath&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/WEB-INF/views/&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;defaultEncoding&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
@@ -768,11 +673,11 @@ docker import CONTAINER
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;exposeRequestAttributes&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;exposeSessionAttributes&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;exposeSpringMacroHelpers&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;模板文件常用语法&lt;/h2&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsp&quot; data-lang=&quot;jsp&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD HTML 4.01 Transitional//EN&amp;quot; &amp;quot;http://www.w3.org/TR/html4/loose.dtd&amp;quot;&amp;gt;&lt;/span&gt;  
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsp&quot; data-lang=&quot;jsp&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD HTML 4.01 Transitional//EN&amp;quot; &amp;quot;http://www.w3.org/TR/html4/loose.dtd&amp;quot;&amp;gt;&lt;/span&gt;  
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;  
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;  
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Content-Type&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;  
@@ -819,26 +724,28 @@ include导入文件：
 &lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;#include &amp;quot;include.html&amp;quot;/&amp;gt;  
   
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;  
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;模板代码中可以直接读取session中级response中填入的属性值&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java,freemarker,spring/freemarker-java&quot;&gt;springmvc中配置FreeMarker&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 10, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[idea 快捷键]]></title>
-  <link>http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap</link>
-  <id>http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap</id>
-  <published>2015-12-01T00:00:00+08:00</published>
-  <updated>2015-12-01T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;idea 定制快捷键Mac版&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/java,freemarker,spring/2015/12/10/freemarker-java.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/java,freemarker,spring/2015/12/10/freemarker-java.html</guid>
+        
+        <category>java</category>
+        
+        <category>FreeMarker</category>
+        
+        <category>spring</category>
+        
+        
+        <category>java,FreeMarker,spring</category>
+        
+      </item>
+    
+      <item>
+        <title>idea 快捷键</title>
+        <description>&lt;p&gt;idea 定制快捷键Mac版&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -933,555 +840,21 @@ jump to navigation bar 			⌥ ⌘ B
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/JeffreyWei/jeffreywei.github.io/tree/master/assets/posts/2015-12/1201&quot;&gt;文档配置&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap&quot;&gt;idea 快捷键&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 01, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[我是你夜晚的太阳]]></title>
-  <link>http://127.0.0.1:4000/novel,book/novel</link>
-  <id>http://127.0.0.1:4000/novel,book/novel</id>
-  <published>2015-11-28T00:00:00+08:00</published>
-  <updated>2015-11-28T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;没有灵魂的生物可怕又可悲&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;pre&gt;&lt;code&gt;我的天空没有太阳，总是黑夜，但并不暗，因为有东西代替了太阳。虽然没有太阳那么明亮，但对我来说已经足够。凭借着这份光，我便能把黑夜当成白天。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这是女主人公&lt;code&gt;西本雪穗&lt;/code&gt;对自己生活状态的陈述，童年时生活的创伤让这个女孩失去了阳光，直到男主人公&lt;code&gt;桐原亮司&lt;/code&gt;的挺身而出，她抓住了这仅有的一点光亮仅仅的不放。书中直到结局才第一次正面描写两个人在同一地点出现，就是这样的两个人，两个人空空的灵魂产生的漩涡把他们紧紧的吸引在一起，影响着周围的一切。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;互利共生&lt;/code&gt;这是老刑警给他们下的定义，一个做事不择手段，另一个为其心甘情愿，从小学到高中、大学再到各自拥有自己的事业，在其他人的眼中不相交的两条轨迹因为特殊的羁绊越缠越深，他们的灵魂早在那个交织点上离开了他们的肉体，而对方的存在恰好填补了这份空白。雪穗让自己活在别人的羡慕中，她在夺取身边一切可以得道的资源，亮司则在暗中为其扫清障碍，甘愿做强盗甚至杀手。&lt;/p&gt;
-
-&lt;p&gt;他们之间的关系到底是不是爱，或者只是另一半的单相思，作者给读者留下了想象的空间&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;雪穗正沿扶梯上楼，背影犹如白色的幽灵。
-她一次都没有回头。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;当亮司倒在血泊中的那一刻，她生命中唯一的亮光消失了，她仅存的那点精神支柱也被抽空，站在那里的只是一具剩下一具驱壳而已。&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/novel,book/novel&quot;&gt;我是你夜晚的太阳&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on November 28, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[当爬虫遇到压缩页面&GBK编码]]></title>
-  <link>http://127.0.0.1:4000/python,%20spider/python-spider-encode</link>
-  <id>http://127.0.0.1:4000/python,%20spider/python-spider-encode</id>
-  <published>2015-11-25T00:00:00+08:00</published>
-  <updated>2015-11-25T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;目标站点使用gzip或者中文编码&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/JeffreyWei/xunleiaccount&quot;&gt;网络VIP账号爬虫工具&lt;/a&gt;执行时出错，首先使用浏览器访问检查页面样式是否变更，确认代码中样式规则仍然是适用的，后使用同样的方法访问站点首页正常，在访问账号页面时返回数据为乱码，使用&lt;code&gt;curl&lt;/code&gt;查看页面同样返回乱码，查看浏览器请求，返回的头部确实有压缩标记，处理方法，需要在得到返回内容后使用对应的解压缩即可，这里给出Gzip的实现，如下：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPageHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;Accept-Encoding&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;gzip, deflate&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;# gzip解压缩&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x1f\x8b\x08\x00\x00\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gzip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GzipFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileobj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cStringIO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StringIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/python,%20spider/python-spider-encode&quot;&gt;当爬虫遇到压缩页面&GBK编码&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on November 25, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[寻找数轴上相邻两个数之间的最大差值]]></title>
-  <link>http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm</link>
-  <id>http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm</id>
-  <published>2015-11-24T00:00:00+08:00</published>
-  <updated>2015-11-24T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Via python&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;中午在网上看到的一道面试题，最近再补Python就试着写了下&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;问题描述：N个未排序的整数，在线性时间内，求这N个整数在数轴上相邻两个数之间的最大差值&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;python&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-*-&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;coding:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-*-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;__author__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wei&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;
-
-
-&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;interval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
-	&lt;span class=&quot;s&quot;&gt;&amp;quot;每次找到一组数中相对小的，距离最近，在所有集合中找到最大的即为结果&amp;quot;&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;gap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:]:&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;gap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__main__&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;时间复杂度为n(n-1)/2&lt;/em&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm&quot;&gt;寻找数轴上相邻两个数之间的最大差值&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on November 24, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Zookeeper (2) --典型应用场景]]></title>
-  <link>http://127.0.0.1:4000/distribute/zk_02</link>
-  <id>http://127.0.0.1:4000/distribute/zk_02</id>
-  <published>2015-10-29T00:00:00+08:00</published>
-  <updated>2015-10-29T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;典型分布式应用场景有：数据发布/订阅、负债均衡、命名服务、分布式协议/通知、集群管理、Master选举、分布式锁、分布式队列等。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;数据发布/订阅&lt;/h2&gt;
-
-&lt;p&gt;主要应用场景如&lt;code&gt;配置中心&lt;/code&gt;变更服务地址、数据库切换等，集群中的服务使用Zookeeper中的配置提供服务，解决服务规模大，配置修改频繁的问题。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;负载均衡&lt;/h2&gt;
-&lt;p&gt;可以提供一种动态的DNS服务，Zookeeper中维护最新的IP、域名映射关系，客户端根据需要使用Zookeeper急群众的DNS信息来解析域名对应的IP，达到动态路由的目的。
-## 命名服务
-命名服务是分布式系统最基础的公共服务之一，在分布式系统中，被命名的尸体通常可以是集群中的机器、提供的服务地址或远程对象等，这些我们都可以同城他们为名称（Name）,其中较为常见的就是一些分布式服务框架（如RPC/RMI）中的服务地址列表，通过使用命名服务，客户端应用能够根据指定的名字来获取资源的实体、服务地址提供者的信息等。
-## 分布式协议/通知
-分布式协议/通知是协调不同组件协同供作的关键所在，例如分布式事务处理、机器间的相互协调等。引入这样一个协调者，便于将分布式协议的职责从应用中分离出来，从而可以大大减少系统之间的耦合性，而且能够显著提供系统的可扩展性。应用举例：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Mysql数据复制总线：Mysql_Replicator
-    &lt;ol&gt;
-      &lt;li&gt;任务注册&lt;/li&gt;
-      &lt;li&gt;任务热备份&lt;/li&gt;
-      &lt;li&gt;记录执行状态&lt;/li&gt;
-      &lt;li&gt;控制台协调&lt;/li&gt;
-      &lt;li&gt;冷备切换&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;一种通用的分布式系统机器间通信方式
-    &lt;ol&gt;
-      &lt;li&gt;心跳监测&lt;/li&gt;
-      &lt;li&gt;工作进度汇报&lt;/li&gt;
-      &lt;li&gt;系统调度&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;集群管理&lt;/h2&gt;
-&lt;p&gt;集群管理包括两部分：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;集群监控&lt;/code&gt;（对集群运行时状态的手机）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;集群控制&lt;/code&gt;（对集群进行操作与控制）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;通常会有如下的需求：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;需要知道集群中有多少机器在工作&lt;/li&gt;
-  &lt;li&gt;对集群中的机器运行时状态进行收集（分布式日志收集系统）&lt;/li&gt;
-  &lt;li&gt;对集群中的机器进行上下线操作（云主机管理）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;master&quot;&gt;Master选举&lt;/h2&gt;
-&lt;p&gt;当需要分布在不同机器上的相互独立的相同系统单元执行一个独立的操作时需要选出一个Master执行相应的操作。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;分布式锁&lt;/h2&gt;
-
-&lt;p&gt;分布式锁是控制分布系统之间同步访问共享资源的一种方式。如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要通过一些互斥手段防止彼此之间的干扰，以确保一致性，在这种情况下，就需要使用分布式锁了。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;分布式队列&lt;/h2&gt;
-&lt;p&gt;使用Zookeeper可以实现&lt;code&gt;FIFO：先进先出&lt;/code&gt;、&lt;code&gt;Barrier：分布式屏障&lt;/code&gt;，确保在分布式的架构下系统工作流程的正确性。&lt;/p&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/distribute/zk_02&quot;&gt;Zookeeper (2) --典型应用场景&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on October 29, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[java类继承中的一些规则]]></title>
-  <link>http://127.0.0.1:4000/java/java-class-inherit</link>
-  <id>http://127.0.0.1:4000/java/java-class-inherit</id>
-  <published>2015-10-28T00:00:00+08:00</published>
-  <updated>2015-10-28T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;子类初始化的顺序&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;子类初始化时构造函数优于类中的字段&lt;/h2&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mSuperX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;·&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;setX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;99&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;sc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;mSuperX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mSubX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;mSubX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SubX is assigned &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SubX = &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mSubX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;输出结果为&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;SubX is assigned 99
-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;构造子类B需要先是调用A的构造函数，由于&lt;code&gt;setX&lt;/code&gt;被重写，然后执行了B中的&lt;code&gt;setX&lt;/code&gt;方法输出99，然后初始化B中的字段&lt;code&gt;mSubX = 1&lt;/code&gt;，完成B对象的初始化。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;构造子类时会先调用父类的无参构造方法，即使调用的是子类的有参构造方法&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mSuperX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;AAAAA&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;A1&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mSubX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;BBBBBBB&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SubX = &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mSubX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;B1&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;CCCCCC&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;C1&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;输出结果为&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;AAAAA
-BBBBBBB
-C1
-&lt;/code&gt;&lt;/pre&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/java-class-inherit&quot;&gt;java类继承中的一些规则&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on October 28, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[ZooKeeper（1）--部署]]></title>
-  <link>http://127.0.0.1:4000/distribute/zk_01</link>
-  <id>http://127.0.0.1:4000/distribute/zk_01</id>
-  <published>2015-10-20T00:00:00+08:00</published>
-  <updated>2015-10-20T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;ZooKeeper集群、单机、伪集群部署方式&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;zookeeper&quot;&gt;Zookeeper部署&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;配置修改&lt;/h3&gt;
-&lt;p&gt;主要修改文件&lt;code&gt;zoo.cfg&lt;/code&gt;，修改内容如下：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;集群&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; dataDir=/tmp/zookeeper/	
-	
- server.1=ip1:2888:3888
-	
- server.2=ip2:2888:3888
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;单机&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; dataDir=/tmp/zookeeper/	
-	
- server.1=ip1:2888:3888
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;伪集群&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt; dataDir=/tmp/zookeeper/	
-	
- server.1=ip1:2888:3888
-	
- server.2=ip1:4888:5888
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;在每台机器的指定的&lt;code&gt;dataDir&lt;/code&gt;下创建&lt;code&gt;myid&lt;/code&gt;文件内容为server后的数字&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;启动&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;sh zkServer.sh start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;测试&lt;/h3&gt;
-
-&lt;p&gt;使用&lt;code&gt;telnet ip 2181&lt;/code&gt;测试，输入&lt;code&gt;stat&lt;/code&gt;查看服务状态&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;停止&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;sh zkServer.sh stop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;bin目录下的命令&lt;/strong&gt;
-zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
-
-&lt;p&gt;zkCli		ZK的建议客户端&lt;/p&gt;
-
-&lt;p&gt;zkEnv		设置ZK的环境变量&lt;/p&gt;
-
-&lt;p&gt;zkServer	ZK服务器的启动、停止和重启脚本&lt;/p&gt;
-
-&lt;h2 id=&quot;zookeeperzabpaxos&quot;&gt;Zookeeper使用的ZAB协议与Paxos算法的区别&lt;/h2&gt;
-
-&lt;p&gt;两者的设计目标不同，ZAB协议主要用于构建一个高可用的分布式数据主备系统，Paxos用于构建一个分布式的一致性状态机系统。&lt;/p&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/distribute/zk_01&quot;&gt;ZooKeeper（1）--部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on October 20, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Intellij IDEA使用记录]]></title>
-  <link>http://127.0.0.1:4000/idea,ide/IDE-idea-JDK</link>
-  <id>http://127.0.0.1:4000/idea,ide/IDE-idea-JDK</id>
-  <published>2015-08-23T00:00:00+08:00</published>
-  <updated>2015-08-23T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;记录IDE使用过程中遇到的问题、解决方案&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;项目编译环境调整&lt;/h2&gt;
-
-&lt;p&gt;同时修改JDK、Language level、及Setting-&amp;gt;Java compiler中的配置。&lt;/p&gt;
-
-&lt;h2 id=&quot;jdk-language-level&quot;&gt;JDK Language level&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;JDK&lt;/code&gt;：使用的编译版本&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Language level&lt;/code&gt;：代码编译检查的最低版本，比如设置为5.0就不能使用6.0、7.0的特性代码&lt;/p&gt;
-
-&lt;p&gt;可以配置&lt;code&gt;Project&lt;/code&gt;的默认配置，也可以精确到每个&lt;code&gt;Modules&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;tab&quot;&gt;代码中使用Tab指标符&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-08/23-1.png&quot; alt=&quot;&quot; title=&quot;23-1.png&quot; /&gt;&lt;/p&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/idea,ide/IDE-idea-JDK&quot;&gt;Intellij IDEA使用记录&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on August 23, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[使用maven生成带依赖的jar]]></title>
-  <link>http://127.0.0.1:4000/java/maven-jar</link>
-  <id>http://127.0.0.1:4000/java/maven-jar</id>
-  <published>2015-08-21T00:00:00+08:00</published>
-  <updated>2015-08-21T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;编译、打包需要一个独立运行的jar。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;mainfestmf&quot;&gt;生成MAINFEST.MF&lt;/h2&gt;
-&lt;p&gt;项目源码根路径下添加&lt;code&gt;META-INF/MAINFEST.MF&lt;/code&gt;文件，用于指向还有启动类。&lt;/p&gt;
-
-&lt;h2 id=&quot;maven&quot;&gt;maven配置修改&lt;/h2&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-compiler-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.3.2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-jar-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.4&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;archive&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;manifest&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;addClasspath&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/addClasspath&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;classpathPrefix&amp;gt;&lt;/span&gt;lib/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/classpathPrefix&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;c&quot;&gt;&amp;lt;!--指明main方法所在的类--&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;mainClass&amp;gt;&lt;/span&gt;com.wei.spider.Main&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mainClass&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/manifest&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/archive&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-assembly-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;archive&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;manifest&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;c&quot;&gt;&amp;lt;!--指明main方法所在的类--&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;mainClass&amp;gt;&lt;/span&gt;com.wei.spider.Main&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mainClass&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/manifest&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/archive&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;descriptorRefs&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;descriptorRef&amp;gt;&lt;/span&gt;jar-with-dependencies&lt;span class=&quot;nt&quot;&gt;&amp;lt;/descriptorRef&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/descriptorRefs&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;make-assembly&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;package&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;single&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;编译打包、运行&lt;/h2&gt;
-
-&lt;p&gt;使用命令&lt;code&gt;mvn clean compile assembly:single&lt;/code&gt;打包项目。使用&lt;code&gt;java -jar demo.jar&lt;/code&gt;运行。&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/maven-jar&quot;&gt;使用maven生成带依赖的jar&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on August 21, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[web项目中资源文件编译后改变]]></title>
-  <link>http://127.0.0.1:4000/java/spring-resources</link>
-  <id>http://127.0.0.1:4000/java/spring-resources</id>
-  <published>2015-08-06T00:00:00+08:00</published>
-  <updated>2015-08-06T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://127.0.0.1:4000</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;p&gt;解决resources目录中配置文件改变的问题，spring中使用静态注入&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;保持资源文件在编译后不变&lt;/h2&gt;
-
-&lt;p&gt;由于项目中用到了17mon的IP库，数据已文件的形式放在项目下的resources，但每次编译完发现在target下省城的对应的文件已改变，猜测是使用maven编译时，对不同类型的资源文件进行了处理，尝试使用maven的&lt;code&gt;Maven Resources Plugin&lt;/code&gt;插件排除特殊的资源文件&lt;/p&gt;
-
-&lt;p&gt;修改Maven Resources Plugin插件配置，排除指定类型的文件&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-resources-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.7&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;nonFilteredFileExtensions&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;nonFilteredFileExtension&amp;gt;&lt;/span&gt;dat&lt;span class=&quot;nt&quot;&gt;&amp;lt;/nonFilteredFileExtension&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/nonFilteredFileExtensions&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;重新编译后，使用&lt;code&gt;md5&lt;/code&gt;命令对比两个文件，target下的资源文件未改变，一起正常。&lt;/p&gt;
-
-&lt;h2 id=&quot;spring&quot;&gt;Spring中的静态注入&lt;/h2&gt;
-
-&lt;p&gt;要在spring中使用静态注入需要满足两个条件：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;声明静态属性的set方法&lt;/li&gt;
-  &lt;li&gt;使用&lt;code&gt;org.springframework.beans.factory.config.MethodInvokingFactoryBean&lt;/code&gt;向类中的方法注入&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;如要注入path：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;spring配置如下：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;org.springframework.beans.factory.config.MethodInvokingFactoryBean&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;staticMethod&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;com.wei.shimao.utils.IPLoactionUtils.setPath&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;arguments&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;
-            ${ipdbpath}
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/spring-resources&quot;&gt;web项目中资源文件编译后改变&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on August 06, 2015.&lt;/p&gt;</content>
-</entry>
-
-</feed>
+</description>
+        <pubDate>Tue, 01 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://jeffreywei.github.io/idea,ide,keymap/2015/12/01/IDE-idea-keymap.html</link>
+        <guid isPermaLink="true">http://jeffreywei.github.io/idea,ide,keymap/2015/12/01/IDE-idea-keymap.html</guid>
+        
+        <category>idea</category>
+        
+        <category>ide</category>
+        
+        <category>keymap</category>
+        
+        
+        <category>idea,ide,keymap</category>
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,660 +1,597 @@
 <!DOCTYPE html>
 <html>
 <!--
-                                         ::
-                                        :;J7, :,                        ::;7:
-                                        ,ivYi, ,                       ;LLLFS:
-                                        :iv7Yi                       :7ri;j5PL
-                                       ,:ivYLvr                    ,ivrrirrY2X,
-                                       :;r@Wwz.7r:                :ivu@kexianli.
-                                      :iL7::,:::iiirii:ii;::::,,irvF7rvvLujL7ur
-                                     ri::,:,::i:iiiiiii:i:irrv177JX7rYXqZEkvv17
-                                  ;i:, , ::::iirrririi:i:::iiir2XXvii;L8OGJr71i
-                                :,, ,,:   ,::ir@mingyi.irii:i:::j1jri7ZBOS7ivv,
-                                   ,::,    ::rv77iiiriii:iii:i::,rvLq@huhao.Li
-                               ,,      ,, ,:ir7ir::,:::i;ir:::i:i::rSGGYri712:
-                             :::  ,v7r:: ::rrv77:, ,, ,:i7rrii:::::, ir7ri7Lri
-                            ,     2OBBOi,iiir;r::        ,irriiii::,, ,iv7Luur:
-                          ,,     i78MBBi,:,:::,:,  :7FSL: ,iriii:::i::,,:rLqXv::
-                          :      iuMMP: :,:::,:ii;2GY7OBB0viiii:i:iii:i:::iJqL;::
-                         ,     ::::i   ,,,,, ::LuBBu BBBBBErii:i:i:i:i:i:i:r77ii
-                        ,       :       , ,,:::rruBZ1MBBqi, :,,,:::,::::::iiriri:
-                       ,               ,,,,::::i:  @arqiao.       ,:,, ,:::ii;i7:
-                      :,       rjujLYLi   ,,:::::,:::::::::,,   ,:i,:,,,,,::i:iii
-                      ::      BBBBBBBBB0,    ,,::: , ,:::::: ,      ,,,, ,,:::::::
-                      i,  ,  ,8BMMBBBBBBi     ,,:,,     ,,, , ,   , , , :,::ii::i::
-                      :      iZMOMOMBBM2::::::::::,,,,     ,,,,,,:,,,::::i:irr:i:::,
-                      i   ,,:;u0MBMOG1L:::i::::::  ,,,::,   ,,, ::::::i:i:iirii:i:i:
-                      :    ,iuUuuXUkFu7i:iii:i:::, :,:,: ::::::::i:i:::::iirr7iiri::
-                      :     :rk@Yizero.i:::::, ,:ii:::::::i:::::i::,::::iirrriiiri::,
-                       :      5BMBBBBBBSr:,::rv2kuii:::iii::,:i:,, , ,,:,:i@petermu.,
-                            , :r50EZ8MBBBBGOBBBZP7::::i::,:::::,: :,:,::i;rrririiii::
-                                :jujYY7LS0ujJL7r::,::i::,::::::::::::::iirirrrrrrr:ii:
-                             ,:  :@kevensun.:,:,,,::::i:i:::::,,::::::iir;ii;7v77;ii;i,
-                             ,,,     ,,:,::::::i:iiiii:i::::,, ::::iiiir@xingjief.r;7:i,
-                          , , ,,,:,,::::::::iiiiiiiiii:,:,:::::::::iiir;ri7vL77rrirri::
-                           :,, , ::::::::i:::i:::i:i::,,,,,:,::i:i:::iir;@Secbone.ii:::
-██╗    ██╗ █████╗ ██╗████████╗██╗███╗   ██╗ ██████╗     ███████╗ ██████╗ ██████╗     ██╗   ██╗ ██████╗ ██╗   ██╗
-██║    ██║██╔══██╗██║╚══██╔══╝██║████╗  ██║██╔════╝     ██╔════╝██╔═══██╗██╔══██╗    ╚██╗ ██╔╝██╔═══██╗██║   ██║
-██║ █╗ ██║███████║██║   ██║   ██║██╔██╗ ██║██║  ███╗    █████╗  ██║   ██║██████╔╝     ╚████╔╝ ██║   ██║██║   ██║
-██║███╗██║██╔══██║██║   ██║   ██║██║╚██╗██║██║   ██║    ██╔══╝  ██║   ██║██╔══██╗      ╚██╔╝  ██║   ██║██║   ██║
-╚███╔███╔╝██║  ██║██║   ██║   ██║██║ ╚████║╚██████╔╝    ██║     ╚██████╔╝██║  ██║       ██║   ╚██████╔╝╚██████╔╝
- ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚═╝      ╚═════╝ ╚═╝  ╚═╝       ╚═╝    ╚═════╝  ╚═════╝        
+                       ::
+                      :;J7, :,                        ::;7:
+                      ,ivYi, ,                       ;LLLFS:
+                      :iv7Yi                       :7ri;j5PL
+                     ,:ivYLvr                    ,ivrrirrY2X,
+                     :;r@Wwz.7r:                :ivu@kexianli.
+                    :iL7::,:::iiirii:ii;::::,,irvF7rvvLujL7ur
+                   ri::,:,::i:iiiiiii:i:irrv177JX7rYXqZEkvv17
+                ;i:, , ::::iirrririi:i:::iiir2XXvii;L8OGJr71i
+              :,, ,,:   ,::ir@mingyi.irii:i:::j1jri7ZBOS7ivv,
+                 ,::,    ::rv77iiiriii:iii:i::,rvLq@huhao.Li
+             ,,      ,, ,:ir7ir::,:::i;ir:::i:i::rSGGYri712:
+           :::  ,v7r:: ::rrv77:, ,, ,:i7rrii:::::, ir7ri7Lri
+          ,     2OBBOi,iiir;r::        ,irriiii::,, ,iv7Luur:
+        ,,     i78MBBi,:,:::,:,  :7FSL: ,iriii:::i::,,:rLqXv::
+        :      iuMMP: :,:::,:ii;2GY7OBB0viiii:i:iii:i:::iJqL;::
+       ,     ::::i   ,,,,, ::LuBBu BBBBBErii:i:i:i:i:i:i:r77ii
+      ,       :       , ,,:::rruBZ1MBBqi, :,,,:::,::::::iiriri:
+     ,               ,,,,::::i:  @arqiao.       ,:,, ,:::ii;i7:
+    :,       rjujLYLi   ,,:::::,:::::::::,,   ,:i,:,,,,,::i:iii
+    ::      BBBBBBBBB0,    ,,::: , ,:::::: ,      ,,,, ,,:::::::
+    i,  ,  ,8BMMBBBBBBi     ,,:,,     ,,, , ,   , , , :,::ii::i::
+    :      iZMOMOMBBM2::::::::::,,,,     ,,,,,,:,,,::::i:irr:i:::,
+    i   ,,:;u0MBMOG1L:::i::::::  ,,,::,   ,,, ::::::i:i:iirii:i:i:
+    :    ,iuUuuXUkFu7i:iii:i:::, :,:,: ::::::::i:i:::::iirr7iiri::
+    :     :rk@Yizero.i:::::, ,:ii:::::::i:::::i::,::::iirrriiiri::,
+     :      5BMBBBBBBSr:,::rv2kuii:::iii::,:i:,, , ,,:,:i@petermu.,
+          , :r50EZ8MBBBBGOBBBZP7::::i::,:::::,: :,:,::i;rrririiii::
+              :jujYY7LS0ujJL7r::,::i::,::::::::::::::iirirrrrrrr:ii:
+           ,:  :@kevensun.:,:,,,::::i:i:::::,,::::::iir;ii;7v77;ii;i,
+           ,,,     ,,:,::::::i:iiiii:i::::,, ::::iiiir@xingjief.r;7:i,
+        , , ,,,:,,::::::::iiiiiiiiii:,:,:::::::::iiir;ri7vL77rrirri::
+         :,, , ::::::::i:::i:::i:i::,,,,,:,::i:i:::iir;@Secbone.ii:::
+
 -->
-<head>
-<meta charset="utf-8">
-<title>Github &#8211; Sagittarius</title>
-<meta name="description" content="Wei's blog">
-<meta name="keywords" content="life, feeling, blog, linux, docker, arch, emacs, program, c, c++, golang, java, hadoop">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title>Sagittarius</title>
+  <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
 
-
-<!-- Open Graph -->
-<meta property="og:locale" content="en_US">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Github">
-<meta property="og:description" content="Wei's blog">
-<meta property="og:url" content="http://127.0.0.1:4000/index.html">
-<meta property="og:site_name" content="Sagittarius">
-<meta property="og:image" content="http://jeffreywei.github.io/images/Clouds.jpg">
-
-
-
-
-
-<link rel="canonical" href="http://127.0.0.1:4000/">
-<link href="http://127.0.0.1:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Sagittarius Feed">
-
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Chrome Color -->
-<meta name="theme-color" content="#db5945">
-
-<!-- Windows8 Tile -->
-<meta name="msapplication-TileColor" content="#db5945">
-<meta name="msapplication-TileImage" content="http://127.0.0.1:4000/images/apple-touch-icon-144x144-precomposed.png">
-
-
-    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:4000/assets/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/nprogress/0.1.6/nprogress.min.css" />
-
-<div class="search-wrapper">
-    <div class="search-form">
-        <input type="text" class="search-field" placeholder="Search...">
-        <i class="fa fa-times"></i>
-        <ul class="search-results post-list"></ul><!-- /.search-results -->
-    </div><!-- /.search-form -->
-</div><!-- ./search-wrapper -->
-
-<script type="text/javascript" src="http://cdn.bootcss.com/nprogress/0.1.6/nprogress.min.js"></script>
-<script>NProgress.start();</script>
-
-
-
-
-<!-- Icons -->
-<!-- 16x16 -->
-<link rel="shortcut icon" href="http://127.0.0.1:4000/favicon.ico">
-<!-- 32x32 -->
-<link rel="shortcut icon" href="http://127.0.0.1:4000/favicon.png">
-<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://127.0.0.1:4000/images/apple-touch-icon-precomposed.png">
-<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://127.0.0.1:4000/images/apple-touch-icon-72x72-precomposed.png">
-<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://127.0.0.1:4000/images/apple-touch-icon-114x114-precomposed.png">
-<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://127.0.0.1:4000/images/apple-touch-icon-144x144-precomposed.png">
-
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://jeffreywei.github.io/">
+  <link rel="alternate" type="application/rss+xml" title="Sagittarius" href="http://jeffreywei.github.io/feed.xml">
 </head>
-<body class="home-template" itemscope itemtype="http://schema.org/WebPage">
-<div id="fade"></div>
-<a id="slide" class="animated fade"></a>
-<aside id="sidebar">
-    <nav id="navigation">
-    <h2>MENU</h2>
-    <hr>
 
-            <li>
-                    <a href="http://127.0.0.1:4000/">Home</a>
-                 </li>
 
-            <li>
-                    <a href="http://127.0.0.1:4000/categories">Categories</a>
-                 </li>
+  <body>
 
-            <li>
-                    <a href="http://127.0.0.1:4000/tags">Tags</a>
-                 </li>
+    <header class="site-header">
 
-            <li>
-                    <a href="http://127.0.0.1:4000/guestbook">Guestbook</a>
-                 </li>
+  <div class="wrapper">
 
-            <li>
-                    <a href="http://127.0.0.1:4000/project">Work</a>
-                 </li>
+    <a class="site-title" href="/">Sagittarius</a>
 
-            <li>
-                    <a href="http://127.0.0.1:4000/links">Links</a>
-                 </li>
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
 
-            <li>
-                    <a href="http://127.0.0.1:4000/about">About</a>
-                 </li>
-
-           <li><a href="http://127.0.0.1:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss"></i> Feed</a></li>
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
     </nav>
 
+  </div>
 
-</aside>
-
-<header id="masthead" class="blog-background  align-center align-middle animated from-bottom"  style="background-image: url(http://jeffreywei.github.io/images/Clouds.jpg)" itemscope itemtype="http://schema.org/Organization">
-
-
-    <button class="menu-button animated fade dosearch">
-        <i class="fa fa-search"></i>
-    </button>
-
-
-    <div class="inner">
-        <div class="container">
-            <a class="brand light" href="http://127.0.0.1:4000" role="banner" itemprop="url">
-
-                <img itemprop="logo" src="http://127.0.0.1:4000/images/fa-paper-plane-o.png" alt="Sagittarius Logo" />
-
-            <h1 class="blog-title light" itemprop="name">
-                Sagittarius
-            </h1>
-
-            </a>
-            <h2 class="blog-description light bordered bordered-top" itemprop="description">
-                Good artists copy,Great artist steal.
-            </h2>
-        </div>
-    </div>
-    
-    
-    <div class="decor-wrapper">
-        <svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
-            <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
-
-            <path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
-            <path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
-
-            <path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
-            <path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
-
-            <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
-
-            <path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
-
-        </svg>
-    </div>
-    
 </header>
 
-<div id="main" class="content" role="main" itemprop="mainContentOfPage">
-    <div class="container">
-        <div class="row">
-            <div class="page-body" itemprop="description">
-            
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
     
-        
-        
-        
-        
-        
-            
-            
-            
-            
-            
-            <div class="row">
-                <article class="post post col-md-8 col-md-offset-2">
-                   <header class="post-header">
-                   
-                        
-                        <h2 class="post-title text-center super lighter bordered-bottom">
-                            <a href="http://127.0.0.1:4000/docker/blog-test">Docker(3)-项目部署</a>
-                        
-                        </h2>
-                        <div class="post-info text-center small">
-                            <time datetime="2016-02-13T00:00:00+08:00" class="post-time">13 Feb 2016</time>
-                            in <span class="post-tags"><a href="http://127.0.0.1:4000/categories/index.html#docker" data-toggle="tooltip" title="Other posts from the Docker category" rel="tag">Docker</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;Less than 1 minute read</span>
-                        </div>
-                    </header>
-                    <div class="post-body bordered-bottom">
-                    
-                    <p class = "lead"><p>项目中使用Docker发布、部署</p>
+      <li>
+        <span class="post-meta">Feb 10, 2016</span>
 
-</p>
-                        <div class="text-center">
-                        
-                        <a href="http://127.0.0.1:4000/docker/blog-test" data-toggle="tooltip" title="Deploy project with Docker" class="more-link btn btn-danger btn-large">
-                            <i class="fa fa-link"></i> read more...
-                        </a>
-                        
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
+        <h2>
+          <a class="post-link" href="/docker/2016/02/10/learning-docker-03-project-deploy.html">Docker(3)-项目部署</a>
+        </h2>
+      </li>
     
-        
-        
-        
-        
-        
-            
-            
-            
-            
-            
-            <div class="row">
-                <article class="post post col-md-8 col-md-offset-2">
-                   <header class="post-header">
-                   
-                        
-                        <h2 class="post-title text-center super lighter bordered-bottom">
-                            <a href="http://127.0.0.1:4000/docker/learning-docker-03-project-deploy">Docker(3)-项目部署</a>
-                        
-                        </h2>
-                        <div class="post-info text-center small">
-                            <time datetime="2016-02-10T00:00:00+08:00" class="post-time">10 Feb 2016</time>
-                            in <span class="post-tags"><a href="http://127.0.0.1:4000/categories/index.html#docker" data-toggle="tooltip" title="Other posts from the Docker category" rel="tag">Docker</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;Less than 1 minute read</span>
-                        </div>
-                    </header>
-                    <div class="post-body bordered-bottom">
-                    
-                    <p class = "lead"><p>项目中使用Docker发布、部署</p>
+      <li>
+        <span class="post-meta">Jan 21, 2016</span>
 
-</p>
-                        <div class="text-center">
-                        
-                        <a href="http://127.0.0.1:4000/docker/learning-docker-03-project-deploy" data-toggle="tooltip" title="Deploy project with Docker" class="more-link btn btn-danger btn-large">
-                            <i class="fa fa-link"></i> read more...
-                        </a>
-                        
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
+        <h2>
+          <a class="post-link" href="/docker/2016/01/21/learning-docker-02-container-epository.html">Docker(2)-容器&仓库</a>
+        </h2>
+      </li>
     
-        
-        
-        
-        
-        
-            
-            
-            
-            
-            
-            <div class="row">
-                <article class="post post col-md-8 col-md-offset-2">
-                   <header class="post-header">
-                   
-                        
-                        <h2 class="post-title text-center super lighter bordered-bottom">
-                            <a href="http://127.0.0.1:4000/docker/learning-docker-02-container-epository">Docker(2)-容器&仓库</a>
-                        
-                        </h2>
-                        <div class="post-info text-center small">
-                            <time datetime="2016-01-21T00:00:00+08:00" class="post-time">21 Jan 2016</time>
-                            in <span class="post-tags"><a href="http://127.0.0.1:4000/categories/index.html#docker" data-toggle="tooltip" title="Other posts from the Docker category" rel="tag">Docker</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;Less than 1 minute read</span>
-                        </div>
-                    </header>
-                    <div class="post-body bordered-bottom">
-                    
-                    <p class = "lead"><p>Docker容器、仓库的相关操作</p>
+      <li>
+        <span class="post-meta">Jan 20, 2016</span>
 
-</p>
-                        <div class="text-center">
-                        
-                        <a href="http://127.0.0.1:4000/docker/learning-docker-02-container-epository" data-toggle="tooltip" title="Docker Container&Repository" class="more-link btn btn-danger btn-large">
-                            <i class="fa fa-link"></i> read more...
-                        </a>
-                        
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
+        <h2>
+          <a class="post-link" href="/docker/2016/01/20/learning-docker-01-image.html">Docker(1)-镜像</a>
+        </h2>
+      </li>
     
-        
-        
-        
-        
-        
-            
-            
-            
-            
-            
-            <div class="row">
-                <article class="post post col-md-8 col-md-offset-2">
-                   <header class="post-header">
-                   
-                        
-                        <h2 class="post-title text-center super lighter bordered-bottom">
-                            <a href="http://127.0.0.1:4000/docker/learning-docker-01-image">Docker(1)-镜像</a>
-                        
-                        </h2>
-                        <div class="post-info text-center small">
-                            <time datetime="2016-01-20T00:00:00+08:00" class="post-time">20 Jan 2016</time>
-                            in <span class="post-tags"><a href="http://127.0.0.1:4000/categories/index.html#docker" data-toggle="tooltip" title="Other posts from the Docker category" rel="tag">Docker</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;Less than 1 minute read</span>
-                        </div>
-                    </header>
-                    <div class="post-body bordered-bottom">
-                    
-                    <p class = "lead"><p>Docker镜像的相关操作</p>
+      <li>
+        <span class="post-meta">Jan 15, 2016</span>
 
-</p>
-                        <div class="text-center">
-                        
-                        <a href="http://127.0.0.1:4000/docker/learning-docker-01-image" data-toggle="tooltip" title="Docker mirror" class="more-link btn btn-danger btn-large">
-                            <i class="fa fa-link"></i> read more...
-                        </a>
-                        
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
+        <h2>
+          <a class="post-link" href="/java/2016/01/15/tomcat-remote-debug.html">tomcat远程调试</a>
+        </h2>
+      </li>
     
-        
-        
-        
-        
-        
-            
-            
-            
-            
-            
-            <div class="row">
-                <article class="post post col-md-8 col-md-offset-2">
-                   <header class="post-header">
-                   
-                        
-                        <h2 class="post-title text-center super lighter bordered-bottom">
-                            <a href="http://127.0.0.1:4000/java/tomcat-remote-debug">tomcat远程调试</a>
-                        
-                        </h2>
-                        <div class="post-info text-center small">
-                            <time datetime="2016-01-15T00:00:00+08:00" class="post-time">15 Jan 2016</time>
-                            in <span class="post-tags"><a href="http://127.0.0.1:4000/categories/index.html#java" data-toggle="tooltip" title="Other posts from the Java category" rel="tag">Java</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;Less than 1 minute read</span>
-                        </div>
-                    </header>
-                    <div class="post-body bordered-bottom">
-                    
-                    <p class = "lead"><p>配置使用tomcat远程调试功能，使用idea远程调试项目</p>
+      <li>
+        <span class="post-meta">Jan 13, 2016</span>
 
-</p>
-                        <div class="text-center">
-                        
-                        <a href="http://127.0.0.1:4000/java/tomcat-remote-debug" data-toggle="tooltip" title="tomcat remote debug" class="more-link btn btn-danger btn-large">
-                            <i class="fa fa-link"></i> read more...
-                        </a>
-                        
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
+        <h2>
+          <a class="post-link" href="/javascript/2016/01/13/ajax-jquery-crossdomain.html">使用jsonp实现js跨域请求</a>
+        </h2>
+      </li>
     
-        
-        
-        
-        
-        
-            
-            
-            
-            
-            
-            <div class="row">
-                <article class="post post col-md-8 col-md-offset-2">
-                   <header class="post-header">
-                   
-                        
-                        <h2 class="post-title text-center super lighter bordered-bottom">
-                            <a href="http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain">使用jsonp实现js跨域请求</a>
-                        
-                        </h2>
-                        <div class="post-info text-center small">
-                            <time datetime="2016-01-13T00:00:00+08:00" class="post-time">13 Jan 2016</time>
-                            in <span class="post-tags"><a href="http://127.0.0.1:4000/categories/index.html#javascript" data-toggle="tooltip" title="Other posts from the Javascript category" rel="tag">Javascript</a></span>&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;Less than 1 minute read</span>
-                        </div>
-                    </header>
-                    <div class="post-body bordered-bottom">
-                    
-                    <p class = "lead"><p>页面内跨域请求</p>
+      <li>
+        <span class="post-meta">Dec 25, 2015</span>
 
-</p>
-                        <div class="text-center">
-                        
-                        <a href="http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain" data-toggle="tooltip" title="ajax cross domain with jsonp" class="more-link btn btn-danger btn-large">
-                            <i class="fa fa-link"></i> read more...
-                        </a>
-                        
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
+        <h2>
+          <a class="post-link" href="/work/2015/12/25/2015-summary.html">2015年终总结</a>
+        </h2>
+      </li>
     
+      <li>
+        <span class="post-meta">Dec 23, 2015</span>
 
-        <div class="row text-center text-caps">
-            <div class="col-md-8 col-md-offset-2">
-                <nav class="pagination" role="navigation">
+        <h2>
+          <a class="post-link" href="/java,maven/2015/12/23/maven-using-SNAPSHOT.html">maven引用snapshot版本jar</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Dec 16, 2015</span>
 
-    <span class="page-number">Page 1 of 10</span>
- 
-        <a class="older-posts btn btn-danger btn-large" href="/page2">Older Posts &rarr;</a>
- 
-</nav>
-            </div>
-        </div>
+        <h2>
+          <a class="post-link" href="/java,maven/2015/12/16/maven-deploy.html">maven发布带有javadoc、source的库文件</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Dec 10, 2015</span>
 
+        <h2>
+          <a class="post-link" href="/java,freemarker,spring/2015/12/10/freemarker-java.html">springmvc中配置FreeMarker</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Dec 1, 2015</span>
 
+        <h2>
+          <a class="post-link" href="/idea,ide,keymap/2015/12/01/IDE-idea-keymap.html">idea 快捷键</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Nov 28, 2015</span>
 
-            </div>
-        </div>
-    </div>
+        <h2>
+          <a class="post-link" href="/novel,book/2015/11/28/novel.html">我是你夜晚的太阳</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Nov 25, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python,%20spider/2015/11/25/python-spider-encode.html">当爬虫遇到压缩页面&GBK编码</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Nov 24, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python,%20algorithm/2015/11/24/find-gap-algorithm.html">寻找数轴上相邻两个数之间的最大差值</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Oct 29, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/distribute/2015/10/29/zk_02.html">Zookeeper (2) --典型应用场景</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Oct 28, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/java/2015/10/28/java-class-inherit.html">java类继承中的一些规则</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Oct 20, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/distribute/2015/10/20/zk_01.html">ZooKeeper（1）--部署</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Aug 23, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/idea,ide/2015/08/23/IDE-idea-JDK.html">Intellij IDEA使用记录</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Aug 21, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/java/2015/08/21/maven-jar.html">使用maven生成带依赖的jar</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Aug 6, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/java/2015/08/06/spring-resources.html">web项目中资源文件编译后改变</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Aug 3, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/work/2015/08/03/spring-mvc-interceptor.html">spring mvc使用自定义拦截器</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 28, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/work/2015/07/28/spring-task.html">spring-task使用注意事项</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 27, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/work/2015/07/27/maven-jefft-https.html">在Maven中配置Jetty使用https协议</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 22, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/22/read-book-1-10.html">《自控力》--第十章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 21, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/21/read-book-1-9.html">《自控力》--第九章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 20, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/20/read-book-1-8.html">《自控力》--第八章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 18, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/18/read-book-1-7.html">《自控力》--第六章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 8, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/08/read-book-1-6.html">《自控力》--第五章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 7, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/07/read-book-1-5.html">《自控力》--第四章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 6, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/06/read-book-1-4.html">《自控力》--第三章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 2, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/02/read-book-1-3.html">《自控力》--第二章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jul 1, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/07/01/read-book-1-2.html">《自控力》--第一章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 30, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/book/2015/06/30/read-book-1-1.html">《自控力》--导言</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 17, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/life/2015/06/17/life.html">今日事今日毕</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 11, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python/2015/06/11/learning-python-5.html">python重点回顾（5）</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 10, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python/2015/06/10/learning-python-4.html">python重点回顾（4）</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 9, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python/2015/06/09/learning-python-3.html">python重点回顾（3）</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 8, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/internet,wrok/2015/06/08/using-ngrok.html">ngrok使用</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 8, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python/2015/06/08/learning-python-2.html">python重点回顾（2）</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 7, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/life/2015/06/07/smart-sellers.html">卖家的聪明才智超乎想象</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 7, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/python/2015/06/07/learning-python-1.html">python重点回顾（1）</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 5, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/java,mybatis/2015/06/05/using-mybatis-generator.html">MyBatis Generator使用</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 3, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/java,cache/2015/06/03/java-spring-ehcache.html">Java项目中缓存的使用</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 2, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/06/02/swift-lesson-2-7.html">Swift教程第二章(7)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Jun 1, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/06/01/swift-lesson-2-6.html">Swift教程第二章(6)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 31, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/05/31/swift-lesson-2-5.html">Swift教程第二章(5)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 30, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/05/30/swift-lesson-2-4.html">Swift教程第二章(4)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 30, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/life/2015/05/30/about-life.html">古文名言警句</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 29, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/05/29/swift-lesson-2-3.html">Swift教程第二章(3)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 28, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/05/28/swift-lesson-2-2.html">Swift教程第二章(2)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 25, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/05/25/swift-lesson-2-1.html">Swift教程第二章(1)</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 24, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/swift,work/2015/05/24/swift-lesson-1.html">Swift教程第一章</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 19, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/work,nosql/2015/05/19/mongodb-import-data.html">mongodb数据导入</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 15, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/work,nosql/2015/05/15/mongodb-install.html">mongodb用户授权</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 10, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/life/2015/05/10/Stay-Foolish.html">有广度更要有深度</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">May 7, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/hadoop/2015/05/07/hadoop-standalone-install.html">hadoop-单用户部署</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Apr 29, 2015</span>
+
+        <h2>
+          <a class="post-link" href="/life/2015/04/29/International-Labour-Day-eve.html">五一前夕</a>
+        </h2>
+      </li>
+    
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
 </div>
-    
-<footer id="footer"  class="blog-background  text-center align-middle animated from-top" style="background-image: url(http://jeffreywei.github.io/images/Clouds.jpg)" >
 
-
-    <div class="inner">
-        <div class="container">
-
-            <ul class="social-icons">
-            
-            
-            
-            
-            
-            
-            
-            <li>
-                <a href="http://github.com/JeffreyWei" data-toggle="tooltip" title="Wei on Github" target="_blank">
-                    <i class="fa fa-github"></i>
-                </a>
-            </li>
-            
-			
-        </ul>
-            <div>
-                <a href="http://127.0.0.1:4000/about/">Wei</a> &copy; 2016 &bull; All rights reserved.
-            </div>
-            <ul class="menu-items">
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/"><i class="fa fa-home"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/categories"><i class="fa fa-bars"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/tags"><i class="fa fa-tags"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/guestbook"><i class="fa fa-comments"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/project"><i class="fa fa-code"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/links"><i class="fa fa-link"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li>
-                
-                    <a href="http://127.0.0.1:4000/about"><i class="fa fa-user"></i></a>&nbsp;&bull;
-                
-            </li>
-            
-            <li><a href="http://127.0.0.1:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss"></i> Feed</a></li>
-        </ul>
-        </div>
+      </div>
     </div>
-    
-        <div class="decor-wrapper">
-            <svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
 
-                <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
-                <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+    <footer class="site-footer">
 
-                <path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
-                <path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+  <div class="wrapper">
 
-                <path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
-                <path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+    <h2 class="footer-heading">Sagittarius</h2>
 
-                <path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Sagittarius</li>
+          <li><a href="mailto:mavenwei@qq.com">mavenwei@qq.com</a></li>
+        </ul>
+      </div>
 
-                <path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/JeffreyWei"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">JeffreyWei</span></a>
 
-            </svg>
-        </div>
-    
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
 </footer>
 
 
-    <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"><\/script>')</script>
-<script src="http://127.0.0.1:4000/assets/js/scripts.min.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:4000/assets/js/waypoints.min.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:4000/assets/js/script.js"></script>
-<script type='text/javascript'>console.log("HMFaysal Omega Theme Version 2.0");</script>
-<script type='text/javascript'>console.log("https://alum.mit.edu/www/hmfaysal");</script>
-<script type='text/javascript'>$(document).ready(function(){$(".time").text(function(a,b){return Math.round(parseFloat(b))})});</script>
+  </body>
 
-<script type="text/javascript">
-
-/*      Slides       */
-
-$("a#slide").click(function(){
-    $("#sidebar,body,a#slide,#fade").addClass("slide")
-});
-
-$("#fade,#header,#posts-container").click(function(){
-    $("#sidebar,body,a#slide,#fade").removeClass("slide")
-});
-
-$("a#click-filter").click(function(){
-    $("#slide-filter").slideToggle("medium");
-    $("#slide-pages").slideOut("medium");
-});
-
-$("a#click-pages").click(function(){
-    $("#slide-pages").slideToggle("medium");
-    $("#slide-filter").slideOut("medium");
-});
-
-/*      End-Slides      */
-
-</script>
-
-
-<!-- Jekyll Simple Search option -->
-<script>
-  $(document).ready(function() {
-      $('.search-field').simpleJekyllSearch({
-          jsonFile : 'http://127.0.0.1:4000/search.json',
-          searchResults : '.search-results',
-          template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
-          noResults: '<p>Nothing found.</p>'
-        });
-  });
-
-  (function( $, window, undefined ) {
-
-     var bs = {
-          close: $(".fa-times"),
-          searchform: $(".search-form"),
-          canvas: $("body"),
-          dothis: $('.dosearch')
-      };
-
-    bs.dothis.on('click', function() {
-      $('.search-wrapper').css({ display: "block" });
-      bs.searchform.toggleClass('active');
-      bs.searchform.find('input').focus();
-      bs.canvas.toggleClass('search-overlay');
-    });
-
-      bs.close.on('click', function() {
-        $('.search-wrapper').removeAttr( 'style' );
-        bs.searchform.toggleClass('active');
-        bs.canvas.removeClass('search-overlay');
-    });
-  })( jQuery, window );
-</script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-42739557-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-
-
-
-
-<script>NProgress.done();</script>
-
-</body>
 </html>

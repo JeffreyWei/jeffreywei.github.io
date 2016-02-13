@@ -12,6 +12,7 @@ description: "Deploy project with Docker"
 项目中使用Docker发布、部署
 
 <!--more-->
+
 ##生成镜像
 使用`dockerfile`生成包含war的镜像，此处使用的jetty作为容器
 
