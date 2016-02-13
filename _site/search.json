@@ -3,7 +3,15 @@
         {
           "title"      : "Docker(3)-项目部署",
           "category"   : "Docker",
-          "url"        : "http://jeffreywei.github.io/docker/learning-docker-03-project-deploy",
+          "url"        : "http://127.0.0.1:4000/docker/blog-test",
+          "date"       : "2016-02-13 00:00:00 +0800",
+          "shortdate"  : "February 13, 2016"
+        } ,
+    
+        {
+          "title"      : "Docker(3)-项目部署",
+          "category"   : "Docker",
+          "url"        : "http://127.0.0.1:4000/docker/learning-docker-03-project-deploy",
           "date"       : "2016-02-10 00:00:00 +0800",
           "shortdate"  : "February 10, 2016"
         } ,
@@ -11,7 +19,7 @@
         {
           "title"      : "Docker(2)-容器&amp;仓库",
           "category"   : "Docker",
-          "url"        : "http://jeffreywei.github.io/docker/learning-docker-02-container-epository",
+          "url"        : "http://127.0.0.1:4000/docker/learning-docker-02-container-epository",
           "date"       : "2016-01-21 00:00:00 +0800",
           "shortdate"  : "January 21, 2016"
         } ,
@@ -19,7 +27,7 @@
         {
           "title"      : "Docker(1)-镜像",
           "category"   : "Docker",
-          "url"        : "http://jeffreywei.github.io/docker/learning-docker-01-image",
+          "url"        : "http://127.0.0.1:4000/docker/learning-docker-01-image",
           "date"       : "2016-01-20 00:00:00 +0800",
           "shortdate"  : "January 20, 2016"
         } ,
@@ -27,7 +35,7 @@
         {
           "title"      : "tomcat远程调试",
           "category"   : "java",
-          "url"        : "http://jeffreywei.github.io/java/tomcat-remote-debug",
+          "url"        : "http://127.0.0.1:4000/java/tomcat-remote-debug",
           "date"       : "2016-01-15 00:00:00 +0800",
           "shortdate"  : "January 15, 2016"
         } ,
@@ -35,7 +43,7 @@
         {
           "title"      : "使用jsonp实现js跨域请求",
           "category"   : "javascript",
-          "url"        : "http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain",
+          "url"        : "http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain",
           "date"       : "2016-01-13 00:00:00 +0800",
           "shortdate"  : "January 13, 2016"
         } ,
@@ -43,7 +51,7 @@
         {
           "title"      : "2015年终总结",
           "category"   : "work",
-          "url"        : "http://jeffreywei.github.io/work/2015-summary",
+          "url"        : "http://127.0.0.1:4000/work/2015-summary",
           "date"       : "2015-12-25 00:00:00 +0800",
           "shortdate"  : "December 25, 2015"
         } ,
@@ -51,7 +59,7 @@
         {
           "title"      : "maven引用snapshot版本jar",
           "category"   : "java,maven",
-          "url"        : "http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT",
+          "url"        : "http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT",
           "date"       : "2015-12-23 00:00:00 +0800",
           "shortdate"  : "December 23, 2015"
         } ,
@@ -59,7 +67,7 @@
         {
           "title"      : "maven发布带有javadoc、source的库文件",
           "category"   : "java,maven",
-          "url"        : "http://jeffreywei.github.io/java,maven/maven-deploy",
+          "url"        : "http://127.0.0.1:4000/java,maven/maven-deploy",
           "date"       : "2015-12-16 00:00:00 +0800",
           "shortdate"  : "December 16, 2015"
         } ,
@@ -67,7 +75,7 @@
         {
           "title"      : "springmvc中配置FreeMarker",
           "category"   : "java,FreeMarker,spring",
-          "url"        : "http://jeffreywei.github.io/java,freemarker,spring/freemarker-java",
+          "url"        : "http://127.0.0.1:4000/java,freemarker,spring/freemarker-java",
           "date"       : "2015-12-10 00:00:00 +0800",
           "shortdate"  : "December 10, 2015"
         } ,
@@ -75,7 +83,7 @@
         {
           "title"      : "idea 快捷键",
           "category"   : "idea,ide,keymap",
-          "url"        : "http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap",
+          "url"        : "http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap",
           "date"       : "2015-12-01 00:00:00 +0800",
           "shortdate"  : "December 01, 2015"
         } ,
@@ -83,7 +91,7 @@
         {
           "title"      : "我是你夜晚的太阳",
           "category"   : "novel,book",
-          "url"        : "http://jeffreywei.github.io/novel,book/novel",
+          "url"        : "http://127.0.0.1:4000/novel,book/novel",
           "date"       : "2015-11-28 00:00:00 +0800",
           "shortdate"  : "November 28, 2015"
         } ,
@@ -91,7 +99,7 @@
         {
           "title"      : "当爬虫遇到压缩页面&amp;GBK编码",
           "category"   : "python, spider",
-          "url"        : "http://jeffreywei.github.io/python,%20spider/python-spider-encode",
+          "url"        : "http://127.0.0.1:4000/python,%20spider/python-spider-encode",
           "date"       : "2015-11-25 00:00:00 +0800",
           "shortdate"  : "November 25, 2015"
         } ,
@@ -99,7 +107,7 @@
         {
           "title"      : "寻找数轴上相邻两个数之间的最大差值",
           "category"   : "python, algorithm",
-          "url"        : "http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm",
+          "url"        : "http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm",
           "date"       : "2015-11-24 00:00:00 +0800",
           "shortdate"  : "November 24, 2015"
         } ,
@@ -107,7 +115,7 @@
         {
           "title"      : "Zookeeper (2) --典型应用场景",
           "category"   : "distribute",
-          "url"        : "http://jeffreywei.github.io/distribute/zk_02",
+          "url"        : "http://127.0.0.1:4000/distribute/zk_02",
           "date"       : "2015-10-29 00:00:00 +0800",
           "shortdate"  : "October 29, 2015"
         } ,
@@ -115,7 +123,7 @@
         {
           "title"      : "java类继承中的一些规则",
           "category"   : "java",
-          "url"        : "http://jeffreywei.github.io/java/java-class-inherit",
+          "url"        : "http://127.0.0.1:4000/java/java-class-inherit",
           "date"       : "2015-10-28 00:00:00 +0800",
           "shortdate"  : "October 28, 2015"
         } ,
@@ -123,7 +131,7 @@
         {
           "title"      : "ZooKeeper（1）--部署",
           "category"   : "distribute",
-          "url"        : "http://jeffreywei.github.io/distribute/zk_01",
+          "url"        : "http://127.0.0.1:4000/distribute/zk_01",
           "date"       : "2015-10-20 00:00:00 +0800",
           "shortdate"  : "October 20, 2015"
         } ,
@@ -131,7 +139,7 @@
         {
           "title"      : "Intellij IDEA使用记录",
           "category"   : "idea,ide",
-          "url"        : "http://jeffreywei.github.io/idea,ide/IDE-idea-JDK",
+          "url"        : "http://127.0.0.1:4000/idea,ide/IDE-idea-JDK",
           "date"       : "2015-08-23 00:00:00 +0800",
           "shortdate"  : "August 23, 2015"
         } ,
@@ -139,7 +147,7 @@
         {
           "title"      : "使用maven生成带依赖的jar",
           "category"   : "java",
-          "url"        : "http://jeffreywei.github.io/java/maven-jar",
+          "url"        : "http://127.0.0.1:4000/java/maven-jar",
           "date"       : "2015-08-21 00:00:00 +0800",
           "shortdate"  : "August 21, 2015"
         } ,
@@ -147,7 +155,7 @@
         {
           "title"      : "web项目中资源文件编译后改变",
           "category"   : "java",
-          "url"        : "http://jeffreywei.github.io/java/spring-resources",
+          "url"        : "http://127.0.0.1:4000/java/spring-resources",
           "date"       : "2015-08-06 00:00:00 +0800",
           "shortdate"  : "August 06, 2015"
         } ,
@@ -155,7 +163,7 @@
         {
           "title"      : "spring mvc使用自定义拦截器",
           "category"   : "work",
-          "url"        : "http://jeffreywei.github.io/work/spring-mvc-interceptor",
+          "url"        : "http://127.0.0.1:4000/work/spring-mvc-interceptor",
           "date"       : "2015-08-03 00:00:00 +0800",
           "shortdate"  : "August 03, 2015"
         } ,
@@ -163,7 +171,7 @@
         {
           "title"      : "spring-task使用注意事项",
           "category"   : "work",
-          "url"        : "http://jeffreywei.github.io/work/spring-task",
+          "url"        : "http://127.0.0.1:4000/work/spring-task",
           "date"       : "2015-07-28 00:00:00 +0800",
           "shortdate"  : "July 28, 2015"
         } ,
@@ -171,7 +179,7 @@
         {
           "title"      : "在Maven中配置Jetty使用https协议",
           "category"   : "work",
-          "url"        : "http://jeffreywei.github.io/work/maven-jefft-https",
+          "url"        : "http://127.0.0.1:4000/work/maven-jefft-https",
           "date"       : "2015-07-27 00:00:00 +0800",
           "shortdate"  : "July 27, 2015"
         } ,
@@ -179,7 +187,7 @@
         {
           "title"      : "《自控力》--第十章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-10",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-10",
           "date"       : "2015-07-22 00:00:00 +0800",
           "shortdate"  : "July 22, 2015"
         } ,
@@ -187,7 +195,7 @@
         {
           "title"      : "《自控力》--第九章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-9",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-9",
           "date"       : "2015-07-21 00:00:00 +0800",
           "shortdate"  : "July 21, 2015"
         } ,
@@ -195,7 +203,7 @@
         {
           "title"      : "《自控力》--第八章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-8",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-8",
           "date"       : "2015-07-20 00:00:00 +0800",
           "shortdate"  : "July 20, 2015"
         } ,
@@ -203,7 +211,7 @@
         {
           "title"      : "《自控力》--第六章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-7",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-7",
           "date"       : "2015-07-18 00:00:00 +0800",
           "shortdate"  : "July 18, 2015"
         } ,
@@ -211,7 +219,7 @@
         {
           "title"      : "《自控力》--第五章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-6",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-6",
           "date"       : "2015-07-08 00:00:00 +0800",
           "shortdate"  : "July 08, 2015"
         } ,
@@ -219,7 +227,7 @@
         {
           "title"      : "《自控力》--第四章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-5",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-5",
           "date"       : "2015-07-07 00:00:00 +0800",
           "shortdate"  : "July 07, 2015"
         } ,
@@ -227,7 +235,7 @@
         {
           "title"      : "《自控力》--第三章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-4",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-4",
           "date"       : "2015-07-06 00:00:00 +0800",
           "shortdate"  : "July 06, 2015"
         } ,
@@ -235,7 +243,7 @@
         {
           "title"      : "《自控力》--第二章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-3",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-3",
           "date"       : "2015-07-02 00:00:00 +0800",
           "shortdate"  : "July 02, 2015"
         } ,
@@ -243,7 +251,7 @@
         {
           "title"      : "《自控力》--第一章",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-2",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-2",
           "date"       : "2015-07-01 00:00:00 +0800",
           "shortdate"  : "July 01, 2015"
         } ,
@@ -251,7 +259,7 @@
         {
           "title"      : "《自控力》--导言",
           "category"   : "book",
-          "url"        : "http://jeffreywei.github.io/book/read-book-1-1",
+          "url"        : "http://127.0.0.1:4000/book/read-book-1-1",
           "date"       : "2015-06-30 00:00:00 +0800",
           "shortdate"  : "June 30, 2015"
         } ,
@@ -259,7 +267,7 @@
         {
           "title"      : "今日事今日毕",
           "category"   : "life",
-          "url"        : "http://jeffreywei.github.io/life/life",
+          "url"        : "http://127.0.0.1:4000/life/life",
           "date"       : "2015-06-17 00:00:00 +0800",
           "shortdate"  : "June 17, 2015"
         } ,
@@ -267,7 +275,7 @@
         {
           "title"      : "python重点回顾（5）",
           "category"   : "python",
-          "url"        : "http://jeffreywei.github.io/python/learning-python-5",
+          "url"        : "http://127.0.0.1:4000/python/learning-python-5",
           "date"       : "2015-06-11 00:00:00 +0800",
           "shortdate"  : "June 11, 2015"
         } ,
@@ -275,7 +283,7 @@
         {
           "title"      : "python重点回顾（4）",
           "category"   : "python",
-          "url"        : "http://jeffreywei.github.io/python/learning-python-4",
+          "url"        : "http://127.0.0.1:4000/python/learning-python-4",
           "date"       : "2015-06-10 00:00:00 +0800",
           "shortdate"  : "June 10, 2015"
         } ,
@@ -283,7 +291,7 @@
         {
           "title"      : "python重点回顾（3）",
           "category"   : "python",
-          "url"        : "http://jeffreywei.github.io/python/learning-python-3",
+          "url"        : "http://127.0.0.1:4000/python/learning-python-3",
           "date"       : "2015-06-09 00:00:00 +0800",
           "shortdate"  : "June 09, 2015"
         } ,
@@ -291,7 +299,7 @@
         {
           "title"      : "ngrok使用",
           "category"   : "internet,wrok",
-          "url"        : "http://jeffreywei.github.io/internet,wrok/using-ngrok",
+          "url"        : "http://127.0.0.1:4000/internet,wrok/using-ngrok",
           "date"       : "2015-06-08 00:00:00 +0800",
           "shortdate"  : "June 08, 2015"
         } ,
@@ -299,7 +307,7 @@
         {
           "title"      : "python重点回顾（2）",
           "category"   : "python",
-          "url"        : "http://jeffreywei.github.io/python/learning-python-2",
+          "url"        : "http://127.0.0.1:4000/python/learning-python-2",
           "date"       : "2015-06-08 00:00:00 +0800",
           "shortdate"  : "June 08, 2015"
         } ,
@@ -307,7 +315,7 @@
         {
           "title"      : "卖家的聪明才智超乎想象",
           "category"   : "life",
-          "url"        : "http://jeffreywei.github.io/life/smart-sellers",
+          "url"        : "http://127.0.0.1:4000/life/smart-sellers",
           "date"       : "2015-06-07 00:00:00 +0800",
           "shortdate"  : "June 07, 2015"
         } ,
@@ -315,7 +323,7 @@
         {
           "title"      : "python重点回顾（1）",
           "category"   : "python",
-          "url"        : "http://jeffreywei.github.io/python/learning-python-1",
+          "url"        : "http://127.0.0.1:4000/python/learning-python-1",
           "date"       : "2015-06-07 00:00:00 +0800",
           "shortdate"  : "June 07, 2015"
         } ,
@@ -323,7 +331,7 @@
         {
           "title"      : "MyBatis Generator使用",
           "category"   : "java,mybatis",
-          "url"        : "http://jeffreywei.github.io/java,mybatis/using-mybatis-generator",
+          "url"        : "http://127.0.0.1:4000/java,mybatis/using-mybatis-generator",
           "date"       : "2015-06-05 00:00:00 +0800",
           "shortdate"  : "June 05, 2015"
         } ,
@@ -331,7 +339,7 @@
         {
           "title"      : "Java项目中缓存的使用",
           "category"   : "java,cache",
-          "url"        : "http://jeffreywei.github.io/java,cache/java-spring-ehcache",
+          "url"        : "http://127.0.0.1:4000/java,cache/java-spring-ehcache",
           "date"       : "2015-06-03 00:00:00 +0800",
           "shortdate"  : "June 03, 2015"
         } ,
@@ -339,7 +347,7 @@
         {
           "title"      : "Swift教程第二章(7)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-7",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-7",
           "date"       : "2015-06-02 00:00:00 +0800",
           "shortdate"  : "June 02, 2015"
         } ,
@@ -347,7 +355,7 @@
         {
           "title"      : "Swift教程第二章(6)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-6",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-6",
           "date"       : "2015-06-01 00:00:00 +0800",
           "shortdate"  : "June 01, 2015"
         } ,
@@ -355,7 +363,7 @@
         {
           "title"      : "Swift教程第二章(5)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-5",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-5",
           "date"       : "2015-05-31 00:00:00 +0800",
           "shortdate"  : "May 31, 2015"
         } ,
@@ -363,7 +371,7 @@
         {
           "title"      : "Swift教程第二章(4)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-4",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-4",
           "date"       : "2015-05-30 00:00:00 +0800",
           "shortdate"  : "May 30, 2015"
         } ,
@@ -371,7 +379,7 @@
         {
           "title"      : "古文名言警句",
           "category"   : "life",
-          "url"        : "http://jeffreywei.github.io/life/about-life",
+          "url"        : "http://127.0.0.1:4000/life/about-life",
           "date"       : "2015-05-30 00:00:00 +0800",
           "shortdate"  : "May 30, 2015"
         } ,
@@ -379,7 +387,7 @@
         {
           "title"      : "Swift教程第二章(3)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-3",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-3",
           "date"       : "2015-05-29 00:00:00 +0800",
           "shortdate"  : "May 29, 2015"
         } ,
@@ -387,7 +395,7 @@
         {
           "title"      : "Swift教程第二章(2)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-2",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-2",
           "date"       : "2015-05-28 00:00:00 +0800",
           "shortdate"  : "May 28, 2015"
         } ,
@@ -395,7 +403,7 @@
         {
           "title"      : "Swift教程第二章(1)",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-2-1",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-2-1",
           "date"       : "2015-05-25 00:00:00 +0800",
           "shortdate"  : "May 25, 2015"
         } ,
@@ -403,7 +411,7 @@
         {
           "title"      : "Swift教程第一章",
           "category"   : "swift,work",
-          "url"        : "http://jeffreywei.github.io/swift,work/swift-lesson-1",
+          "url"        : "http://127.0.0.1:4000/swift,work/swift-lesson-1",
           "date"       : "2015-05-24 00:00:00 +0800",
           "shortdate"  : "May 24, 2015"
         } ,
@@ -411,7 +419,7 @@
         {
           "title"      : "mongodb数据导入",
           "category"   : "work,nosql",
-          "url"        : "http://jeffreywei.github.io/work,nosql/mongodb-import-data",
+          "url"        : "http://127.0.0.1:4000/work,nosql/mongodb-import-data",
           "date"       : "2015-05-19 00:00:00 +0800",
           "shortdate"  : "May 19, 2015"
         } ,
@@ -419,7 +427,7 @@
         {
           "title"      : "mongodb用户授权",
           "category"   : "work,nosql",
-          "url"        : "http://jeffreywei.github.io/work,nosql/mongodb-install",
+          "url"        : "http://127.0.0.1:4000/work,nosql/mongodb-install",
           "date"       : "2015-05-15 00:00:00 +0800",
           "shortdate"  : "May 15, 2015"
         } ,
@@ -427,7 +435,7 @@
         {
           "title"      : "有广度更要有深度",
           "category"   : "life",
-          "url"        : "http://jeffreywei.github.io/life/Stay-Foolish",
+          "url"        : "http://127.0.0.1:4000/life/Stay-Foolish",
           "date"       : "2015-05-10 00:00:00 +0800",
           "shortdate"  : "May 10, 2015"
         } ,
@@ -435,7 +443,7 @@
         {
           "title"      : "hadoop-单用户部署",
           "category"   : "hadoop",
-          "url"        : "http://jeffreywei.github.io/hadoop/hadoop-standalone-install",
+          "url"        : "http://127.0.0.1:4000/hadoop/hadoop-standalone-install",
           "date"       : "2015-05-07 00:00:00 +0800",
           "shortdate"  : "May 07, 2015"
         } ,
@@ -443,7 +451,7 @@
         {
           "title"      : "五一前夕",
           "category"   : "life",
-          "url"        : "http://jeffreywei.github.io/life/International-Labour-Day-eve",
+          "url"        : "http://127.0.0.1:4000/life/International-Labour-Day-eve",
           "date"       : "2015-04-29 00:00:00 +0800",
           "shortdate"  : "April 29, 2015"
         } 

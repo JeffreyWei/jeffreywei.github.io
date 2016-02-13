@@ -2,282 +2,287 @@ callback([
 
   {
     "text": "五一前夕",
-    "href": "http://jeffreywei.github.io/life/International-Labour-Day-eve"
+    "href": "http://127.0.0.1:4000/life/International-Labour-Day-eve"
   } ,
 
   {
     "text": "hadoop-单用户部署",
-    "href": "http://jeffreywei.github.io/hadoop/hadoop-standalone-install"
+    "href": "http://127.0.0.1:4000/hadoop/hadoop-standalone-install"
   } ,
 
   {
     "text": "有广度更要有深度",
-    "href": "http://jeffreywei.github.io/life/Stay-Foolish"
+    "href": "http://127.0.0.1:4000/life/Stay-Foolish"
   } ,
 
   {
     "text": "mongodb用户授权",
-    "href": "http://jeffreywei.github.io/work,nosql/mongodb-install"
+    "href": "http://127.0.0.1:4000/work,nosql/mongodb-install"
   } ,
 
   {
     "text": "mongodb数据导入",
-    "href": "http://jeffreywei.github.io/work,nosql/mongodb-import-data"
+    "href": "http://127.0.0.1:4000/work,nosql/mongodb-import-data"
   } ,
 
   {
     "text": "Swift教程第一章",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-1"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-1"
   } ,
 
   {
     "text": "Swift教程第二章(1)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-1"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-1"
   } ,
 
   {
     "text": "Swift教程第二章(2)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-2"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-2"
   } ,
 
   {
     "text": "Swift教程第二章(3)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-3"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-3"
   } ,
 
   {
     "text": "古文名言警句",
-    "href": "http://jeffreywei.github.io/life/about-life"
+    "href": "http://127.0.0.1:4000/life/about-life"
   } ,
 
   {
     "text": "Swift教程第二章(4)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-4"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-4"
   } ,
 
   {
     "text": "Swift教程第二章(5)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-5"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-5"
   } ,
 
   {
     "text": "Swift教程第二章(6)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-6"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-6"
   } ,
 
   {
     "text": "Swift教程第二章(7)",
-    "href": "http://jeffreywei.github.io/swift,work/swift-lesson-2-7"
+    "href": "http://127.0.0.1:4000/swift,work/swift-lesson-2-7"
   } ,
 
   {
     "text": "Java项目中缓存的使用",
-    "href": "http://jeffreywei.github.io/java,cache/java-spring-ehcache"
+    "href": "http://127.0.0.1:4000/java,cache/java-spring-ehcache"
   } ,
 
   {
     "text": "MyBatis Generator使用",
-    "href": "http://jeffreywei.github.io/java,mybatis/using-mybatis-generator"
+    "href": "http://127.0.0.1:4000/java,mybatis/using-mybatis-generator"
   } ,
 
   {
     "text": "python重点回顾（1）",
-    "href": "http://jeffreywei.github.io/python/learning-python-1"
+    "href": "http://127.0.0.1:4000/python/learning-python-1"
   } ,
 
   {
     "text": "卖家的聪明才智超乎想象",
-    "href": "http://jeffreywei.github.io/life/smart-sellers"
+    "href": "http://127.0.0.1:4000/life/smart-sellers"
   } ,
 
   {
     "text": "python重点回顾（2）",
-    "href": "http://jeffreywei.github.io/python/learning-python-2"
+    "href": "http://127.0.0.1:4000/python/learning-python-2"
   } ,
 
   {
     "text": "ngrok使用",
-    "href": "http://jeffreywei.github.io/internet,wrok/using-ngrok"
+    "href": "http://127.0.0.1:4000/internet,wrok/using-ngrok"
   } ,
 
   {
     "text": "python重点回顾（3）",
-    "href": "http://jeffreywei.github.io/python/learning-python-3"
+    "href": "http://127.0.0.1:4000/python/learning-python-3"
   } ,
 
   {
     "text": "python重点回顾（4）",
-    "href": "http://jeffreywei.github.io/python/learning-python-4"
+    "href": "http://127.0.0.1:4000/python/learning-python-4"
   } ,
 
   {
     "text": "python重点回顾（5）",
-    "href": "http://jeffreywei.github.io/python/learning-python-5"
+    "href": "http://127.0.0.1:4000/python/learning-python-5"
   } ,
 
   {
     "text": "今日事今日毕",
-    "href": "http://jeffreywei.github.io/life/life"
+    "href": "http://127.0.0.1:4000/life/life"
   } ,
 
   {
     "text": "《自控力》--导言",
-    "href": "http://jeffreywei.github.io/book/read-book-1-1"
+    "href": "http://127.0.0.1:4000/book/read-book-1-1"
   } ,
 
   {
     "text": "《自控力》--第一章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-2"
+    "href": "http://127.0.0.1:4000/book/read-book-1-2"
   } ,
 
   {
     "text": "《自控力》--第二章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-3"
+    "href": "http://127.0.0.1:4000/book/read-book-1-3"
   } ,
 
   {
     "text": "《自控力》--第三章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-4"
+    "href": "http://127.0.0.1:4000/book/read-book-1-4"
   } ,
 
   {
     "text": "《自控力》--第四章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-5"
+    "href": "http://127.0.0.1:4000/book/read-book-1-5"
   } ,
 
   {
     "text": "《自控力》--第五章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-6"
+    "href": "http://127.0.0.1:4000/book/read-book-1-6"
   } ,
 
   {
     "text": "《自控力》--第六章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-7"
+    "href": "http://127.0.0.1:4000/book/read-book-1-7"
   } ,
 
   {
     "text": "《自控力》--第八章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-8"
+    "href": "http://127.0.0.1:4000/book/read-book-1-8"
   } ,
 
   {
     "text": "《自控力》--第九章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-9"
+    "href": "http://127.0.0.1:4000/book/read-book-1-9"
   } ,
 
   {
     "text": "《自控力》--第十章",
-    "href": "http://jeffreywei.github.io/book/read-book-1-10"
+    "href": "http://127.0.0.1:4000/book/read-book-1-10"
   } ,
 
   {
     "text": "在Maven中配置Jetty使用https协议",
-    "href": "http://jeffreywei.github.io/work/maven-jefft-https"
+    "href": "http://127.0.0.1:4000/work/maven-jefft-https"
   } ,
 
   {
     "text": "spring-task使用注意事项",
-    "href": "http://jeffreywei.github.io/work/spring-task"
+    "href": "http://127.0.0.1:4000/work/spring-task"
   } ,
 
   {
     "text": "spring mvc使用自定义拦截器",
-    "href": "http://jeffreywei.github.io/work/spring-mvc-interceptor"
+    "href": "http://127.0.0.1:4000/work/spring-mvc-interceptor"
   } ,
 
   {
     "text": "web项目中资源文件编译后改变",
-    "href": "http://jeffreywei.github.io/java/spring-resources"
+    "href": "http://127.0.0.1:4000/java/spring-resources"
   } ,
 
   {
     "text": "使用maven生成带依赖的jar",
-    "href": "http://jeffreywei.github.io/java/maven-jar"
+    "href": "http://127.0.0.1:4000/java/maven-jar"
   } ,
 
   {
     "text": "Intellij IDEA使用记录",
-    "href": "http://jeffreywei.github.io/idea,ide/IDE-idea-JDK"
+    "href": "http://127.0.0.1:4000/idea,ide/IDE-idea-JDK"
   } ,
 
   {
     "text": "ZooKeeper（1）--部署",
-    "href": "http://jeffreywei.github.io/distribute/zk_01"
+    "href": "http://127.0.0.1:4000/distribute/zk_01"
   } ,
 
   {
     "text": "java类继承中的一些规则",
-    "href": "http://jeffreywei.github.io/java/java-class-inherit"
+    "href": "http://127.0.0.1:4000/java/java-class-inherit"
   } ,
 
   {
     "text": "Zookeeper (2) --典型应用场景",
-    "href": "http://jeffreywei.github.io/distribute/zk_02"
+    "href": "http://127.0.0.1:4000/distribute/zk_02"
   } ,
 
   {
     "text": "寻找数轴上相邻两个数之间的最大差值",
-    "href": "http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm"
+    "href": "http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm"
   } ,
 
   {
     "text": "当爬虫遇到压缩页面&GBK编码",
-    "href": "http://jeffreywei.github.io/python,%20spider/python-spider-encode"
+    "href": "http://127.0.0.1:4000/python,%20spider/python-spider-encode"
   } ,
 
   {
     "text": "我是你夜晚的太阳",
-    "href": "http://jeffreywei.github.io/novel,book/novel"
+    "href": "http://127.0.0.1:4000/novel,book/novel"
   } ,
 
   {
     "text": "idea 快捷键",
-    "href": "http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap"
+    "href": "http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap"
   } ,
 
   {
     "text": "springmvc中配置FreeMarker",
-    "href": "http://jeffreywei.github.io/java,freemarker,spring/freemarker-java"
+    "href": "http://127.0.0.1:4000/java,freemarker,spring/freemarker-java"
   } ,
 
   {
     "text": "maven发布带有javadoc、source的库文件",
-    "href": "http://jeffreywei.github.io/java,maven/maven-deploy"
+    "href": "http://127.0.0.1:4000/java,maven/maven-deploy"
   } ,
 
   {
     "text": "maven引用snapshot版本jar",
-    "href": "http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT"
+    "href": "http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT"
   } ,
 
   {
     "text": "2015年终总结",
-    "href": "http://jeffreywei.github.io/work/2015-summary"
+    "href": "http://127.0.0.1:4000/work/2015-summary"
   } ,
 
   {
     "text": "使用jsonp实现js跨域请求",
-    "href": "http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain"
+    "href": "http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain"
   } ,
 
   {
     "text": "tomcat远程调试",
-    "href": "http://jeffreywei.github.io/java/tomcat-remote-debug"
+    "href": "http://127.0.0.1:4000/java/tomcat-remote-debug"
   } ,
 
   {
     "text": "Docker(1)-镜像",
-    "href": "http://jeffreywei.github.io/docker/learning-docker-01-image"
+    "href": "http://127.0.0.1:4000/docker/learning-docker-01-image"
   } ,
 
   {
     "text": "Docker(2)-容器&仓库",
-    "href": "http://jeffreywei.github.io/docker/learning-docker-02-container-epository"
+    "href": "http://127.0.0.1:4000/docker/learning-docker-02-container-epository"
   } ,
 
   {
     "text": "Docker(3)-项目部署",
-    "href": "http://jeffreywei.github.io/docker/learning-docker-03-project-deploy"
+    "href": "http://127.0.0.1:4000/docker/learning-docker-03-project-deploy"
+  } ,
+
+  {
+    "text": "Docker(3)-项目部署",
+    "href": "http://127.0.0.1:4000/docker/blog-test"
   } 
 
 ])

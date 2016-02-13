@@ -2,7 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
-        <loc>http://jeffreywei.github.io/docker/learning-docker-03-project-deploy</loc>
+        <loc>http://127.0.0.1:4000/docker/blog-test</loc>
+        <lastmod>T00:00:00-00:00</lastmod>
+    <data>
+        <display>
+            <title>Docker(3)-项目部署</title>
+            <pubTime>2016-02-13T00:00:00+08:00</pubTime>
+            <tag>Docker</tag>
+            <content>
+                <![CDATA[
+                &lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
+
+&lt;!--more--&gt;
+&lt;p&gt;##生成镜像
+使用&lt;code&gt;dockerfile&lt;/code&gt;生成包含war的镜像，此处使用的jetty作为容器&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM jetty:9-jre7
+MAINTAINER wei@yizhen.com
+COPY target/uther.war /var/lib/jetty/webapps/ROOT.war
+VOLUME /home/jetty/.dubbo
+EXPOSE 8080
+EXPOSE 20885
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;由于项目中使用了dubbo，需要在用户根目录创建一个可写权限的文件夹;对外暴露需要使用的端口&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;使用maven打包项目&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn  clean compile war:war -Dmaven.test.skip=true -P dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用&lt;code&gt;docker build&lt;/code&gt;生成镜像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker build -t imagename:tag dockerfilepath/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;启动镜像&lt;/h2&gt;
+
+&lt;p&gt;使用&lt;code&gt;docker run&lt;/code&gt;启动容器&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -d -p 80:8080 -p 20885:20885 -v /log:/log --net=host --name proejct_0210 imagename:tag
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;项目对外输出文件日志，使用了一个映射卷;net参数使dubbo向外暴露的接口使用和宿主机器同网段的地址&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;基础容器&lt;/h2&gt;
+&lt;p&gt;###mysql&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run --name mysql -v /mysqldata:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=toor -d mysql:5.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;jenkins&quot;&gt;jenkins&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -it  -p 8080:8080 -p 50000:50000 -v /jenkinsdata:/var/ jenkins_home jenkins
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;registry&quot;&gt;registry&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -p 5000:5000 -v /docker_registry:/tmp/registry-dev  registry
+sudo docker push 127.0.0.1:5000/imagename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;rancher&quot;&gt;rancher&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -d --restart=always -p 8080:8080 rancher/server
+&lt;/code&gt;&lt;/pre&gt;
+
+
+                ]]>
+            </content>
+            <breadCrumb title="Docker" url="http://127.0.0.1:4000/categories/#Docker" />
+        </display>
+    </data>
+    </url>
+    
+    <url>
+        <loc>http://127.0.0.1:4000/docker/learning-docker-03-project-deploy</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -71,13 +146,13 @@ sudo docker push 127.0.0.1:5000/imagename
 
                 ]]>
             </content>
-            <breadCrumb title="Docker" url="http://jeffreywei.github.io/categories/#Docker" />
+            <breadCrumb title="Docker" url="http://127.0.0.1:4000/categories/#Docker" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/docker/learning-docker-02-container-epository</loc>
+        <loc>http://127.0.0.1:4000/docker/learning-docker-02-container-epository</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -136,13 +211,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="Docker" url="http://jeffreywei.github.io/categories/#Docker" />
+            <breadCrumb title="Docker" url="http://127.0.0.1:4000/categories/#Docker" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/docker/learning-docker-01-image</loc>
+        <loc>http://127.0.0.1:4000/docker/learning-docker-01-image</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -294,13 +369,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="Docker" url="http://jeffreywei.github.io/categories/#Docker" />
+            <breadCrumb title="Docker" url="http://127.0.0.1:4000/categories/#Docker" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/tomcat-remote-debug</loc>
+        <loc>http://127.0.0.1:4000/java/tomcat-remote-debug</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -344,13 +419,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="java" url="http://jeffreywei.github.io/categories/#java" />
+            <breadCrumb title="java" url="http://127.0.0.1:4000/categories/#java" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain</loc>
+        <loc>http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -399,13 +474,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="javascript" url="http://jeffreywei.github.io/categories/#javascript" />
+            <breadCrumb title="javascript" url="http://127.0.0.1:4000/categories/#javascript" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/2015-summary</loc>
+        <loc>http://127.0.0.1:4000/work/2015-summary</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -504,13 +579,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="work" url="http://jeffreywei.github.io/categories/#work" />
+            <breadCrumb title="work" url="http://127.0.0.1:4000/categories/#work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT</loc>
+        <loc>http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -554,13 +629,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="java,maven" url="http://jeffreywei.github.io/categories/#java,maven" />
+            <breadCrumb title="java,maven" url="http://127.0.0.1:4000/categories/#java,maven" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,maven/maven-deploy</loc>
+        <loc>http://127.0.0.1:4000/java,maven/maven-deploy</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -636,13 +711,13 @@ docker import CONTAINER
 
                 ]]>
             </content>
-            <breadCrumb title="java,maven" url="http://jeffreywei.github.io/categories/#java,maven" />
+            <breadCrumb title="java,maven" url="http://127.0.0.1:4000/categories/#java,maven" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,freemarker,spring/freemarker-java</loc>
+        <loc>http://127.0.0.1:4000/java,freemarker,spring/freemarker-java</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -755,13 +830,13 @@ include导入文件：
 
                 ]]>
             </content>
-            <breadCrumb title="java,FreeMarker,spring" url="http://jeffreywei.github.io/categories/#java,FreeMarker,spring" />
+            <breadCrumb title="java,FreeMarker,spring" url="http://127.0.0.1:4000/categories/#java,FreeMarker,spring" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap</loc>
+        <loc>http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -868,13 +943,13 @@ jump to navigation bar 			⌥ ⌘ B
 
                 ]]>
             </content>
-            <breadCrumb title="idea,ide,keymap" url="http://jeffreywei.github.io/categories/#idea,ide,keymap" />
+            <breadCrumb title="idea,ide,keymap" url="http://127.0.0.1:4000/categories/#idea,ide,keymap" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/novel,book/novel</loc>
+        <loc>http://127.0.0.1:4000/novel,book/novel</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -904,13 +979,13 @@ jump to navigation bar 			⌥ ⌘ B
 
                 ]]>
             </content>
-            <breadCrumb title="novel,book" url="http://jeffreywei.github.io/categories/#novel,book" />
+            <breadCrumb title="novel,book" url="http://127.0.0.1:4000/categories/#novel,book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python,%20spider/python-spider-encode</loc>
+        <loc>http://127.0.0.1:4000/python,%20spider/python-spider-encode</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -938,13 +1013,13 @@ jump to navigation bar 			⌥ ⌘ B
 
                 ]]>
             </content>
-            <breadCrumb title="python, spider" url="http://jeffreywei.github.io/categories/#python, spider" />
+            <breadCrumb title="python, spider" url="http://127.0.0.1:4000/categories/#python, spider" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm</loc>
+        <loc>http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -986,13 +1061,13 @@ jump to navigation bar 			⌥ ⌘ B
 
                 ]]>
             </content>
-            <breadCrumb title="python, algorithm" url="http://jeffreywei.github.io/categories/#python, algorithm" />
+            <breadCrumb title="python, algorithm" url="http://127.0.0.1:4000/categories/#python, algorithm" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/distribute/zk_02</loc>
+        <loc>http://127.0.0.1:4000/distribute/zk_02</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1064,13 +1139,13 @@ jump to navigation bar 			⌥ ⌘ B
 
                 ]]>
             </content>
-            <breadCrumb title="distribute" url="http://jeffreywei.github.io/categories/#distribute" />
+            <breadCrumb title="distribute" url="http://127.0.0.1:4000/categories/#distribute" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/java-class-inherit</loc>
+        <loc>http://127.0.0.1:4000/java/java-class-inherit</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1167,13 +1242,13 @@ C1
 
                 ]]>
             </content>
-            <breadCrumb title="java" url="http://jeffreywei.github.io/categories/#java" />
+            <breadCrumb title="java" url="http://127.0.0.1:4000/categories/#java" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/distribute/zk_01</loc>
+        <loc>http://127.0.0.1:4000/distribute/zk_01</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1254,13 +1329,13 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
                 ]]>
             </content>
-            <breadCrumb title="distribute" url="http://jeffreywei.github.io/categories/#distribute" />
+            <breadCrumb title="distribute" url="http://127.0.0.1:4000/categories/#distribute" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/idea,ide/IDE-idea-JDK</loc>
+        <loc>http://127.0.0.1:4000/idea,ide/IDE-idea-JDK</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1286,18 +1361,18 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
 &lt;h2 id=&quot;tab&quot;&gt;代码中使用Tab指标符&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-08/23-1.png&quot; alt=&quot;&quot; title=&quot;23-1.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-08/23-1.png&quot; alt=&quot;&quot; title=&quot;23-1.png&quot; /&gt;&lt;/p&gt;
 
 
                 ]]>
             </content>
-            <breadCrumb title="idea,ide" url="http://jeffreywei.github.io/categories/#idea,ide" />
+            <breadCrumb title="idea,ide" url="http://127.0.0.1:4000/categories/#idea,ide" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/maven-jar</loc>
+        <loc>http://127.0.0.1:4000/java/maven-jar</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1365,13 +1440,13 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
                 ]]>
             </content>
-            <breadCrumb title="java" url="http://jeffreywei.github.io/categories/#java" />
+            <breadCrumb title="java" url="http://127.0.0.1:4000/categories/#java" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/spring-resources</loc>
+        <loc>http://127.0.0.1:4000/java/spring-resources</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1433,13 +1508,13 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
                 ]]>
             </content>
-            <breadCrumb title="java" url="http://jeffreywei.github.io/categories/#java" />
+            <breadCrumb title="java" url="http://127.0.0.1:4000/categories/#java" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/spring-mvc-interceptor</loc>
+        <loc>http://127.0.0.1:4000/work/spring-mvc-interceptor</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1491,13 +1566,13 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
                 ]]>
             </content>
-            <breadCrumb title="work" url="http://jeffreywei.github.io/categories/#work" />
+            <breadCrumb title="work" url="http://127.0.0.1:4000/categories/#work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/spring-task</loc>
+        <loc>http://127.0.0.1:4000/work/spring-task</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1556,13 +1631,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="work" url="http://jeffreywei.github.io/categories/#work" />
+            <breadCrumb title="work" url="http://127.0.0.1:4000/categories/#work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/maven-jefft-https</loc>
+        <loc>http://127.0.0.1:4000/work/maven-jefft-https</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1629,13 +1704,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="work" url="http://jeffreywei.github.io/categories/#work" />
+            <breadCrumb title="work" url="http://127.0.0.1:4000/categories/#work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-10</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-10</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1659,13 +1734,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-9</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-9</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1712,13 +1787,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-8</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-8</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1764,13 +1839,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-7</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-7</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1818,13 +1893,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-6</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-6</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1870,13 +1945,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-5</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-5</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1918,13 +1993,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-4</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-4</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -1968,13 +2043,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-3</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-3</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2025,13 +2100,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-2</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-2</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2082,13 +2157,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-1</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-1</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2126,13 +2201,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="book" url="http://jeffreywei.github.io/categories/#book" />
+            <breadCrumb title="book" url="http://127.0.0.1:4000/categories/#book" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/life</loc>
+        <loc>http://127.0.0.1:4000/life/life</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2147,7 +2222,7 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
 &lt;p&gt;本来写了很多最近的感受，但有着隐约的负能量，过段删除，还是老习惯分享一段黑科技（古文）吧：）&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-06/06-17-1.jpg&quot; alt=&quot;&quot; title=&quot;guwen&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-06/06-17-1.jpg&quot; alt=&quot;&quot; title=&quot;guwen&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;孟子曰：”舜发于畎亩之中，傅说举于版筑之间，胶鬲举于鱼盐之中，管夷吾举于士，孙叔敖举于海，百里奚举于市。故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空伐其身行，行弗乱其所为，所以动心忍性，曾益其所不能。人恒过，然后能改。困于心，衡于虑，而后作。徵于色，发于声，而后喻。入则无法家拂士，出则无敌国外患者，国恒亡。然后知生于忧患难与共，而死于安乐也。”&lt;/strong&gt;&lt;/p&gt;
 
@@ -2158,13 +2233,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="life" url="http://jeffreywei.github.io/categories/#life" />
+            <breadCrumb title="life" url="http://127.0.0.1:4000/categories/#life" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-5</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-5</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2389,13 +2464,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="python" url="http://jeffreywei.github.io/categories/#python" />
+            <breadCrumb title="python" url="http://127.0.0.1:4000/categories/#python" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-4</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-4</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2730,13 +2805,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="python" url="http://jeffreywei.github.io/categories/#python" />
+            <breadCrumb title="python" url="http://127.0.0.1:4000/categories/#python" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-3</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-3</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2905,13 +2980,13 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
 
                 ]]>
             </content>
-            <breadCrumb title="python" url="http://jeffreywei.github.io/categories/#python" />
+            <breadCrumb title="python" url="http://127.0.0.1:4000/categories/#python" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/internet,wrok/using-ngrok</loc>
+        <loc>http://127.0.0.1:4000/internet,wrok/using-ngrok</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -2966,13 +3041,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="internet,wrok" url="http://jeffreywei.github.io/categories/#internet,wrok" />
+            <breadCrumb title="internet,wrok" url="http://127.0.0.1:4000/categories/#internet,wrok" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-2</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-2</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -3216,13 +3291,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="python" url="http://jeffreywei.github.io/categories/#python" />
+            <breadCrumb title="python" url="http://127.0.0.1:4000/categories/#python" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/smart-sellers</loc>
+        <loc>http://127.0.0.1:4000/life/smart-sellers</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -3237,20 +3312,20 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
 &lt;p&gt;最近某东店庆活动比以往多了不少，看上去好像花了更少的钱买了更多的东西，但为了凑单多多少少都会买很多实际上不需要的物件回家，跟着网站的页面一个接一个的点下去买了不少东西，浪费了不少时间，还有那解释权永远归他们的霸王条款，很是让人无奈。千算万算没有对方算得精细，大多数消费者永远不要奢望从商家那里赚到实惠。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-06/06-07-1.jpg&quot; alt=&quot;&quot; title=&quot;奸商&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-06/06-07-1.jpg&quot; alt=&quot;&quot; title=&quot;奸商&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;只买需要的东西，冷静消费不要被商家牵着鼻子走，还是那句老话&lt;code&gt;从南京到北京，买的没有卖的精&lt;/code&gt;&lt;/p&gt;
 
 
                 ]]>
             </content>
-            <breadCrumb title="life" url="http://jeffreywei.github.io/categories/#life" />
+            <breadCrumb title="life" url="http://127.0.0.1:4000/categories/#life" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-1</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-1</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -3735,13 +3810,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="python" url="http://jeffreywei.github.io/categories/#python" />
+            <breadCrumb title="python" url="http://127.0.0.1:4000/categories/#python" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,mybatis/using-mybatis-generator</loc>
+        <loc>http://127.0.0.1:4000/java,mybatis/using-mybatis-generator</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -3851,13 +3926,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="java,mybatis" url="http://jeffreywei.github.io/categories/#java,mybatis" />
+            <breadCrumb title="java,mybatis" url="http://127.0.0.1:4000/categories/#java,mybatis" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,cache/java-spring-ehcache</loc>
+        <loc>http://127.0.0.1:4000/java,cache/java-spring-ehcache</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4116,13 +4191,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="java,cache" url="http://jeffreywei.github.io/categories/#java,cache" />
+            <breadCrumb title="java,cache" url="http://127.0.0.1:4000/categories/#java,cache" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-7</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-7</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4139,18 +4214,18 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 &lt;p&gt;##泛型
 275&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-06/s-l-2-6-1.png&quot; alt=&quot;&quot; title=&quot;s-l-2-6-1 &quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-06/s-l-2-6-1.png&quot; alt=&quot;&quot; title=&quot;s-l-2-6-1 &quot; /&gt;&lt;/p&gt;
 
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-6</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-6</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4309,7 +4384,7 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 &lt;h3 id=&quot;section-13&quot;&gt;协议合成&lt;/h3&gt;
 &lt;p&gt;一个协议可由多个协议采用protocol&amp;lt;SomeProtocol,AnotherProtocol&amp;gt;这样的格式进行组合，成为协议组合(protocol composition)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-06/s-l-2-6-1.png&quot; alt=&quot;&quot; title=&quot;s-l-2-6-1 &quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-06/s-l-2-6-1.png&quot; alt=&quot;&quot; title=&quot;s-l-2-6-1 &quot; /&gt;
 &lt;strong&gt;注意：协议合成并不会生成一个新协议类型，而是将多个协议合成一个临时的协议，超出范围后立刻失效。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-14&quot;&gt;可选协议类型&lt;/h3&gt;
@@ -4318,13 +4393,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-5</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-5</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4431,23 +4506,23 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
 &lt;h2 id=&quot;section-10&quot;&gt;类型嵌套&lt;/h2&gt;
 &lt;p&gt;###定义
-&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/s-l-2-5-1.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-1&quot; /&gt;
-&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/s-l-2-5-2.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-2&quot; /&gt;
-&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/s-l-2-5-3.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-3&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/s-l-2-5-1.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-1&quot; /&gt;
+&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/s-l-2-5-2.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-2&quot; /&gt;
+&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/s-l-2-5-3.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-3&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-11&quot;&gt;类型嵌套的引用&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/s-l-2-5-4.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/s-l-2-5-4.png&quot; alt=&quot;&quot; title=&quot;s-l-2-5-4&quot; /&gt;&lt;/p&gt;
 
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-4</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-4</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4597,13 +4672,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/about-life</loc>
+        <loc>http://127.0.0.1:4000/life/about-life</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4617,7 +4692,7 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 &lt;p&gt;《诫子书》–诸葛亮
 &lt;!--more--&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/about-life-1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/about-life-1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;夫君子之行，静以修身，俭以养德；&lt;/strong&gt;&lt;/p&gt;
 
@@ -4636,13 +4711,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="life" url="http://jeffreywei.github.io/categories/#life" />
+            <breadCrumb title="life" url="http://127.0.0.1:4000/categories/#life" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-3</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-3</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4747,11 +4822,11 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
 &lt;h3 id=&quot;getset&quot;&gt;属性的get/set&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/properties_0.png.png&quot; alt=&quot;&quot; title=&quot;properties_0&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/properties_0.png.png&quot; alt=&quot;&quot; title=&quot;properties_0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;set中默认使用newValue代替新输入的对象&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/properties_1.png.png&quot; alt=&quot;&quot; title=&quot;properties_1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/properties_1.png.png&quot; alt=&quot;&quot; title=&quot;properties_1&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-9&quot;&gt;只读属性&lt;/h3&gt;
 
@@ -4788,13 +4863,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-2</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-2</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -4920,13 +4995,13 @@ trust_host_root_certs: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;/co
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-1</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-1</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5148,13 +5223,13 @@ assert(age&amp;gt;=0,&quot;error&quot;)
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-1</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-1</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5282,13 +5357,13 @@ mutating??
 
                 ]]>
             </content>
-            <breadCrumb title="swift,work" url="http://jeffreywei.github.io/categories/#swift,work" />
+            <breadCrumb title="swift,work" url="http://127.0.0.1:4000/categories/#swift,work" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work,nosql/mongodb-import-data</loc>
+        <loc>http://127.0.0.1:4000/work,nosql/mongodb-import-data</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5344,13 +5419,13 @@ db.customer.stats()
 
                 ]]>
             </content>
-            <breadCrumb title="work,nosql" url="http://jeffreywei.github.io/categories/#work,nosql" />
+            <breadCrumb title="work,nosql" url="http://127.0.0.1:4000/categories/#work,nosql" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work,nosql/mongodb-install</loc>
+        <loc>http://127.0.0.1:4000/work,nosql/mongodb-install</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5440,13 +5515,13 @@ db.customer.stats()
 
                 ]]>
             </content>
-            <breadCrumb title="work,nosql" url="http://jeffreywei.github.io/categories/#work,nosql" />
+            <breadCrumb title="work,nosql" url="http://127.0.0.1:4000/categories/#work,nosql" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/Stay-Foolish</loc>
+        <loc>http://127.0.0.1:4000/life/Stay-Foolish</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5499,13 +5574,13 @@ db.customer.stats()
 
                 ]]>
             </content>
-            <breadCrumb title="life" url="http://jeffreywei.github.io/categories/#life" />
+            <breadCrumb title="life" url="http://127.0.0.1:4000/categories/#life" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/hadoop/hadoop-standalone-install</loc>
+        <loc>http://127.0.0.1:4000/hadoop/hadoop-standalone-install</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5520,7 +5595,7 @@ db.customer.stats()
 
 &lt;h3 id=&quot;hadoop&quot;&gt;1.Hadoop下载&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/hadoop-logo.jpg&quot; alt=&quot; &quot; title=&quot;hadoop logo&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/hadoop-logo.jpg&quot; alt=&quot; &quot; title=&quot;hadoop logo&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz&quot;&gt;hadoop-2.7.0&lt;/a&gt;&lt;/p&gt;
 
@@ -5582,7 +5657,7 @@ $ export HADOOP\_PREFIX=/usr/local/hadoop
 
     &lt;p&gt;访问&lt;a href=&quot;http://localhost:50070/&quot;&gt;http://localhost:50070/&lt;/a&gt;，查看服务状态&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-05/1.png&quot; alt=&quot; &quot; title=&quot;hadoop web admin page&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-05/1.png&quot; alt=&quot; &quot; title=&quot;hadoop web admin page&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;测试&lt;/p&gt;
@@ -5602,13 +5677,13 @@ $ export HADOOP\_PREFIX=/usr/local/hadoop
 
                 ]]>
             </content>
-            <breadCrumb title="hadoop" url="http://jeffreywei.github.io/categories/#hadoop" />
+            <breadCrumb title="hadoop" url="http://127.0.0.1:4000/categories/#hadoop" />
         </display>
     </data>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/International-Labour-Day-eve</loc>
+        <loc>http://127.0.0.1:4000/life/International-Labour-Day-eve</loc>
         <lastmod>T00:00:00-00:00</lastmod>
     <data>
         <display>
@@ -5623,7 +5698,7 @@ $ export HADOOP\_PREFIX=/usr/local/hadoop
 
 &lt;p&gt;在网上漫无目的的瞎逛时看到了一篇中学时期要求背诵的古文&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-04/1.png&quot; alt=&quot; &quot; title=&quot;游褒禅山记&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-04/1.png&quot; alt=&quot; &quot; title=&quot;游褒禅山记&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;于是余有叹焉。古人之观于天地、山川、草木、虫鱼、鸟兽，往往有得，以其求思之深而无不在也。夫夷以近，则游者众；险以远，则至者少。而世之奇伟、瑰怪，非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也。有志矣，不随以止也，然力不足者，亦不能至也。有志与力，而又不随以怠，至于幽暗昏惑而无物以相之，亦不能至也。然力足以至焉，于人为可讥，而在己为有悔；尽吾志也而不能至者，可以无悔矣，其孰能讥之乎？此余之所得也！&lt;/strong&gt;&lt;/p&gt;
 
@@ -5634,7 +5709,7 @@ $ export HADOOP\_PREFIX=/usr/local/hadoop
 
                 ]]>
             </content>
-            <breadCrumb title="life" url="http://jeffreywei.github.io/categories/#life" />
+            <breadCrumb title="life" url="http://127.0.0.1:4000/categories/#life" />
         </display>
     </data>
     </url>

@@ -2,250 +2,254 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
-        <loc>http://jeffreywei.github.io/</loc>
+        <loc>http://127.0.0.1:4000/</loc>
     </url>
     <url>
-        <loc>http://jeffreywei.github.io/categories</loc>
+        <loc>http://127.0.0.1:4000/categories</loc>
     </url>
     <url>
-        <loc>http://jeffreywei.github.io/tags</loc>
+        <loc>http://127.0.0.1:4000/tags</loc>
     </url>
     <url>
-        <loc>http://jeffreywei.github.io/guestbook</loc>
+        <loc>http://127.0.0.1:4000/guestbook</loc>
     </url>
     <url>
-        <loc>http://jeffreywei.github.io/project</loc>
+        <loc>http://127.0.0.1:4000/project</loc>
     </url>
     <url>
-        <loc>http://jeffreywei.github.io/links</loc>
+        <loc>http://127.0.0.1:4000/links</loc>
     </url>
     <url>
-        <loc>http://jeffreywei.github.io/about</loc>
+        <loc>http://127.0.0.1:4000/about</loc>
     </url>
 
     
     <url>
-        <loc>http://jeffreywei.github.io/docker/learning-docker-03-project-deploy</loc>
+        <loc>http://127.0.0.1:4000/docker/blog-test</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/docker/learning-docker-02-container-epository</loc>
+        <loc>http://127.0.0.1:4000/docker/learning-docker-03-project-deploy</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/docker/learning-docker-01-image</loc>
+        <loc>http://127.0.0.1:4000/docker/learning-docker-02-container-epository</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/tomcat-remote-debug</loc>
+        <loc>http://127.0.0.1:4000/docker/learning-docker-01-image</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain</loc>
+        <loc>http://127.0.0.1:4000/java/tomcat-remote-debug</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/2015-summary</loc>
+        <loc>http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT</loc>
+        <loc>http://127.0.0.1:4000/work/2015-summary</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,maven/maven-deploy</loc>
+        <loc>http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,freemarker,spring/freemarker-java</loc>
+        <loc>http://127.0.0.1:4000/java,maven/maven-deploy</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap</loc>
+        <loc>http://127.0.0.1:4000/java,freemarker,spring/freemarker-java</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/novel,book/novel</loc>
+        <loc>http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python,%20spider/python-spider-encode</loc>
+        <loc>http://127.0.0.1:4000/novel,book/novel</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm</loc>
+        <loc>http://127.0.0.1:4000/python,%20spider/python-spider-encode</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/distribute/zk_02</loc>
+        <loc>http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/java-class-inherit</loc>
+        <loc>http://127.0.0.1:4000/distribute/zk_02</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/distribute/zk_01</loc>
+        <loc>http://127.0.0.1:4000/java/java-class-inherit</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/idea,ide/IDE-idea-JDK</loc>
+        <loc>http://127.0.0.1:4000/distribute/zk_01</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/maven-jar</loc>
+        <loc>http://127.0.0.1:4000/idea,ide/IDE-idea-JDK</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java/spring-resources</loc>
+        <loc>http://127.0.0.1:4000/java/maven-jar</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/spring-mvc-interceptor</loc>
+        <loc>http://127.0.0.1:4000/java/spring-resources</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/spring-task</loc>
+        <loc>http://127.0.0.1:4000/work/spring-mvc-interceptor</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work/maven-jefft-https</loc>
+        <loc>http://127.0.0.1:4000/work/spring-task</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-10</loc>
+        <loc>http://127.0.0.1:4000/work/maven-jefft-https</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-9</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-10</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-8</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-9</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-7</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-8</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-6</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-7</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-5</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-6</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-4</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-5</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-3</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-4</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-2</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-3</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/book/read-book-1-1</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-2</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/life</loc>
+        <loc>http://127.0.0.1:4000/book/read-book-1-1</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-5</loc>
+        <loc>http://127.0.0.1:4000/life/life</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-4</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-5</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-3</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-4</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/internet,wrok/using-ngrok</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-3</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-2</loc>
+        <loc>http://127.0.0.1:4000/internet,wrok/using-ngrok</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/smart-sellers</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-2</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/python/learning-python-1</loc>
+        <loc>http://127.0.0.1:4000/life/smart-sellers</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,mybatis/using-mybatis-generator</loc>
+        <loc>http://127.0.0.1:4000/python/learning-python-1</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/java,cache/java-spring-ehcache</loc>
+        <loc>http://127.0.0.1:4000/java,mybatis/using-mybatis-generator</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-7</loc>
+        <loc>http://127.0.0.1:4000/java,cache/java-spring-ehcache</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-6</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-7</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-5</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-6</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-4</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-5</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/about-life</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-4</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-3</loc>
+        <loc>http://127.0.0.1:4000/life/about-life</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-2</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-3</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-2-1</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-2</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/swift,work/swift-lesson-1</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-2-1</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work,nosql/mongodb-import-data</loc>
+        <loc>http://127.0.0.1:4000/swift,work/swift-lesson-1</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/work,nosql/mongodb-install</loc>
+        <loc>http://127.0.0.1:4000/work,nosql/mongodb-import-data</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/Stay-Foolish</loc>
+        <loc>http://127.0.0.1:4000/work,nosql/mongodb-install</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/hadoop/hadoop-standalone-install</loc>
+        <loc>http://127.0.0.1:4000/life/Stay-Foolish</loc>
     </url>
     
     <url>
-        <loc>http://jeffreywei.github.io/life/International-Labour-Day-eve</loc>
+        <loc>http://127.0.0.1:4000/hadoop/hadoop-standalone-install</loc>
+    </url>
+    
+    <url>
+        <loc>http://127.0.0.1:4000/life/International-Labour-Day-eve</loc>
     </url>
     
 </urlset>

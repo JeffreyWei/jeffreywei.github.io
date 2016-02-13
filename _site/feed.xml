@@ -2,26 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">Sagittarius</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://jeffreywei.github.io/feed.xml" />
-<link rel="alternate" type="text/html" href="http://jeffreywei.github.io" />
-<updated>2016-02-10T11:03:42+08:00</updated>
-<id>http://jeffreywei.github.io/</id>
+<link rel="self" type="application/atom+xml" href="http://127.0.0.1:4000/feed.xml" />
+<link rel="alternate" type="text/html" href="http://127.0.0.1:4000" />
+<updated>2016-02-13T14:27:26+08:00</updated>
+<id>http://127.0.0.1:4000/</id>
 <author>
   <name>Wei</name>
-  <uri>http://jeffreywei.github.io/</uri>
+  <uri>http://127.0.0.1:4000/</uri>
   <email>mavenwei@qq.com</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[Docker(3)-项目部署]]></title>
-  <link>http://jeffreywei.github.io/docker/learning-docker-03-project-deploy</link>
-  <id>http://jeffreywei.github.io/docker/learning-docker-03-project-deploy</id>
-  <published>2016-02-10T00:00:00+08:00</published>
-  <updated>2016-02-10T00:00:00+08:00</updated>
+  <link>http://127.0.0.1:4000/docker/blog-test</link>
+  <id>http://127.0.0.1:4000/docker/blog-test</id>
+  <published>2016-02-13T00:00:00+08:00</published>
+  <updated>2016-02-13T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
@@ -82,19 +82,92 @@ sudo docker push 127.0.0.1:5000/imagename
 &lt;/code&gt;&lt;/pre&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/docker/learning-docker-03-project-deploy&quot;&gt;Docker(3)-项目部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on February 10, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/blog-test&quot;&gt;Docker(3)-项目部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on February 13, 2016.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Docker(3)-项目部署]]></title>
+  <link>http://127.0.0.1:4000/docker/learning-docker-03-project-deploy</link>
+  <id>http://127.0.0.1:4000/docker/learning-docker-03-project-deploy</id>
+  <published>2016-02-10T00:00:00+08:00</published>
+  <updated>2016-02-10T00:00:00+08:00</updated>
+  <author>
+    <name>Wei</name>
+    <uri>http://127.0.0.1:4000</uri>
+    <email>mavenwei@qq.com</email>
+  </author>
+  <content type="html">&lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
+
+&lt;!--more--&gt;
+&lt;p&gt;##生成镜像
+使用&lt;code&gt;dockerfile&lt;/code&gt;生成包含war的镜像，此处使用的jetty作为容器&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM jetty:9-jre7
+MAINTAINER wei@yizhen.com
+COPY target/uther.war /var/lib/jetty/webapps/ROOT.war
+VOLUME /home/jetty/.dubbo
+EXPOSE 8080
+EXPOSE 20885
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;由于项目中使用了dubbo，需要在用户根目录创建一个可写权限的文件夹;对外暴露需要使用的端口&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;使用maven打包项目&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn  clean compile war:war -Dmaven.test.skip=true -P dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用&lt;code&gt;docker build&lt;/code&gt;生成镜像&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker build -t imagename:tag dockerfilepath/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;启动镜像&lt;/h2&gt;
+
+&lt;p&gt;使用&lt;code&gt;docker run&lt;/code&gt;启动容器&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -d -p 80:8080 -p 20885:20885 -v /log:/log --net=host --name proejct_0210 imagename:tag
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;项目对外输出文件日志，使用了一个映射卷;net参数使dubbo向外暴露的接口使用和宿主机器同网段的地址&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;基础容器&lt;/h2&gt;
+&lt;p&gt;###mysql&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run --name mysql -v /mysqldata:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=toor -d mysql:5.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;jenkins&quot;&gt;jenkins&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -it  -p 8080:8080 -p 50000:50000 -v /jenkinsdata:/var/ jenkins_home jenkins
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;registry&quot;&gt;registry&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -p 5000:5000 -v /docker_registry:/tmp/registry-dev  registry
+sudo docker push 127.0.0.1:5000/imagename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;rancher&quot;&gt;rancher&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -d --restart=always -p 8080:8080 rancher/server
+&lt;/code&gt;&lt;/pre&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/learning-docker-03-project-deploy&quot;&gt;Docker(3)-项目部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on February 10, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Docker(2)-容器&仓库]]></title>
-  <link>http://jeffreywei.github.io/docker/learning-docker-02-container-epository</link>
-  <id>http://jeffreywei.github.io/docker/learning-docker-02-container-epository</id>
+  <link>http://127.0.0.1:4000/docker/learning-docker-02-container-epository</link>
+  <id>http://127.0.0.1:4000/docker/learning-docker-02-container-epository</id>
   <published>2016-01-21T00:00:00+08:00</published>
   <updated>2016-01-21T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;Docker容器、仓库的相关操作&lt;/p&gt;
@@ -145,19 +218,19 @@ docker import CONTAINER
 &lt;/code&gt;&lt;/pre&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/docker/learning-docker-02-container-epository&quot;&gt;Docker(2)-容器&仓库&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on January 21, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/learning-docker-02-container-epository&quot;&gt;Docker(2)-容器&仓库&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 21, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Docker(1)-镜像]]></title>
-  <link>http://jeffreywei.github.io/docker/learning-docker-01-image</link>
-  <id>http://jeffreywei.github.io/docker/learning-docker-01-image</id>
+  <link>http://127.0.0.1:4000/docker/learning-docker-01-image</link>
+  <id>http://127.0.0.1:4000/docker/learning-docker-01-image</id>
   <published>2016-01-20T00:00:00+08:00</published>
   <updated>2016-01-20T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;Docker镜像的相关操作&lt;/p&gt;
@@ -301,19 +374,19 @@ docker import CONTAINER
 &lt;p&gt;本系列参考《&lt;a href=&quot;http://book.douban.com/subject/26284823/&quot;&gt;Docker技术入门与实战&lt;/a&gt;》&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/docker/learning-docker-01-image&quot;&gt;Docker(1)-镜像&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on January 20, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/docker/learning-docker-01-image&quot;&gt;Docker(1)-镜像&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 20, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[tomcat远程调试]]></title>
-  <link>http://jeffreywei.github.io/java/tomcat-remote-debug</link>
-  <id>http://jeffreywei.github.io/java/tomcat-remote-debug</id>
+  <link>http://127.0.0.1:4000/java/tomcat-remote-debug</link>
+  <id>http://127.0.0.1:4000/java/tomcat-remote-debug</id>
   <published>2016-01-15T00:00:00+08:00</published>
   <updated>2016-01-15T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;配置使用tomcat远程调试功能，使用idea远程调试项目&lt;/p&gt;
@@ -349,19 +422,19 @@ docker import CONTAINER
 &lt;p&gt;最近在工作中遇到的一个部署问题，是由于URL编码造成的，开发环境使用maven插件使项目运行在jetty上，线上环境为tomcat，部署后发现前台传入的中文无法正常到达后台，查看tomcat配置文档，需要在server.xml中配置连接的编码格式，添加&lt;code&gt;URIEncoding=&quot;UTF-8&quot;&lt;/code&gt;配置。&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java/tomcat-remote-debug&quot;&gt;tomcat远程调试&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on January 15, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/tomcat-remote-debug&quot;&gt;tomcat远程调试&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 15, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[使用jsonp实现js跨域请求]]></title>
-  <link>http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain</link>
-  <id>http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain</id>
+  <link>http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain</link>
+  <id>http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain</id>
   <published>2016-01-13T00:00:00+08:00</published>
   <updated>2016-01-13T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;页面内跨域请求&lt;/p&gt;
@@ -402,19 +475,19 @@ docker import CONTAINER
 
 &lt;p&gt;后端服务需要可以处理&lt;code&gt;callback&lt;/code&gt;参数，并在返回前端需要的回调函数。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/javascript/ajax-jquery-crossdomain&quot;&gt;使用jsonp实现js跨域请求&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on January 13, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/javascript/ajax-jquery-crossdomain&quot;&gt;使用jsonp实现js跨域请求&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on January 13, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[2015年终总结]]></title>
-  <link>http://jeffreywei.github.io/work/2015-summary</link>
-  <id>http://jeffreywei.github.io/work/2015-summary</id>
+  <link>http://127.0.0.1:4000/work/2015-summary</link>
+  <id>http://127.0.0.1:4000/work/2015-summary</id>
   <published>2015-12-25T00:00:00+08:00</published>
   <updated>2015-12-25T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;回顾过去、展望未来&lt;/p&gt;
@@ -505,19 +578,19 @@ docker import CONTAINER
 
 &lt;p&gt;明确各项目组任务、职责，让每个人明确自己的定位，不仅有事做，而且愿意做。为其他人创造成长的机会，达到公司、个人双赢。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/work/2015-summary&quot;&gt;2015年终总结&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on December 25, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/work/2015-summary&quot;&gt;2015年终总结&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 25, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[maven引用snapshot版本jar]]></title>
-  <link>http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT</link>
-  <id>http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT</id>
+  <link>http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT</link>
+  <id>http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT</id>
   <published>2015-12-23T00:00:00+08:00</published>
   <updated>2015-12-23T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;!--more--&gt;
@@ -553,19 +626,19 @@ docker import CONTAINER
 &lt;p&gt;再次编译依赖项目即可从SnapshotsRepositorie获取快照版本的类库。&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java,maven/maven-using-SNAPSHOT&quot;&gt;maven引用snapshot版本jar&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java,maven/maven-using-SNAPSHOT&quot;&gt;maven引用snapshot版本jar&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[maven发布带有javadoc、source的库文件]]></title>
-  <link>http://jeffreywei.github.io/java,maven/maven-deploy</link>
-  <id>http://jeffreywei.github.io/java,maven/maven-deploy</id>
+  <link>http://127.0.0.1:4000/java,maven/maven-deploy</link>
+  <id>http://127.0.0.1:4000/java,maven/maven-deploy</id>
   <published>2015-12-16T00:00:00+08:00</published>
   <updated>2015-12-16T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;如果只发布打包的jar,在其他项目中引用看到的参数都是以var1…的形式存在，而且不包含注释文档，本文介绍如何向布带有源码、注释的jar.&lt;/p&gt;
@@ -633,19 +706,19 @@ docker import CONTAINER
 
 &lt;p&gt;这样在其他项目引用时就可以获取到文档及源码。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java,maven/maven-deploy&quot;&gt;maven发布带有javadoc、source的库文件&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java,maven/maven-deploy&quot;&gt;maven发布带有javadoc、source的库文件&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[springmvc中配置FreeMarker]]></title>
-  <link>http://jeffreywei.github.io/java,freemarker,spring/freemarker-java</link>
-  <id>http://jeffreywei.github.io/java,freemarker,spring/freemarker-java</id>
+  <link>http://127.0.0.1:4000/java,freemarker,spring/freemarker-java</link>
+  <id>http://127.0.0.1:4000/java,freemarker,spring/freemarker-java</id>
   <published>2015-12-10T00:00:00+08:00</published>
   <updated>2015-12-10T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;前端模板freemarker配置&lt;/p&gt;
@@ -750,19 +823,19 @@ include导入文件：
 
 &lt;p&gt;模板代码中可以直接读取session中级response中填入的属性值&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java,freemarker,spring/freemarker-java&quot;&gt;springmvc中配置FreeMarker&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on December 10, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java,freemarker,spring/freemarker-java&quot;&gt;springmvc中配置FreeMarker&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 10, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[idea 快捷键]]></title>
-  <link>http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap</link>
-  <id>http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap</id>
+  <link>http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap</link>
+  <id>http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap</id>
   <published>2015-12-01T00:00:00+08:00</published>
   <updated>2015-12-01T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;idea 定制快捷键Mac版&lt;/p&gt;
@@ -861,19 +934,19 @@ jump to navigation bar 			⌥ ⌘ B
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/JeffreyWei/jeffreywei.github.io/tree/master/assets/posts/2015-12/1201&quot;&gt;文档配置&lt;/a&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/idea,ide,keymap/IDE-idea-keymap&quot;&gt;idea 快捷键&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on December 01, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/idea,ide,keymap/IDE-idea-keymap&quot;&gt;idea 快捷键&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on December 01, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[我是你夜晚的太阳]]></title>
-  <link>http://jeffreywei.github.io/novel,book/novel</link>
-  <id>http://jeffreywei.github.io/novel,book/novel</id>
+  <link>http://127.0.0.1:4000/novel,book/novel</link>
+  <id>http://127.0.0.1:4000/novel,book/novel</id>
   <published>2015-11-28T00:00:00+08:00</published>
   <updated>2015-11-28T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;没有灵魂的生物可怕又可悲&lt;/p&gt;
@@ -895,19 +968,19 @@ jump to navigation bar 			⌥ ⌘ B
 
 &lt;p&gt;当亮司倒在血泊中的那一刻，她生命中唯一的亮光消失了，她仅存的那点精神支柱也被抽空，站在那里的只是一具剩下一具驱壳而已。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/novel,book/novel&quot;&gt;我是你夜晚的太阳&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on November 28, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/novel,book/novel&quot;&gt;我是你夜晚的太阳&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on November 28, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[当爬虫遇到压缩页面&GBK编码]]></title>
-  <link>http://jeffreywei.github.io/python,%20spider/python-spider-encode</link>
-  <id>http://jeffreywei.github.io/python,%20spider/python-spider-encode</id>
+  <link>http://127.0.0.1:4000/python,%20spider/python-spider-encode</link>
+  <id>http://127.0.0.1:4000/python,%20spider/python-spider-encode</id>
   <published>2015-11-25T00:00:00+08:00</published>
   <updated>2015-11-25T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;目标站点使用gzip或者中文编码&lt;/p&gt;
@@ -927,19 +1000,19 @@ jump to navigation bar 			⌥ ⌘ B
 	&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/python,%20spider/python-spider-encode&quot;&gt;当爬虫遇到压缩页面&GBK编码&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on November 25, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/python,%20spider/python-spider-encode&quot;&gt;当爬虫遇到压缩页面&GBK编码&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on November 25, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[寻找数轴上相邻两个数之间的最大差值]]></title>
-  <link>http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm</link>
-  <id>http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm</id>
+  <link>http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm</link>
+  <id>http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm</id>
   <published>2015-11-24T00:00:00+08:00</published>
   <updated>2015-11-24T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;Via python&lt;/p&gt;
@@ -973,19 +1046,19 @@ jump to navigation bar 			⌥ ⌘ B
 
 &lt;p&gt;&lt;em&gt;时间复杂度为n(n-1)/2&lt;/em&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/python,%20algorithm/find-gap-algorithm&quot;&gt;寻找数轴上相邻两个数之间的最大差值&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on November 24, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/python,%20algorithm/find-gap-algorithm&quot;&gt;寻找数轴上相邻两个数之间的最大差值&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on November 24, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Zookeeper (2) --典型应用场景]]></title>
-  <link>http://jeffreywei.github.io/distribute/zk_02</link>
-  <id>http://jeffreywei.github.io/distribute/zk_02</id>
+  <link>http://127.0.0.1:4000/distribute/zk_02</link>
+  <id>http://127.0.0.1:4000/distribute/zk_02</id>
   <published>2015-10-29T00:00:00+08:00</published>
   <updated>2015-10-29T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;典型分布式应用场景有：数据发布/订阅、负债均衡、命名服务、分布式协议/通知、集群管理、Master选举、分布式锁、分布式队列等。&lt;/p&gt;
@@ -1049,19 +1122,19 @@ jump to navigation bar 			⌥ ⌘ B
 &lt;p&gt;使用Zookeeper可以实现&lt;code&gt;FIFO：先进先出&lt;/code&gt;、&lt;code&gt;Barrier：分布式屏障&lt;/code&gt;，确保在分布式的架构下系统工作流程的正确性。&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/distribute/zk_02&quot;&gt;Zookeeper (2) --典型应用场景&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on October 29, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/distribute/zk_02&quot;&gt;Zookeeper (2) --典型应用场景&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on October 29, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[java类继承中的一些规则]]></title>
-  <link>http://jeffreywei.github.io/java/java-class-inherit</link>
-  <id>http://jeffreywei.github.io/java/java-class-inherit</id>
+  <link>http://127.0.0.1:4000/java/java-class-inherit</link>
+  <id>http://127.0.0.1:4000/java/java-class-inherit</id>
   <published>2015-10-28T00:00:00+08:00</published>
   <updated>2015-10-28T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;子类初始化的顺序&lt;/p&gt;
@@ -1150,19 +1223,19 @@ C1
 &lt;/code&gt;&lt;/pre&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java/java-class-inherit&quot;&gt;java类继承中的一些规则&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on October 28, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/java-class-inherit&quot;&gt;java类继承中的一些规则&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on October 28, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[ZooKeeper（1）--部署]]></title>
-  <link>http://jeffreywei.github.io/distribute/zk_01</link>
-  <id>http://jeffreywei.github.io/distribute/zk_01</id>
+  <link>http://127.0.0.1:4000/distribute/zk_01</link>
+  <id>http://127.0.0.1:4000/distribute/zk_01</id>
   <published>2015-10-20T00:00:00+08:00</published>
   <updated>2015-10-20T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;ZooKeeper集群、单机、伪集群部署方式&lt;/p&gt;
@@ -1235,19 +1308,19 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 &lt;p&gt;两者的设计目标不同，ZAB协议主要用于构建一个高可用的分布式数据主备系统，Paxos用于构建一个分布式的一致性状态机系统。&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/distribute/zk_01&quot;&gt;ZooKeeper（1）--部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on October 20, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/distribute/zk_01&quot;&gt;ZooKeeper（1）--部署&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on October 20, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Intellij IDEA使用记录]]></title>
-  <link>http://jeffreywei.github.io/idea,ide/IDE-idea-JDK</link>
-  <id>http://jeffreywei.github.io/idea,ide/IDE-idea-JDK</id>
+  <link>http://127.0.0.1:4000/idea,ide/IDE-idea-JDK</link>
+  <id>http://127.0.0.1:4000/idea,ide/IDE-idea-JDK</id>
   <published>2015-08-23T00:00:00+08:00</published>
   <updated>2015-08-23T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;记录IDE使用过程中遇到的问题、解决方案&lt;/p&gt;
@@ -1267,22 +1340,22 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
 &lt;h2 id=&quot;tab&quot;&gt;代码中使用Tab指标符&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2015-08/23-1.png&quot; alt=&quot;&quot; title=&quot;23-1.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:4000/assets/posts/2015-08/23-1.png&quot; alt=&quot;&quot; title=&quot;23-1.png&quot; /&gt;&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/idea,ide/IDE-idea-JDK&quot;&gt;Intellij IDEA使用记录&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on August 23, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/idea,ide/IDE-idea-JDK&quot;&gt;Intellij IDEA使用记录&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on August 23, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[使用maven生成带依赖的jar]]></title>
-  <link>http://jeffreywei.github.io/java/maven-jar</link>
-  <id>http://jeffreywei.github.io/java/maven-jar</id>
+  <link>http://127.0.0.1:4000/java/maven-jar</link>
+  <id>http://127.0.0.1:4000/java/maven-jar</id>
   <published>2015-08-21T00:00:00+08:00</published>
   <updated>2015-08-21T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;编译、打包需要一个独立运行的jar。&lt;/p&gt;
@@ -1342,19 +1415,19 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 
 &lt;p&gt;使用命令&lt;code&gt;mvn clean compile assembly:single&lt;/code&gt;打包项目。使用&lt;code&gt;java -jar demo.jar&lt;/code&gt;运行。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java/maven-jar&quot;&gt;使用maven生成带依赖的jar&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on August 21, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/maven-jar&quot;&gt;使用maven生成带依赖的jar&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on August 21, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[web项目中资源文件编译后改变]]></title>
-  <link>http://jeffreywei.github.io/java/spring-resources</link>
-  <id>http://jeffreywei.github.io/java/spring-resources</id>
+  <link>http://127.0.0.1:4000/java/spring-resources</link>
+  <id>http://127.0.0.1:4000/java/spring-resources</id>
   <published>2015-08-06T00:00:00+08:00</published>
   <updated>2015-08-06T00:00:00+08:00</updated>
   <author>
     <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email>mavenwei@qq.com</email>
   </author>
   <content type="html">&lt;p&gt;解决resources目录中配置文件改变的问题，spring中使用静态注入&lt;/p&gt;
@@ -1408,63 +1481,7 @@ zkCleanup	清理ZK历史数据（事务日志、快照数据文件）&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/java/spring-resources&quot;&gt;web项目中资源文件编译后改变&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on August 06, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[spring mvc使用自定义拦截器]]></title>
-  <link>http://jeffreywei.github.io/work/spring-mvc-interceptor</link>
-  <id>http://jeffreywei.github.io/work/spring-mvc-interceptor</id>
-  <published>2015-08-03T00:00:00+08:00</published>
-  <updated>2015-08-03T00:00:00+08:00</updated>
-  <author>
-    <name>Wei</name>
-    <uri>http://jeffreywei.github.io</uri>
-    <email>mavenwei@qq.com</email>
-  </author>
-  <content type="html">&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;配置修改&lt;/h2&gt;
-&lt;p&gt;在spring mvc配置文件中添加如下节点：&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--interceptor setting --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:interceptors&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:interceptor&amp;gt;&lt;/span&gt;
-	     &lt;span class=&quot;c&quot;&gt;&amp;lt;!--设置匹配路径--&amp;gt;&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:mapping&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;path=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/mvc/**&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;com.wei.springsimple.interceptor.SysInterceptor&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/mvc:interceptor&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mvc:interceptors&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;定义拦截器&lt;/h2&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SysInterceptor&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HandlerInterceptor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;preHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;preHandle&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;postHandle&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;afterCompletion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;afterCompletion&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;注:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;preHandle&lt;/code&gt;：预处理回调方法，实现处理器的预处理（如登录检查），第三个参数为响应的处理器,返回值：true表示继续流程（如调用下一个拦截器或处理器）；false表示流程中断（如登录检查失败），不会继续调用其他的拦截器或处理器，此时我们需要通过response来产生响应；&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;postHandle&lt;/code&gt;：后处理回调方法，实现处理器的后处理（但在渲染视图之前），此时我们可以通过modelAndView（模型和视图对象）对模型数据进行处理或对视图进行处理，modelAndView也可能为null。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;afterCompletion&lt;/code&gt;：整个请求处理完毕回调方法，即在视图渲染完毕时回调，如性能监控中我们可以在此记录结束时间并输出消耗时间，还可以进行一些资源清理，类似于try-catch-finally中的finally，但仅调用处理器执行链中preHandle返回true的拦截器的afterCompletion。&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://jeffreywei.github.io/work/spring-mvc-interceptor&quot;&gt;spring mvc使用自定义拦截器&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://jeffreywei.github.io&quot;&gt;Sagittarius&lt;/a&gt; on August 03, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/java/spring-resources&quot;&gt;web项目中资源文件编译后改变&lt;/a&gt; was originally published by Wei at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;Sagittarius&lt;/a&gt; on August 06, 2015.&lt;/p&gt;</content>
 </entry>
 
 </feed>
