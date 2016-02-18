@@ -83,6 +83,6 @@ class worker implements Runnable {
 
 不难看出，这两个对象使用的时机、方式有所不同，`CyclicBarrier`的await使工作线程阻塞；`CountDownLatch`的await在需要并行节点结束时使用，达到线程协作。
 
-[1]: {{ site.url }}/assets/posts/2016-02/1.png "流程图"
+[1]: {{ site.url }}/assets/posts/2016-02/0217/1.png "流程图"
 
 
