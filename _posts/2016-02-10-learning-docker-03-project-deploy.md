@@ -75,6 +75,17 @@ description: "Deploy project with Docker"
 	sudo docker run -d --restart=always -p 8080:8080 rancher/server
 
 
+## 常见问题
+
+###Wrong volume permissions
+此问题是由Linux权限管理引起的，使用
+
+	su -c "setenforce 0"
+	
+	OR
+	
+	chcon -Rt svirt_sandbox_file_t /path/to/volume
+
 
 
 
