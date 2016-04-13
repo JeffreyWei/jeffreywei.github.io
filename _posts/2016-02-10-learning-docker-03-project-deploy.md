@@ -88,6 +88,16 @@ description: "Deploy project with Docker"
 
 
 
+### docker registry
 
+ 	Error response from daemon: invalid registry endpoint https://192.168.220.203:5000/v0/: unable to ping registry endpoint https://192.168.220.203:5000/v0/
+v2 ping attempt failed with error: Get https://192.168.220.203:5000/v2/: EOF
+ v1 ping attempt failed with error: Get https://192.168.220.203:5000/v1/_ping: EOF. If this private registry supports only HTTP or HTTPS with an unknown CA certificate, please add `--insecure-registry 192.168.220.203:5000` to the daemon's arguments. In the case of HTTPS, if you have access to the registry's CA certificate, no need for the flag; simply place the CA certificate at /etc/docker/certs.d/192.168.220.203:5000/ca.crt
+ 
+	 vi /usr/lib/systemd/system/docker.service
+	 
+在`ExecStart`中添加提示中的相应参数重启Docker
+
+	service docker stop && service docker start
 
 
