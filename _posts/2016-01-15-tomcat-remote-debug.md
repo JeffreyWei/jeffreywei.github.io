@@ -19,7 +19,7 @@ description: "tomcat remote debug"
 2. 在`bin`目录中创建文件`setenv.sh`，windows环境命名为`setenv.bat`;
 3. 在上面的文件中添加如下命令:
 	
-		EXPORT CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+		export CATALINA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
 
 	windwos
 
