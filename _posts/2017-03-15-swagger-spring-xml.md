@@ -96,6 +96,8 @@ public class ServiceImplController {
 访问`http://IP:port/{context-path}/swagger-ui.html`
 
 ![ ][1]
+![ ][2]
 
 
 [1]: {{ site.url }}/assets/posts/2017-03/swagger_1.png "swagger_1"
+[2]: {{ site.url }}/assets/posts/2017-03/swagger_2.png "swagger_2"
