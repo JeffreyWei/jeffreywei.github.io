@@ -1,867 +1,657 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Sagittarius</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-</description>
-    <link>http://jeffreywei.github.io/</link>
-    <atom:link href="http://jeffreywei.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Feb 2016 13:31:56 +0800</pubDate>
-    <lastBuildDate>Thu, 18 Feb 2016 13:31:56 +0800</lastBuildDate>
-    <generator>Jekyll v3.1.1</generator>
-    
-      <item>
-        <title>线程协作CountDownLatch&amp;CyclicBarrier</title>
-        <description>&lt;p&gt;最近在开发计算量较大的模块中使用到的线程协作总结&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-17T11:49:11+08:00</updated><id>http://localhost:4000/</id><title type="html">Sagittarius</title><subtitle>Cease to struggle and you cease to live.</subtitle><author><name>JeffreyWei</name></author><entry><title type="html">使用telnet调试dubbo接口</title><link href="http://localhost:4000/blog/dubbo-telnet" rel="alternate" type="text/html" title="使用telnet调试dubbo接口" /><published>2017-05-15T00:00:00+08:00</published><updated>2017-05-15T00:00:00+08:00</updated><id>http://localhost:4000/blog/dubbo-telnet</id><content type="html" xml:base="http://localhost:4000/blog/dubbo-telnet">&lt;!--more--&gt;
 
-&lt;!--more--&gt;
+&lt;h2 id=&quot;dubbo端口连接&quot;&gt;dubbo端口连接&lt;/h2&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;需求&lt;/h2&gt;
-&lt;p&gt;要求三个线程按下图所示的流程协同执行&lt;/p&gt;
+&lt;p&gt;使用配置中心或者直接查看代码配置中具体服务提供方的IP及port，使用telnet连接&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jeffreywei.github.io/assets/posts/2016-02/0217/1.png&quot; alt=&quot;&quot; title=&quot;流程图&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;telnet 192.168.220.164 3000
 
-&lt;h2 id=&quot;section-1&quot;&gt;实现&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ThreadDemo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CountDownLatch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CountDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CyclicBarrier&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cyclicBarrier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;threadB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;threadA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;await&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;All worke done&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/images/posts/2017-05/dubbo-telnet-2.png&quot; alt=&quot; &quot; title=&quot;dubbo-telnet-2&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;常用命令&quot;&gt;常用命令&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls&lt;/code&gt; 显示服务列表&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ps&lt;/code&gt; 显示服务端口列表&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt; 改变缺省服务&lt;/p&gt;
+
+&lt;p&gt;![ ][2]&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;trace&lt;/code&gt; 跟踪服务调用情况&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; 统计服务任意方法的调用情况&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;invoke&lt;/code&gt;服务调用，复杂对象采用json格式传入&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;status&lt;/code&gt;dubbo服务状态，当全部OK时则显示OK，只要有一个ERROR则显示ERROR，只要有一个WARN则显示WARN&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;log&lt;/code&gt;改变dubbo日志级别 &lt;em&gt;log 1000&lt;/em&gt; 查看log最后1000个字符&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://dubbo.io/Telnet+Command+Reference-zh.htm&quot;&gt;Telnet命令参考手册&lt;/a&gt;&lt;/p&gt;</content><author><name>JeffreyWei</name></author><category term="java" /><category term="java" /><category term="linux" /><summary type="html"></summary></entry><entry><title type="html">Linux服务器配置优化</title><link href="http://localhost:4000/blog/linux-config-optimize" rel="alternate" type="text/html" title="Linux服务器配置优化" /><published>2017-03-28T00:00:00+08:00</published><updated>2017-03-28T00:00:00+08:00</updated><id>http://localhost:4000/blog/linux-config-optimize</id><content type="html" xml:base="http://localhost:4000/blog/linux-config-optimize">&lt;!--more--&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;系统连接数&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ulimit -n 65535
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;查看命令&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ulimit -a
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;socket最大连接数&lt;/p&gt;
+
+    &lt;p&gt;sudo echo 10000 &amp;gt; /proc/sys/net/core/somaxconn&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;加快tcp回收系统默认是0。&lt;/p&gt;
+
+    &lt;p&gt;sudo echo  1 &amp;gt; /proc/sys/net/ipv4/tcp_tw_recycle&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;洪水抵御保护系统默认是1&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  echo 0 &amp;gt; /proc/sys/net/ipv4/tcp_syncookies
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;这个修改强烈建议在做完压力测试后改回来&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Nginx&lt;/p&gt;
+
+    &lt;p&gt;Nginx使用默认配置的话，只能接受1024个并发请求。我们可以通过修改配置来增加并发。找到nginx.conf，位置一般在/etc/nginx/nginx.conf。在Nginx全局的配置中worker_processes 1的下面加上worker_rlimit_nofile 10240，允许Nginx的子进程可以打开10240个文件。event中，worker_connections从1024改为10000。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ulimit&lt;/span&gt; -n 65535
+sudo &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;10000 &amp;gt; /proc/sys/net/core/somaxconn
+sudo &lt;span class=&quot;nb&quot;&gt;echo  &lt;/span&gt;1 &amp;gt; /proc/sys/net/ipv4/tcp_tw_recycle
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name>JeffreyWei</name></author><category term="bigdata" /><category term="scala" /><category term="sbt" /><summary type="html"></summary></entry><entry><title type="html">sbt相关配置</title><link href="http://localhost:4000/blog/scala-sbt" rel="alternate" type="text/html" title="sbt相关配置" /><published>2017-03-27T00:00:00+08:00</published><updated>2017-03-27T00:00:00+08:00</updated><id>http://localhost:4000/blog/scala-sbt</id><content type="html" xml:base="http://localhost:4000/blog/scala-sbt">&lt;!--more--&gt;
+
+&lt;h2 id=&quot;安装&quot;&gt;安装&lt;/h2&gt;
+&lt;p&gt;以下方式任选其一：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;官网下载zip/tat包，解压&lt;/li&gt;
+  &lt;li&gt;brew install sbt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;环境变量&quot;&gt;环境变量&lt;/h2&gt;
+
+&lt;p&gt;如果使用独立安装包的方式安装需要配置环境变量，brew方式已自动配置&lt;/p&gt;
+
+&lt;h2 id=&quot;仓库修改&quot;&gt;仓库修改&lt;/h2&gt;
+
+&lt;p&gt;创建&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.sbt/repositories&lt;/code&gt;内容如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[repositories]
+local
+osc: http://maven.aliyun.com/nexus/content/groups/public/
+typesafe: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext], bootOnly
+sonatype-oss-releases
+maven-central
+sonatype-oss-snapshots
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;idea配置修改&quot;&gt;IDEA配置修改&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sbt-launch.jar指向安装地址&lt;/li&gt;
+  &lt;li&gt;添加环境变量 -Dsbt.override.build.repos=true&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>JeffreyWei</name></author><category term="bigdata" /><category term="scala" /><category term="sbt" /><summary type="html"></summary></entry><entry><title type="html">idea中配置spark开发环境via scala</title><link href="http://localhost:4000/blog/idea-spark-idea" rel="alternate" type="text/html" title="idea中配置spark开发环境via scala" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>http://localhost:4000/blog/idea-spark-idea</id><content type="html" xml:base="http://localhost:4000/blog/idea-spark-idea">&lt;!--more--&gt;
+
+&lt;h2 id=&quot;具体步骤&quot;&gt;具体步骤&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;为idea添加scala插件&lt;/li&gt;
+  &lt;li&gt;下载spark,查看&lt;code class=&quot;highlighter-rouge&quot;&gt;jars&lt;/code&gt;中scala版本，如：&lt;em&gt;scala-compiler-2.11.8.jar&lt;/em&gt;、&lt;em&gt;scala-library-2.11.8.jar&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;下载上面对应的scala版本&lt;/li&gt;
+  &lt;li&gt;idea中添加scalaSDK,导入spark依赖&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;demo code&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import org.apache.spark.{SparkConf, SparkContext}
+
+/**
+  * Created by wei on 17/3/19.
+  */
+object Demo extends App {
+  val conf = new SparkConf().setAppName(&quot;hello&quot;).setMaster(&quot;local&quot;)
+  val sc = new SparkContext(conf)
+  var text = sc.parallelize(Seq(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+  val c = text.count()
+  print(c)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;遇到的问题&quot;&gt;遇到的问题&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目配置&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Error:scalac: Error: requirement failed: package compress
+     java.lang.IllegalArgumentException: requirement failed: package compress
+     at scala.reflect.internal.Types$ModuleTypeRef.&amp;lt;init&amp;gt;(Types.scala:1879)
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;需要修改项目依赖及SDK设置&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;缺少依赖&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Error:scalac: error while loading RDD, Missing dependency 'bad symbolic reference. A signature in RDD.class refers to term annotation
+ in package org.apache.spark which is not available.
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;查看&lt;code class=&quot;highlighter-rouge&quot;&gt;spark-core_2.11-2.1.0.jar&lt;/code&gt;确实有RDD这个类，尝试把&lt;code class=&quot;highlighter-rouge&quot;&gt;jars&lt;/code&gt;目录下的所有jar导入后运行正常&lt;/p&gt;
+
+&lt;p&gt;上面的两个问题困扰了我很久，直到[Error in running Spark-Scala example in intellij
+&lt;a href=&quot;http://stackoverflow.com/questions/41098631/error-in-running-spark-scala-example-in-intellij&quot;&gt;&lt;/a&gt;，里面提到了scala版本，查看spark的依赖里面已经包含了scala,但如果要在idea中启动又必须要设置一个SDK,又下载了spark版本一直的scala后才启动正常。&lt;/p&gt;</content><author><name>JeffreyWei</name></author><category term="bigdata" /><category term="idea" /><category term="spark" /><category term="scala" /><summary type="html"></summary></entry><entry><title type="html">1天-基础软件安装、配置</title><link href="http://localhost:4000/blog/cloud-1" rel="alternate" type="text/html" title="1天-基础软件安装、配置" /><published>2017-03-17T00:00:00+08:00</published><updated>2017-03-17T00:00:00+08:00</updated><id>http://localhost:4000/blog/cloud-1</id><content type="html" xml:base="http://localhost:4000/blog/cloud-1">&lt;!--more--&gt;
+
+&lt;h2 id=&quot;准备安装文件&quot;&gt;准备安装文件&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CDH-5.3.10-1.cdh5.3.10.p0.19-el6.parcel&lt;/li&gt;
+  &lt;li&gt;cloudera-manager-el6-cm5.1.3_x86_64.tar.gz&lt;/li&gt;
+  &lt;li&gt;jdk-7-linux-x64.rpm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;安装jdk&quot;&gt;安装JDK&lt;/h2&gt;
+&lt;p&gt;查看现有版本java
+	rpm -qa|grep java 
+	yum -y remove 卸载&lt;/p&gt;
+
+&lt;p&gt;rpm -ivh jdk-7-linux-x64.rpm&lt;/p&gt;
+
+&lt;p&gt;echo “JAVA_HOME=/usr/java/latest/” » /etc/environment&lt;/p&gt;
+
+&lt;h2 id=&quot;关闭防火墙selinux&quot;&gt;关闭防火墙、SELinux&lt;/h2&gt;
+
+&lt;p&gt;关闭防火墙&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	service iptables stop （临时关闭）  
+	chkconfig iptables off （重启后生效）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;关闭SELinux&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	setenforce 0 （临时生效）  
+	修改 /etc/selinux/config 下的 SELINUX=disabled （重启后永久生效）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;host&quot;&gt;host&lt;/h2&gt;
+
+&lt;p&gt;cdh1/2/3
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vi /etc/hosts&lt;/code&gt;
+	192.168.0.114   cdh1
+	192.168.0.115   cdh2
+	192.168.0.116   cdh3&lt;/p&gt;
+
+&lt;h2 id=&quot;无密码登录&quot;&gt;无密码登录&lt;/h2&gt;
+
+&lt;p&gt;cdh1&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	ssh-keygen -t rsa
+	ssh-copy-id root@cdh2
+	ssh-copy-id root@cdh3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;cdh2&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	ssh-keygen -t rsa
+	ssh-copy-id root@cdh1
+	ssh-copy-id root@cdh3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;cdh3&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	ssh-keygen -t rsa
+	ssh-copy-id root@cdh2
+	ssh-copy-id root@cdh1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;ntp&quot;&gt;ntp&lt;/h2&gt;
+
+&lt;p&gt;所有节点安装ntp服务&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	yum install ntp
+	chkconfig ntpd on
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;cdh1&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ntpdate -u 202.120.2.101
+vi /etc/ntp.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vi /etc/ntp.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;driftfile /var/lib/ntp/drift
+restrict 127.0.0.1
+restrict -6 ::1
+restrict default nomodify notrap
+server 202.120.2.101 prefer  #远程服务器地址
+includefile /etc/ntp/crypto/pw
+keys /etc/ntp/key
+
+
+service ntpd restart 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;cdh2/cdh3&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vi /etc/ntp.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;driftfile /var/lib/ntp/drift
+restrict 127.0.0.1
+restrict -6 ::1
+restrict default kod nomodify notrap nopeernoquery
+restrict -6 default kod nomodify notrapnopeer noquery
+server cdh1
+includefile /etc/ntp/crypto/pw
+keys /etc/ntp/keys
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;ntpdate -u cdh1
+service ntpd restart&lt;/p&gt;
+
+&lt;h2 id=&quot;mysql&quot;&gt;mysql&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rpm -qa&lt;/td&gt;
+      &lt;td&gt;grep musql&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;rpm -e –nodes mysql***&lt;/p&gt;
+
+&lt;p&gt;yum install mysql-server&lt;/p&gt;
+
+&lt;p&gt;设置开机启动：chkconfig mysqld on&lt;/p&gt;
+
+&lt;p&gt;启动mysql：service mysqld start&lt;/p&gt;
+
+&lt;p&gt;设置root的初始密码：mysqladmin -u root password ‘root’&lt;/p&gt;
+
+&lt;p&gt;mysql -uroot -proot 进入mysql命令行，创建以下数据库（根据安装的服务有所区别，我装的是核心组件）：&lt;/p&gt;
+
+&lt;p&gt;hive&lt;/p&gt;
+
+&lt;p&gt;create database hive DEFAULT CHARSET utf8 COLLATE  utf8_general_ci;&lt;/p&gt;
+
+&lt;p&gt;activity monitor&lt;/p&gt;
+
+&lt;p&gt;create database amon DEFAULT CHARSET utf8 COLLATE utf8_general_ci;&lt;/p&gt;
+
+&lt;p&gt;hue&lt;/p&gt;
+
+&lt;p&gt;create database hue DEFAULT CHARSET utf8 COLLATE  utf8_general_ci;&lt;/p&gt;
+
+&lt;p&gt;授权root用户在主节点拥有所有数据库的访问权限&lt;/p&gt;
+
+&lt;p&gt;grant all privileges on &lt;em&gt;.&lt;/em&gt; to ‘root’@’%’identified by ‘root’ with grant option;&lt;/p&gt;
+
+&lt;p&gt;flush privileges;&lt;/p&gt;
+
+&lt;h2 id=&quot;启动cm准备工作&quot;&gt;启动CM准备工作&lt;/h2&gt;
+
+&lt;p&gt;创建用户
+useradd –system –home=/opt/cm-5.1.3/run/cloudera-scm-server/ –no-create-home –shell=/bin/false  cloudera-scm&lt;/p&gt;
+
+&lt;p&gt;tar xzvf cloudera-manager*.tar.gz&lt;/p&gt;
+
+&lt;p&gt;mysql-connector-java-5.1.33-bin.jar，放到/opt/cm-5.1.3/share/cmf/lib&lt;/p&gt;
+
+&lt;p&gt;初始化库
+/opt/cm-5.3.10/share/cmf/schema/scm_prepare_database.sh mysql cm -hlocalhost -uroot -proot –scm-host localhost scm scm scm&lt;/p&gt;
+
+&lt;p&gt;修改agent配置
+修改/opt/cm-5.3.10/etc/cloudera-scm-agent/config.ini中的server_host为主节点的主机名。&lt;/p&gt;
+
+&lt;p&gt;复制文件到cdh2/cdh3
+scp -r /opt/cm-5.3.10 root@cdh2:/opt/
+scp -r /opt/cm-5.3.10 root@cdh3:/opt/&lt;/p&gt;
+
+&lt;p&gt;的/opt/cloudera/parcel-repo/目录中（parcel-repo需要手动创建）。&lt;/p&gt;
+
+&lt;p&gt;相关的文件如下：&lt;/p&gt;
+
+&lt;p&gt;CDH-5.1.3-1.cdh5.1.3.p0.12-el6.parcel
+CDH-5.1.3-1.cdh5.1.3.p0.12-el6.parcel.sha
+manifest.json&lt;/p&gt;
+
+&lt;p&gt;启动服务
+通过
+/opt/cm-5.3.10/etc/init.d/cloudera-scm-server start
+启动服务端。&lt;/p&gt;
+
+&lt;p&gt;通过
+/opt/cm-5.3.10/etc/init.d/cloudera-scm-agent start
+启动Agent服务。&lt;/p&gt;
+
+&lt;p&gt;端口7180，默认的用户名和密码均为admin&lt;/p&gt;
+
+&lt;p&gt;agent上缺少mysql驱动
+/opt/cloudera/parcels/CDH-5.3.10-1.cdh5.3.10.p0.19/lib/hive/lib/&lt;/p&gt;
+
+&lt;p&gt;由于是最小化安装的centos ,python缺少依赖，报错注意看日志，缺什么加什么，少什么改什么。
+yum install python-lxml&lt;/p&gt;
+
+&lt;p&gt;http://archive.cloudera.com/cm5/cm/5/&lt;/p&gt;
+
+&lt;p&gt;http://archive.cloudera.com/cdh5/parcels/latest/&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/jasondan/p/4011153.html&quot;&gt;离线安装Cloudera Manager 5和CDH5(最新版5.1.3) 完全教程&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;##&lt;/p&gt;</content><author><name>JeffreyWei</name></author><category term="bigdata" /><category term="bigdata" /><summary type="html"></summary></entry><entry><title type="html">0天-虚拟机安装</title><link href="http://localhost:4000/blog/cloud-0" rel="alternate" type="text/html" title="0天-虚拟机安装" /><published>2017-03-16T00:00:00+08:00</published><updated>2017-03-16T00:00:00+08:00</updated><id>http://localhost:4000/blog/cloud-0</id><content type="html" xml:base="http://localhost:4000/blog/cloud-0">&lt;!--more--&gt;
+
+&lt;h2 id=&quot;系统安装文件准备&quot;&gt;系统安装文件准备&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CentOS-6.8-x86_64-minimal.iso&lt;/li&gt;
+  &lt;li&gt;VirtualBox-5.1.18-114002-OSX&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;虚拟机安装&quot;&gt;虚拟机安装&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置好虚拟机1cpu 2G内容  3G硬盘 载入安装盘，网络设置选择&lt;code class=&quot;highlighter-rouge&quot;&gt;桥接&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;最小化安装后默认没有启用网卡&lt;/li&gt;
+  &lt;li&gt;vi /etc/sysconfig/network&lt;/li&gt;
+  &lt;li&gt;vi /etc/hosts&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;修改配置&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/sysconfig/network-scripts/ifcfg-eth0&lt;/code&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  DEVICE=eth0
+  HWADDR=08:00:27:D3:57:8E
+  TYPE=Ethernet
+  UUID=72f1df9c-a65f-4c51-8d11-00becf5a9030
+  ONBOOT=yes
+  NM_CONTROLLED=yes
+  BOOTPROTO=static
+  IPADDR=192.168.0.114
+  NETMASK=255.255.255.0
+  GATEWAY=192.168.0.1
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;改为静态地址后需要添加DNS,在&lt;a href=&quot;http://www.ip.cn/dns.html&quot;&gt;DNS列表&lt;/a&gt;找到一个比较快的写入配置&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/resolv.conf &lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;重启网络service network restart&lt;/li&gt;
+  &lt;li&gt;后续操作使用ssh完成&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>JeffreyWei</name></author><category term="bigdata" /><category term="bigdata" /><summary type="html"></summary></entry><entry><title type="html">web项目集成swagger</title><link href="http://localhost:4000/blog/swagger-spring-xml" rel="alternate" type="text/html" title="web项目集成swagger" /><published>2017-03-15T00:00:00+08:00</published><updated>2017-03-15T00:00:00+08:00</updated><id>http://localhost:4000/blog/swagger-spring-xml</id><content type="html" xml:base="http://localhost:4000/blog/swagger-spring-xml">&lt;!--more--&gt;
+
+&lt;h2 id=&quot;添加依赖&quot;&gt;添加依赖&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+	&amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;2.2.2&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&amp;lt;dependency&amp;gt;
+	&amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;springfox-swagger-ui&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;2.2.2&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;添加spring配置&quot;&gt;添加spring配置&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.xx.uther.utils.SwaggerConfig&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:resources&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;location=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:/META-INF/resources/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mapping=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;swagger-ui.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:resources&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;location=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classpath:/META-INF/resources/webjars/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mapping=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/webjars/**&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;构造的类用于配置swagger，内容如下&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@EnableWebMvc&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableSwagger2&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SwaggerConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebMvcConfigurationSupport&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Docket&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createRestApi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Docket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DocumentationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SWAGGER_2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apiInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;apiInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RequestHandlerSelectors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;basePackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.xx.uther.web.controller.api&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PathSelectors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadSleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;worker&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;workerNmae&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CountDownLatch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CyclicBarrier&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;workerNmae&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CountDownLatch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CyclicBarrier&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;workerNmae&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;workerNmae&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;countDownLatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cyclicBarrier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;workerNmae&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; start work&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;ThreadDemo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;threadSleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cyclicBarrier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;await&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BrokenBarrierException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-			&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;ThreadDemo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;threadSleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;workerNmae&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; end work&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;countDownLatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;countDown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ApiInfo&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apiInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ApiInfoBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;RCM APIs&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contact&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;RCM项目组&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;V2.0.0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;区别&lt;/h2&gt;
-
-&lt;p&gt;不难看出，这两个对象使用的时机、方式有所不同，&lt;code class=&quot;highlighter-rouge&quot;&gt;CyclicBarrier&lt;/code&gt;的await使工作线程阻塞；&lt;code class=&quot;highlighter-rouge&quot;&gt;CountDownLatch&lt;/code&gt;的await在需要并行节点结束时使用，达到线程协作。&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 17 Feb 2016 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/java,thread/2016/02/17/java-thread-countdownlatch-cyclicbarrier.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/java,thread/2016/02/17/java-thread-countdownlatch-cyclicbarrier.html</guid>
-        
-        <category>java</category>
-        
-        <category>thread</category>
-        
-        
-        <category>java,thread</category>
-        
-      </item>
-    
-      <item>
-        <title>Docker(3)-项目部署</title>
-        <description>&lt;p&gt;项目中使用Docker发布、部署&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;生成镜像&lt;/h2&gt;
-&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt;生成包含war的镜像，此处使用的jetty作为容器&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jetty:9-jre7
-MAINTAINER wei@yizhen.com
-COPY target/uther.war /var/lib/jetty/webapps/ROOT.war
-VOLUME /home/jetty/.dubbo
-EXPOSE 8080
-EXPOSE 20885
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;由于项目中使用了dubbo，需要在用户根目录创建一个可写权限的文件夹;对外暴露需要使用的端口&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;使用maven打包项目&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mvn  clean compile war:war -Dmaven.test.skip=true -P dev
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;docker build&lt;/code&gt;生成镜像&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker build -t imagename:tag dockerfilepath/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;启动镜像&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt;启动容器&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run -d -p 80:8080 -p 20885:20885 -v /log:/log --net=host --name proejct_0210 imagename:tag
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;项目对外输出文件日志，使用了一个映射卷;net参数使dubbo向外暴露的接口使用和宿主机器同网段的地址&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;基础容器&lt;/h2&gt;
-&lt;p&gt;###mysql&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run --name mysql -v /mysqldata:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=toor -d mysql:5.6
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;jenkins&quot;&gt;jenkins&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run -it  -p 8080:8080 -p 50000:50000 -v /jenkinsdata:/var/ jenkins_home jenkins
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;registry&quot;&gt;registry&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run -p 5000:5000 -v /docker_registry:/tmp/registry-dev  registry
-sudo docker push 127.0.0.1:5000/imagename
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;rancher&quot;&gt;rancher&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run -d --restart=always -p 8080:8080 rancher/server
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-</description>
-        <pubDate>Wed, 10 Feb 2016 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/docker/2016/02/10/learning-docker-03-project-deploy.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/docker/2016/02/10/learning-docker-03-project-deploy.html</guid>
-        
-        <category>Docker</category>
-        
-        
-        <category>Docker</category>
-        
-      </item>
-    
-      <item>
-        <title>Docker(2)-容器&amp;仓库</title>
-        <description>&lt;p&gt;Docker容器、仓库的相关操作&lt;/p&gt;
-
-&lt;!--more--&gt;
-&lt;p&gt;#容器&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;创建容器&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker create
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;创建出的容器处于停止状态，可以使用docker statrt启动，如果需要创建并启动容器使用&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;进入容器&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;启动的容器会进入后台，使用如下命令可以连接后台的容器&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker attach 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;删除容器&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;导入、导出容器&lt;/h2&gt;
-&lt;p&gt;导出一个已创建的容器到一个文件&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker export CONTAINER
-docker import CONTAINER
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;section-4&quot;&gt;仓库&lt;/h1&gt;
-&lt;p&gt;##创建私有仓库&lt;/p&gt;
-
-&lt;p&gt;使用官方的&lt;code class=&quot;highlighter-rouge&quot;&gt;registry&lt;/code&gt;镜像搭建本地私有仓库&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d -p 5000:5000 -v /temp/dockerregistry:/tmp/registry registry
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;上传镜像到私有仓库&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker push localhost:5000/IMAGE 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-</description>
-        <pubDate>Thu, 21 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/docker/2016/01/21/learning-docker-02-container-epository.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/docker/2016/01/21/learning-docker-02-container-epository.html</guid>
-        
-        <category>Docker</category>
-        
-        
-        <category>Docker</category>
-        
-      </item>
-    
-      <item>
-        <title>Docker(1)-镜像</title>
-        <description>&lt;p&gt;Docker镜像的相关操作&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;镜像获取&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker pull [DockerRepositorieAddress/]IMAGENAME[:TAG]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;DockerRepositorieAddress:用于指定镜像来源的仓库地址，默认镜像仓库为Docker Hub&lt;/li&gt;
-  &lt;li&gt;TAG:用于指定镜像版本，如不显示指定，默认会选择latest作为镜像的标签，获取最新版本的镜像&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;镜像下载时会以层的方式进行，层(Layer)其实是AUFS(Advanced Union File System,一种联合文件系统)中的重要概念，是实现增量保存与更新的基础。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;镜像信息查看&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看本机已下载的镜像&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker images
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;此命令会显示一下信息：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;来源的仓库地址&lt;/li&gt;
-      &lt;li&gt;镜像的标签&lt;/li&gt;
-      &lt;li&gt;镜像的ID(唯一)&lt;/li&gt;
-      &lt;li&gt;创建时间&lt;/li&gt;
-      &lt;li&gt;镜像大小&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;为镜像指定标签&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker tag [DockerRepositorieAddress/]IMAGENAME:TAG IMAGES:NEWTAG
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;使用docker images命令查看，新命名的标签和旧的标签指向的是同一个镜像ID，他们只是别名不同。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看镜像详细信息&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker inspect IMAGEID
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;&lt;em&gt;在指定IMAGEID时，通过使用该ID前几个字符即可&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;镜像搜索&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker search TERM
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;删除镜像&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rmi IMAGE[IMAGE...]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;删除时也可是使用&lt;code class=&quot;highlighter-rouge&quot;&gt;镜像ID&lt;/code&gt;来确定需要删除的镜像。如果镜像正在被使用使用rmi是无法删除的，可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;docker rmi -f&lt;/code&gt;强制删除，但不建议这么做，需要先使用&lt;code class=&quot;highlighter-rouge&quot;&gt;docker rm&lt;/code&gt;删除依赖的容器然后再删除镜像。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;创建镜像&lt;/h2&gt;
-
-&lt;p&gt;目前创建镜像的方式由三种：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;基于现有镜像的容器创建&lt;/li&gt;
-  &lt;li&gt;基于本地模板的导入&lt;/li&gt;
-  &lt;li&gt;基于Dockerfile创建&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;下面介绍相对容易理解的前两种&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;基于现有镜像的容器创建&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;例如，对Ubuntu镜像进行操作后创建新的镜像&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker commit -m &quot;提交信息&quot; -a &#39;作者信息&#39; ORIGINIMAGEID NEWIMAGE
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;基于本地模板的导入&lt;/p&gt;
-
-    &lt;p&gt;使用操作系统模板文件导入一个镜像文件&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cat centos-xxx.xx.x.tar.gz 	| docker import - centos:tag
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;保存和载入镜像&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;保存镜像&lt;/p&gt;
-
-    &lt;p&gt;导出镜像为本地文件&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker save -o centos.tar centos:latest
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;载入镜像&lt;/p&gt;
-
-    &lt;p&gt;使用本地文件生成镜像&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker load --input centos.tar 
- 或
- docker load &amp;lt; centos.tar
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;上传镜像&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker push NAME[:TAG]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;section-7&quot;&gt;其他&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;设置源地址&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  docker login www.dockerhub.com
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本系列参考《&lt;a href=&quot;http://book.douban.com/subject/26284823/&quot;&gt;Docker技术入门与实战&lt;/a&gt;》&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 20 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/docker/2016/01/20/learning-docker-01-image.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/docker/2016/01/20/learning-docker-01-image.html</guid>
-        
-        <category>Docker</category>
-        
-        
-        <category>Docker</category>
-        
-      </item>
-    
-      <item>
-        <title>tomcat远程调试</title>
-        <description>&lt;p&gt;配置使用tomcat远程调试功能，使用idea远程调试项目&lt;/p&gt;
-
-&lt;!--more--&gt;
-&lt;p&gt;##tomcat配置
-开启tomcat远程配置的方式有多种，下面介绍其中的一种。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;检查环境变量&lt;code class=&quot;highlighter-rouge&quot;&gt;CATALINA_BASE&lt;/code&gt;，指向tomcat根目录;&lt;/li&gt;
-  &lt;li&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;bin&lt;/code&gt;目录中创建文件&lt;code class=&quot;highlighter-rouge&quot;&gt;setenv.sh&lt;/code&gt;，windows环境命名为&lt;code class=&quot;highlighter-rouge&quot;&gt;setenv.bat&lt;/code&gt;;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在上面的文件中添加如下命令:&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; EXPORT CATALINA_OPTS=&quot;-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n&quot;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;windwos&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; SET CATALINA_OPTS=&quot;-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n&quot;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;此处指定的远程调试端口为&lt;code class=&quot;highlighter-rouge&quot;&gt;8000&lt;/code&gt;。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;ide&quot;&gt;IDE配置&lt;/h2&gt;
-
-&lt;p&gt;这里使用的是&lt;code class=&quot;highlighter-rouge&quot;&gt;idea&lt;/code&gt;，在&lt;code class=&quot;highlighter-rouge&quot;&gt;Run/Debug Configurations&lt;/code&gt;中创建类型为&lt;code class=&quot;highlighter-rouge&quot;&gt;remote&lt;/code&gt;的应用，输入部署tomcat主机的ip:port选择本地源码所属的模块，启动&lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt;连接远程tomcat即可远程调试项目。&lt;/p&gt;
-
-&lt;h2 id=&quot;tomcatjetty&quot;&gt;tomcat&amp;amp;jetty&lt;/h2&gt;
-
-&lt;p&gt;最近在工作中遇到的一个部署问题，是由于URL编码造成的，开发环境使用maven插件使项目运行在jetty上，线上环境为tomcat，部署后发现前台传入的中文无法正常到达后台，查看tomcat配置文档，需要在server.xml中配置连接的编码格式，添加&lt;code class=&quot;highlighter-rouge&quot;&gt;URIEncoding=&quot;UTF-8&quot;&lt;/code&gt;配置。&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 15 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/java/2016/01/15/tomcat-remote-debug.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/java/2016/01/15/tomcat-remote-debug.html</guid>
-        
-        <category>java</category>
-        
-        
-        <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>使用jsonp实现js跨域请求</title>
-        <description>&lt;p&gt;页面内跨域请求&lt;/p&gt;
-
-&lt;!--more--&gt;
-&lt;p&gt;##跨域限制
-浏览器出于安全限制了不同域间的请求，jsonp使用动态生成前端js代码的方式绕过这个限制可以实现跨域请求。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;前端&lt;/h2&gt;
-&lt;p&gt;前端使用jquery封装的ajax&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;content&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://127.0.0.1:8080/ajax?callback=?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-			&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#content&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;This is &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;调用时可以指定&lt;code class=&quot;highlighter-rouge&quot;&gt;callback&lt;/code&gt;或由jquery自动生成callback的参数。
-##后端
-后端代码使用springmvc实现一个可以处理异步请求的方法&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/ajax&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@ResponseBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;getAjaxResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;callback&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{&#39;name&#39;:&#39;张三&#39;}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;(&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;)&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;h2 id=&quot;改造controller层&quot;&gt;改造Controller层&lt;/h2&gt;
+
+&lt;p&gt;通常的用法如下&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/api&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;xxxx服务&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceImplController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;RcmAdapter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rcmAdapterImp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;Rcm4webAdapter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rcm4webAdapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+
+	&lt;span class=&quot;nd&quot;&gt;@ApiOperation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;网认证方式&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;互联网认证方式&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/getAuthenticationFromRong360ByH5&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAuthenticationFromRong360ByH5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typeEnum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@RequestParam&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customerid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rcm4webAdapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAuthenticationFromRong360ByH5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeEnum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customerid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;后端服务需要可以处理&lt;code class=&quot;highlighter-rouge&quot;&gt;callback&lt;/code&gt;参数，并在返回前端需要的回调函数。&lt;/p&gt;
-</description>
-        <pubDate>Wed, 13 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/javascript/2016/01/13/ajax-jquery-crossdomain.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/javascript/2016/01/13/ajax-jquery-crossdomain.html</guid>
-        
-        <category>javascript</category>
-        
-        
-        <category>javascript</category>
-        
-      </item>
-    
-      <item>
-        <title>2015年终总结</title>
-        <description>&lt;p&gt;回顾过去、展望未来&lt;/p&gt;
+&lt;h2 id=&quot;效果&quot;&gt;效果&lt;/h2&gt;
 
-&lt;!--more--&gt;
+&lt;p&gt;访问&lt;code class=&quot;highlighter-rouge&quot;&gt;http://IP:port/{context-path}/swagger-ui.html&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;一、职责概述&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/images/posts/2017-03/swagger_1.png&quot; alt=&quot; &quot; title=&quot;swagger_1&quot; /&gt;
+&lt;img src=&quot;http://localhost:4000/images/posts/2017-03/swagger_2.png&quot; alt=&quot; &quot; title=&quot;swagger_2&quot; /&gt;&lt;/p&gt;</content><author><name>JeffreyWei</name></author><category term="java" /><category term="java" /><category term="web" /><summary type="html"></summary></entry><entry><title type="html">远程调试spring-boot项目</title><link href="http://localhost:4000/blog/spring-boot-remote-debug" rel="alternate" type="text/html" title="远程调试spring-boot项目" /><published>2017-03-14T00:00:00+08:00</published><updated>2017-03-14T00:00:00+08:00</updated><id>http://localhost:4000/blog/spring-boot-remote-debug</id><content type="html" xml:base="http://localhost:4000/blog/spring-boot-remote-debug">&lt;!--more--&gt;
 
-&lt;p&gt;入职以来主要负责自动风控项目的研发管理工作，自主开发基于多样化用户数据，实现分析用户行为分析，辅助决策贷款审核的风控平台。目前自建爬虫不能满足需求，数据源主要依赖第三方采集，分析方式采用主观判断信用项分类的打分机制，初始参数采用逻辑回归的模型计算而来。此产品对外提供贷前辅助决策的功能。团队目标：在现有数据基础上给出尽可能客观的、能够被正常解释的分析结论，为公司现有贷款业务服务。围绕此项目，工作内容如下：&lt;/p&gt;
+&lt;p&gt;项目越来越多的使用spring-boot,远程调试的需求应运而生，实现方式有两种&lt;/p&gt;
 
-&lt;p&gt;管理型工作：&lt;/p&gt;
+&lt;h2 id=&quot;maven&quot;&gt;maven&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;新人培训&lt;/li&gt;
-  &lt;li&gt;产品研发&lt;/li&gt;
-  &lt;li&gt;资源协调&lt;/li&gt;
-  &lt;li&gt;组织列会&lt;/li&gt;
-  &lt;li&gt;内培培训、分享&lt;/li&gt;
-  &lt;li&gt;团队建设&lt;/li&gt;
-&lt;/ul&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;project&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+      ...
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-maven-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.1.12.RELEASE&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;nt&quot;&gt;&amp;lt;jvmArguments&amp;gt;&lt;/span&gt;
+            -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+          &lt;span class=&quot;nt&quot;&gt;&amp;lt;/jvmArguments&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        ...
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+      ...
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    ...
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+  ...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;技术型工作：&lt;/p&gt;
+&lt;p&gt;或&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;技术选型&lt;/li&gt;
-  &lt;li&gt;产品架构&lt;/li&gt;
-  &lt;li&gt;技术指导&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;二、成绩和做法&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;设计之初考虑分布式的需求，为后续开发打下良好基础&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 数据库监控层
- 分布式服务、缓存
- 利于扩展的代码组织结构
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;爬虫技术攻关，实现密码登陆、二次验证、js沙箱&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 管理请求连接，便于重用、状态保持
- 含有复杂ajax的数据获取方式使用执行js的方式获取
- 登录含有验证码的请求页面
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;计算服务&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 抽象数据源、计算规则，便于扩展
- 支持不同算法的计算框架
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;适合现有团队的沟通协作方式&lt;/p&gt;
-
-    &lt;p&gt;团队角色:&lt;code class=&quot;highlighter-rouge&quot;&gt;数据科学家&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;业务专家&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;数据消费者&lt;/code&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 每个人工作侧重点不同
- 执行力较高
- 适应快速迭代
- 对业务推，对技术拉
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;三、经验和教训&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;对未知领域保持兴趣、敬畏，对结论的严谨，不明白的一定要找到原因，一知半解不可取。&lt;/li&gt;
-  &lt;li&gt;做事讲究方式方法，用对的方法解决问题起着至关重要的作用，综合团队意见。&lt;/li&gt;
-  &lt;li&gt;相互信任，预留时间储备，可以给团队成员快速的成长空间&lt;/li&gt;
-  &lt;li&gt;项目长远规划很重要，避免做无用功。&lt;/li&gt;
-  &lt;li&gt;产品项目最大的人力支出项并不是薪酬，而是招募组建这支团队的时间成本，以及在不得已的情况下，降低标准组队带来的质量与效率下降。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;四、今后目标&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;业务框架稳定后工作重心向数据分析转移&lt;/li&gt;
-  &lt;li&gt;规范的团队管理方式，改进任务分配、评估、跟踪&lt;/li&gt;
-  &lt;li&gt;继续锻炼身体，培养好的生活习惯&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;五、对组织意见或建议&lt;/h2&gt;
-
-&lt;p&gt;明确各项目组任务、职责，让每个人明确自己的定位，不仅有事做，而且愿意做。为其他人创造成长的机会，达到公司、个人双赢。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 25 Dec 2015 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/work/2015/12/25/2015-summary.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/work/2015/12/25/2015-summary.html</guid>
-        
-        <category>work</category>
-        
-        
-        <category>work</category>
-        
-      </item>
-    
-      <item>
-        <title>maven引用snapshot版本jar</title>
-        <description>&lt;!--more--&gt;
-&lt;p&gt;##问题描述&lt;/p&gt;
-
-&lt;p&gt;在本地编译上传snapshot jar,在其他环境无法正常获取，发现每次执行&lt;code class=&quot;highlighter-rouge&quot;&gt;mvn deploy&lt;/code&gt;时都会在本地仓库生成相应的文件，本地编译其他依赖项目是没有问题的，但在其他环境编译发现始终从PublicRepositorie获取，推断部署阶段应该是没问题的，猜测问题出在snapshot获取的路径配置上，查看maven配置&lt;code class=&quot;highlighter-rouge&quot;&gt;setting.xml&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;settingxml&quot;&gt;配置setting.xml&lt;/h2&gt;
-&lt;p&gt;###mirror段&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;mirror&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;snapshot&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;mirrorOf&amp;gt;&lt;/span&gt;snapshots-repo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mirrorOf&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://xxx.com/content/repositories/snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/mirror&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;profile&quot;&gt;profile段&lt;/h3&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;allow-snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;activation&amp;gt;&amp;lt;activeByDefault&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/activeByDefault&amp;gt;&amp;lt;/activation&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;nt&quot;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;snapshots-repo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://xxx.com/content/repositories/snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;&amp;lt;releases&amp;gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;false&lt;span class=&quot;nt&quot;&gt;&amp;lt;/enabled&amp;gt;&amp;lt;/releases&amp;gt;&lt;/span&gt;
-         &lt;span class=&quot;nt&quot;&gt;&amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/enabled&amp;gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;
- &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;再次编译依赖项目即可从SnapshotsRepositorie获取快照版本的类库。&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 23 Dec 2015 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/java,maven/2015/12/23/maven-using-SNAPSHOT.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/java,maven/2015/12/23/maven-using-SNAPSHOT.html</guid>
-        
-        <category>java</category>
-        
-        <category>maven</category>
-        
-        
-        <category>java,maven</category>
-        
-      </item>
-    
-      <item>
-        <title>maven发布带有javadoc、source的库文件</title>
-        <description>&lt;p&gt;如果只发布打包的jar,在其他项目中引用看到的参数都是以var1…的形式存在，而且不包含注释文档，本文介绍如何向布带有源码、注释的jar.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;maven&quot;&gt;maven配置&lt;/h2&gt;
-&lt;p&gt;向maven配置文件&lt;code class=&quot;highlighter-rouge&quot;&gt;settings.xml&lt;/code&gt;中添加&lt;code class=&quot;highlighter-rouge&quot;&gt;servers&lt;/code&gt;段，例如：&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;server&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;thirdparty&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;username&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/username&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;password&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/password&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/server&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;server&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;snapshots&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;username&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/username&amp;gt;&lt;/span&gt;
-     &lt;span class=&quot;nt&quot;&gt;&amp;lt;password&amp;gt;&lt;/span&gt;admin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/password&amp;gt;&lt;/span&gt;
-  	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/server&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;分别用于release、snapshot版本发布.&lt;/p&gt;
-
-&lt;h2 id=&quot;project&quot;&gt;project配置&lt;/h2&gt;
-
-&lt;p&gt;修改项目下的&lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;文件&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-source-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;attach-sources&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;deploy&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-javadoc-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;attach-javadocs&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;deploy&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- explicitly define maven-deploy-plugin after other to force exec
-        order --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-deploy-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;deploy&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;deploy&lt;span class=&quot;nt&quot;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;deploy&lt;span class=&quot;nt&quot;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;发布&lt;/h2&gt;
-&lt;p&gt;使用如下命令发布&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	mvn source:jar javadoc:jar deploy
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mvn spring-boot:run -Drun.jvmArguments=&quot;-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005&quot; ## shell
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;这样在其他项目引用时就可以获取到文档及源码。&lt;/p&gt;
-</description>
-        <pubDate>Wed, 16 Dec 2015 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/java,maven/2015/12/16/maven-deploy.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/java,maven/2015/12/16/maven-deploy.html</guid>
-        
-        <category>java</category>
-        
-        <category>maven</category>
-        
-        
-        <category>java,maven</category>
-        
-      </item>
-    
-      <item>
-        <title>springmvc中配置FreeMarker</title>
-        <description>&lt;p&gt;前端模板freemarker配置&lt;/p&gt;
+&lt;p&gt;添加运行参数&lt;code class=&quot;highlighter-rouge&quot;&gt;-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005&lt;/code&gt;&lt;/p&gt;</content><author><name>JeffreyWei</name></author><category term="java" /><category term="java" /><category term="spring-boot" /><summary type="html"></summary></entry><entry><title type="html">tmux</title><link href="http://localhost:4000/blog/tmux" rel="alternate" type="text/html" title="tmux" /><published>2017-03-12T00:00:00+08:00</published><updated>2017-03-12T00:00:00+08:00</updated><id>http://localhost:4000/blog/tmux</id><content type="html" xml:base="http://localhost:4000/blog/tmux">&lt;p&gt;一直使用term2管理终端，几个月前尝试过tmux感觉不错，后来很少用，最近使用终端渐渐多了，回顾一下tmux的一些操作。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;h2 id=&quot;freemarkerjsp&quot;&gt;freemarker与JSP&lt;/h2&gt;
+&lt;h3 id=&quot;基本操作&quot;&gt;基本操作&lt;/h3&gt;
+
+&lt;p&gt;创建会话&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux new -s &amp;lt;name-of-my-session&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;多会话切换&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;prefix&amp;gt; s&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;? // 列出所有快捷键；按q返回&lt;/p&gt;
+
+&lt;p&gt;d // 脱离当前会话；这样可以暂时返回Shell界面，输入tmux attach能够重新进入之前的会话&lt;/p&gt;
+
+&lt;p&gt;D // 选择要脱离的会话；在同时开启了多个会话时使用&lt;/p&gt;
+
+&lt;p&gt;Ctrl+z // 挂起当前会话&lt;/p&gt;
+
+&lt;p&gt;r // 强制重绘未脱离的会话&lt;/p&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;s // 选择并切换会话；在同时开启了多个会话时使用&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;// 进入命令行模式；此时可以输入支持的命令，例如kill-server可以关闭服务器&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;[ // 进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出&lt;/p&gt;
+
+&lt;p&gt;~ // 列出提示信息缓存；其中包含了之前tmux返回的各种提示信息&lt;/p&gt;
+
+&lt;p&gt;###窗口操作
+c // 创建新窗口&lt;/p&gt;
+
+&lt;p&gt;&amp;amp; // 关闭当前窗口&lt;/p&gt;
+
+&lt;p&gt;数字键 // 切换至指定窗口&lt;/p&gt;
+
+&lt;p&gt;p // 切换至上一窗口&lt;/p&gt;
+
+&lt;p&gt;n // 切换至下一窗口&lt;/p&gt;
+
+&lt;p&gt;l // 在前后两个窗口间互相切换&lt;/p&gt;
+
+&lt;p&gt;w // 通过窗口列表切换窗口&lt;/p&gt;
+
+&lt;p&gt;, // 重命名当前窗口；这样便于识别&lt;/p&gt;
+
+&lt;p&gt;. // 修改当前窗口编号；相当于窗口重新排序&lt;/p&gt;
+
+&lt;p&gt;f // 在所有窗口中查找指定文本&lt;/p&gt;
+
+&lt;p&gt;###面板操作
+” // 将当前面板平分为上下两块&lt;/p&gt;
+
+&lt;p&gt;% // 将当前面板平分为左右两块&lt;/p&gt;
+
+&lt;p&gt;x // 关闭当前面板&lt;/p&gt;
+
+&lt;p&gt;! // 将当前面板置于新窗口；即新建一个窗口，其中仅包含当前面板&lt;/p&gt;
+
+&lt;p&gt;Ctrl+方向键 // 以1个单元格为单位移动边缘以调整当前面板大小&lt;/p&gt;
+
+&lt;p&gt;Alt+方向键 // 以5个单元格为单位移动边缘以调整当前面板大小&lt;/p&gt;
+
+&lt;p&gt;Space // 在预置的面板布局中循环切换；依次包括even-horizontal、even-vertical、main-horizontal、main-vertical、tiled&lt;/p&gt;
+
+&lt;p&gt;q // 显示面板编号&lt;/p&gt;
+
+&lt;p&gt;o // 在当前窗口中选择下一面板&lt;/p&gt;
+
+&lt;p&gt;方向键 // 移动光标以选择面板&lt;/p&gt;
+
+&lt;p&gt;{ // 向前置换当前面板&lt;/p&gt;
+
+&lt;p&gt;} // 向后置换当前面板&lt;/p&gt;
+
+&lt;p&gt;Alt+o // 逆时针旋转当前窗口的面板&lt;/p&gt;
+
+&lt;p&gt;Ctrl+o // 顺时针旋转当前窗口的面板&lt;/p&gt;
+
+&lt;h3 id=&quot;补充&quot;&gt;补充&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;prefix&amp;gt; m&lt;/code&gt; 切换鼠标模式&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;prefix&amp;gt; ?&lt;/code&gt; 查看帮助&lt;/p&gt;</content><author><name>JeffreyWei</name></author><category term="terminal" /><category term="terminal" /><summary type="html">一直使用term2管理终端，几个月前尝试过tmux感觉不错，后来很少用，最近使用终端渐渐多了，回顾一下tmux的一些操作。</summary></entry><entry><title type="html">安装mysql-5.7.16-osx10.11-x86_64</title><link href="http://localhost:4000/blog/mysql-install-mac" rel="alternate" type="text/html" title="安装mysql-5.7.16-osx10.11-x86_64" /><published>2016-11-26T00:00:00+08:00</published><updated>2016-11-26T00:00:00+08:00</updated><id>http://localhost:4000/blog/mysql-install-mac</id><content type="html" xml:base="http://localhost:4000/blog/mysql-install-mac">&lt;p&gt;mysql-5.7.16-osx10.11-x86_64&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;之前装过两次mysql，第一次使用dmg方式，安装简单，提供UI引导、配置，但删除的时候比较麻烦，第二种是用homebrew安装，根据版本不同变化比较大，下面介绍另外一种更‘绿色’的方式&lt;/p&gt;
+
+&lt;h2 id=&quot;安装&quot;&gt;安装&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;freemarker是一种模板技术，类似的技术在python与nodejs众比较常见，语法直观&lt;/li&gt;
-  &lt;li&gt;JSP会在编译器生成集成Servlet的class文件&lt;/li&gt;
+  &lt;li&gt;官方直接下载mysql-5.7.16-osx10.11-x86_64.tar解压&lt;/li&gt;
+  &lt;li&gt;移动&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo mv mysql-5.7.16-osx10.11-x86_64 /usr/local/mysql&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;改权限&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo chown -R root:wheel mysql&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;进入mysql根目录执行&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo scripts/mysql_install_db --user=mysql&lt;/code&gt;开始安装&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;除此之外freemarker也被用于代码生成、票据报表、邮件生成等方面&lt;/p&gt;
+&lt;p&gt;最后一步注意提示会生成root密码&lt;/p&gt;
 
-&lt;h2 id=&quot;springmvcfreemarker&quot;&gt;springmvc中集成freemarker&lt;/h2&gt;
-&lt;p&gt;pom.xml中添加freemarker依赖&lt;/p&gt;
+&lt;h2 id=&quot;启动关闭&quot;&gt;启动、关闭&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &amp;lt;dependency&amp;gt;
-        &amp;lt;groupId&amp;gt;org.freemarker&amp;lt;/groupId&amp;gt;
-        &amp;lt;artifactId&amp;gt;freemarker&amp;lt;/artifactId&amp;gt;
-        &amp;lt;version&amp;gt;2.3.23&amp;lt;/version&amp;gt;
-    &amp;lt;/dependency&amp;gt;
+&lt;ul&gt;
+  &lt;li&gt;启动&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo support-files/mysql.server start&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;重启&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo support-files/mysql.server restart&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;关闭&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo support-files/mysql.server stop&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;状态&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo support-files/mysql.server status&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;连接&quot;&gt;连接&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bin/mysql -u root -p&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;修改密码&lt;code class=&quot;highlighter-rouge&quot;&gt;set password for root@localhost = password('&amp;lt;password&amp;gt;');&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;为了方便管理在zsh中添加&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alias mysqlstart='/usr/local/mysql/support-files/mysql.server start'
+alias mysqlstop='/usr/local/mysql/support-files/mysql.server stop'
+alias mysqlstatus='/usr/local/mysql/support-files/mysql.server status'
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;springmvc相关配置&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;freemarkerConfigurer&quot;&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;templateLoaderPath&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF/views/&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;defaultEncoding&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;freemarkerSettings&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;template_update_delay&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;10&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;locale&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;zh_CN&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;datetime_format&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;yyyy-MM-dd HH:mm:ss&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;date_format&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;yyyy-MM-dd&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;number_format&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;#.##&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewResolver&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewClass&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.freemarker.FreeMarkerView&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;suffix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.jsp&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;contentType&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/html;charset=utf-8&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;exposeRequestAttributes&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;exposeSessionAttributes&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;exposeSpringMacroHelpers&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;模板文件常用语法&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsp&quot; data-lang=&quot;jsp&quot;&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&amp;gt;  
-&amp;lt;html&amp;gt;  
-&amp;lt;head&amp;gt;  
-&amp;lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&amp;gt;  
-&amp;lt;title&amp;gt;Insert title here&amp;lt;/title&amp;gt;  
-&amp;lt;/head&amp;gt;  
-&amp;lt;body&amp;gt;  
-  
-描述：${description}  
-&amp;lt;br/&amp;gt;  
-集合大小:${nameList?size}  
-&amp;lt;br/&amp;gt;  
-迭代list集合：  
-&amp;lt;br/&amp;gt;  
-&amp;lt;#list nameList as names&amp;gt;  
-这是第${names_index+1}个人，叫做：&amp;lt;label style=&quot;color:red&quot;&amp;gt;${names}&amp;lt;/label&amp;gt;  
-if判断：  
-&amp;lt;br/&amp;gt;  
-&amp;lt;#if (names==&quot;张三&quot;)&amp;gt;  
- 他是科长  
-&amp;lt;#elseif (names==&quot;李四&quot;)&amp;gt;       &amp;lt;#--注意这里没有返回而是在最后面--&amp;gt;   
- 他是处长  
-&amp;lt;#else&amp;gt;  
-他是群众 
-&amp;lt;/#if&amp;gt;  
-&amp;lt;br/&amp;gt;  
-&amp;lt;/#list&amp;gt;  
-迭代map集合：  
-&amp;lt;br/&amp;gt;  
-&amp;lt;#list weaponMap?keys as key&amp;gt;  
-key---&amp;gt;${key}&amp;lt;br/&amp;gt;  
-value-----&amp;gt;${weaponMap[key]!(&quot;null&quot;)}  
-&amp;lt;#--   
-fremarker 不支持null, 可以用！ 来代替为空的值。  
-其实也可以给一个默认值    
-value-----${weaponMap[key]?default(&quot;null&quot;)}  
-还可以 在输出前判断是否为null  
-&amp;lt;#if weaponMap[key]??&amp;gt;&amp;lt;/#if&amp;gt;都可以  
---&amp;gt;  
-  
-&amp;lt;br/&amp;gt;  
-&amp;lt;/#list&amp;gt;  
-include导入文件：  
-&amp;lt;br/&amp;gt;  
-&amp;lt;#include &quot;include.html&quot;/&amp;gt;  
-  
-&amp;lt;/body&amp;gt;  
-&amp;lt;/html&amp;gt;  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;模板代码中可以直接读取session中级response中填入的属性值&lt;/p&gt;
-</description>
-        <pubDate>Thu, 10 Dec 2015 00:00:00 +0800</pubDate>
-        <link>http://jeffreywei.github.io/java,freemarker,spring/2015/12/10/freemarker-java.html</link>
-        <guid isPermaLink="true">http://jeffreywei.github.io/java,freemarker,spring/2015/12/10/freemarker-java.html</guid>
-        
-        <category>java</category>
-        
-        <category>FreeMarker</category>
-        
-        <category>spring</category>
-        
-        
-        <category>java,FreeMarker,spring</category>
-        
-      </item>
-    
-  </channel>
-</rss>
+&lt;/div&gt;</content><author><name>JeffreyWei</name></author><category term="python" /><category term="python" /><summary type="html">mysql-5.7.16-osx10.11-x86_64</summary></entry></feed>
