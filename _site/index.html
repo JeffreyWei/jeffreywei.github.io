@@ -172,6 +172,79 @@
 		
 		
 				<h2 class="post-title text-center super lighter bordered-bottom">
+					<a href="http://localhost:4000/blog/java-8">java 8</a> 
+		
+			</h2>
+
+			<div class="post-info text-center small">
+				<time datetime="2017-05-15T00:00:00+08:00" class="post-time">15 May 2017</time>
+
+			 
+				
+			in <span class="post-tags">
+				
+			
+				<a href="http://localhost:4000/categories/index.html#java" data-toggle="tooltip" title="Other posts from the Java category" rel="tag">
+					Java
+				</a>
+			
+			
+			</span>
+				
+			
+			&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;
+				
+
+				
+
+				
+					Less than 1 minute read
+				
+				</span>
+			
+			</div>
+		</header>
+
+		<div class="post-body bordered-bottom">
+			 
+			
+		
+			<p>java.util.function中的常用接口 Predicate – 传入一个参数，返回一个bool结果， 方法为boolean test(T t) Consumer – 传入一个参数，无返回值，纯消费。 方法为void accept(T t) Function – 传入一个参数，返回一个结果，方法为R apply(T t) Supplier – 无参数传入，返回一个结果，方法为T get() UnaryOperator – 一元操作符， 继承Function,传入参数的类型和返回类型相同。 BinaryOperator – 二元操作符， 传入的两个参数的类型和返回类型相同， 继承BiFunction 一个经得起折腾的实体类 public class Person { private String name; private int age; public Person(String name, int age) { this.name = name; this.age = age; } public String getName() { return name; } public void setName(String name) { this.name = name; } public int getAge() { return age; } @Override public String toString() { return "Person{" + "name='" + name + '\'' + ", age=" + age + '}'; } }...&hellip;</p>
+		
+			<div class="text-center">
+			
+				<a href="http://localhost:4000/blog/java-8" data-toggle="tooltip" title="挖一个java8的坑，用一些填一些" class="more-link btn btn-danger btn-large">
+					<i class="fa fa-link"></i> read more...
+				</a>
+			
+			</div>
+		</div>
+	</article>
+</div>
+		
+	
+		
+
+		
+		
+
+		
+
+		
+
+	    
+
+		
+	        
+			
+		
+<div class="row">
+	<article class="post post col-md-8 col-md-offset-2">
+		<header class="post-header">
+		
+		
+		
+				<h2 class="post-title text-center super lighter bordered-bottom">
 					<a href="http://localhost:4000/blog/dubbo-telnet">使用telnet调试dubbo接口</a> 
 		
 			</h2>
@@ -685,116 +758,6 @@ object Demo extends App {
 			<div class="text-center">
 			
 				<a href="http://localhost:4000/blog/cloud-1" data-toggle="tooltip" title="" class="more-link btn btn-danger btn-large">
-					<i class="fa fa-link"></i> read more...
-				</a>
-			
-			</div>
-		</div>
-	</article>
-</div>
-		
-	
-		
-
-		
-		
-
-		
-
-		
-
-	    
-
-		
-	        
-			
-		
-<div class="row">
-	<article class="post post col-md-8 col-md-offset-2">
-		<header class="post-header">
-		
-		
-		
-				<h2 class="post-title text-center super lighter bordered-bottom">
-					<a href="http://localhost:4000/blog/cloud-0">0天-虚拟机安装</a> 
-		
-			</h2>
-
-			<div class="post-info text-center small">
-				<time datetime="2017-03-16T00:00:00+08:00" class="post-time">16 Mar 2017</time>
-
-			 
-				
-			in <span class="post-tags">
-				
-			
-				<a href="http://localhost:4000/categories/index.html#bigdata" data-toggle="tooltip" title="Other posts from the Bigdata category" rel="tag">
-					Bigdata
-				</a>
-			
-			
-			</span>
-				
-			
-			&nbsp;<span class="post-tags"><i class="fa fa-clock-o"></i>&nbsp;
-				
-
-				
-
-				
-					Less than 1 minute read
-				
-				</span>
-			
-			</div>
-		</header>
-
-		<div class="post-body bordered-bottom">
-			 
-			
-		
-			<p>
-
-系统安装文件准备
-
-
-  CentOS-6.8-x86_64-minimal.iso
-  VirtualBox-5.1.18-114002-OSX
-
-
-虚拟机安装
-
-
-  设置好虚拟机1cpu 2G内容  3G硬盘 载入安装盘，网络设置选择桥接
-  最小化安装后默认没有启用网卡
-  vi /etc/sysconfig/network
-  vi /etc/hosts
-  
-    修改配置/etc/sysconfig/network-scripts/ifcfg-eth0
-
-      DEVICE=eth0
-  HWADDR=08:00:27:D3:57:8E
-  TYPE=Ethernet
-  UUID=72f1df9c-a65f-4c51-8d11-00becf5a9030
-  ONBOOT=yes
-  NM_CONTROLLED=yes
-  BOOTPROTO=static
-  IPADDR=192.168.0.114
-  NETMASK=255.255.255.0
-  GATEWAY=192.168.0.1
-
-    
-  
-  改为静态地址后需要添加DNS,在DNS列表找到一个比较快的写入配置/etc/resolv.conf 
-  重启网络service network restart
-  后续操作使用ssh完成
-
-
-&hellip;</p>
-		
-			<div class="text-center">
-			
-				<a href="http://localhost:4000/blog/cloud-0" data-toggle="tooltip" title="" class="more-link btn btn-danger btn-large">
 					<i class="fa fa-link"></i> read more...
 				</a>
 			
